@@ -21,7 +21,7 @@
 | [HANDOFF-M3.md](HANDOFF-M3.md) | M2→M3 交接快照（支出核查/对账/报告导出/DoD/命令速查） | ✅ M3 已完成（§六逐项打勾） |
 | [HANDOFF-M4.md](HANDOFF-M4.md) | M3→M4 交接快照（基准指标/README/差异报告/DoD/命令速查） | ✅ M4 已完成（§六逐项打勾） |
 | [HANDOFF-M5.md](HANDOFF-M5.md) | M4→M5 交接快照（桌面交付/打包/技术报告/DoD/命令速查） | ✅ M5 已完成（§六逐项打勾） |
-| [HANDOFF-M6.md](HANDOFF-M6.md) | M5→M6 交接快照（脱敏发布/Release/收尾固化/DoD/命令速查） | ✅ M5 收尾落盘 |
+| [HANDOFF-M6.md](HANDOFF-M6.md) | M5→M6 交接快照（脱敏发布/Release/收尾固化/DoD/命令速查） | ✅ M6 已完成（§六逐项打勾） |
 
 ## 决策记录
 
@@ -74,8 +74,8 @@
 | M3 | 支出核查与对账：四态判定 + 批量扫描 + 跨年对账 + 报告/证据链导出 | ✅ 本地等价校验通过（spending 扩至十二节 + scan 接真四态 + 四集合对账 + scan 驱动报告 + 指纹防篡改；详见 HANDOFF-M3 §六） |
 | M4 | 基准：分段边界/双版本对照/合成台账三类扫描，指标进 README | ✅ **本地等价校验通过**（2026-10-14：三套件 216/216、42/42、129/129 退出码 0 + **探活实测留痕**（每套件注入缺陷实跑变红，06 决策 E23）+ README 指标表终稿 + `diff --out` 对照报告导出（MD/XLSX/evidence，无外链 + 字节冻结）；见 HANDOFF-M4 §六） |
 | M5 | 桌面交付：PySide6 界面 + PyInstaller 打包 + 报告导出（MD/XLSX）+ 技术报告 | ✅ **本地等价校验通过**（2026-10-14：GUI 四页签只消费编排层 API（AST 三条守门 + 三方对账）+ 双 exe onedir 构建 + 数据白名单 + `verify_frozen.py` 八项断言 + 中立目录验收全链实测 + `--fixed-time` 复现 sha256 一致 + 技术报告入仓；202 项测试双绿；见 HANDOFF-M5 §六） |
-| M6 | 脱敏发布 GitHub + Release（exe）+ 收尾固化 | ⬜ |
+| M6 | 脱敏发布 GitHub + Release（exe）+ 收尾固化 | ✅ **已完成**（2026-10-14：脱敏四步留痕（[发布检查单](../docs/发布检查单.md)：HEAD 品牌隔离 2 处措辞修复 + 历史措辞显式定夺不改写）+ 干净 venv 按 README 逐字跑通（快速开始/桌面交付两节全命令过）+ 首推 `yuluo554/safety-expense-calculator` + CI 首跑修复后**四矩阵全绿**（E27）+ Release（exe）zip（ASCII 命名，中立目录复验 bench 三套件达标）+ 缓议项 C1~C4 清零；见 HANDOFF-M6 §六） |
 
 **M0 完成证据**：见 [05-数据计划与里程碑.md](05-数据计划与里程碑.md) §二 M0 DoD 表（D0-1…D0-17 逐项 ✅）。
 **M0 关键交付物**：`src/safefee/`（核心包 + CLI，零第三方依赖）；`tools/`（规则包/夹具/真值库生成器 + 两个扫描器）；`tests/`（145 项）；`.github/workflows/ci.yml`（四矩阵）。
-**下一棒**：读 [HANDOFF-M6.md](HANDOFF-M6.md) 从 M6（脱敏发布）开始。
+**下一棒**：M0~M6 全部完成，项目进入终态（维护模式）；发布留痕见 [docs/发布检查单.md](../docs/发布检查单.md)。
