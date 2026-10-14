@@ -37,7 +37,7 @@ def test_truth_cases_cover_mechanisms_and_edges(data_dir):
     mechanisms = {c.expect.get("mechanism") for c in cases}
     assert {"by_output", "by_revenue_tiered", "by_project_cost"} <= mechanisms
     ids = {c.case_id for c in cases}
-    assert any("EDGE-AT" in i for i in ids), "缺恰好等于分段点档案"
+    assert sum(1 for i in ids if "-EDGE-" in i and i.endswith("AT")) == 3, "缺恰好等于分段点档案（3 个分段点各一）"
     assert any("UNIT-MISMATCH" in i for i in ids), "缺元/万元错配档案"
     assert any(i.startswith("SYN-DUAL-COAL-2022") for i in ids)
     assert any(i.startswith("SYN-DUAL-COAL-2012") for i in ids)

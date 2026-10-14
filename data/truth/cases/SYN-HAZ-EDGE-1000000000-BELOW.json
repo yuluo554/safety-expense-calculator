@@ -1,9 +1,9 @@
 {
-  "case_id": "SYN-HAZ-EDGE-AT",
+  "case_id": "SYN-HAZ-EDGE-1000000000-BELOW",
   "enterprise": {
     "basis_kind": "revenue",
     "basis_unit": "CNY",
-    "basis_value": "1000000000",
+    "basis_value": "999999999.99",
     "enterprise_id": "90000000SYN0000002B",
     "enterprise_name": "示例危险品（合成）有限公司",
     "industry_id": "hazardous_chemicals",
@@ -16,6 +16,6 @@
     "amount": "7425000.00",
     "mechanism": "by_revenue_tiered"
   },
-  "note": "危险品恰好等于/邻近分段点 1000000000 元（AT；边界口径 [lower, upper)，恰好等于归下一段）",
+  "note": "危险品恰好等于/邻近分段点 1000000000 元（BELOW；边界口径 [lower, upper)，恰好等于归下一段）",
   "ruleset_id": "财资-2022-136"
 }

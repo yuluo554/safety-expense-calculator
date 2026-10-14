@@ -199,7 +199,7 @@ def _tier_cases(ruleset_id: str, ruleset: dict) -> List[dict]:
             basis = bound + delta
             amount, note = _accrual_direct(ruleset, "hazardous_chemicals", basis)
             cases.append(_case(
-                "SYN-HAZ-EDGE-%s" % tag, ruleset_id,
+                "SYN-HAZ-EDGE-%s-%s" % (bound, tag), ruleset_id,
                 _enterprise("示例危险品（合成）有限公司", "90000000SYN0000002B",
                             "hazardous_chemicals", 2024, "revenue", str(basis), "CNY"),
                 amount, note,
@@ -441,6 +441,14 @@ def check() -> int:
             continue
         if path.read_bytes() != payload:
             mismatched.append(rel)
+    # 陈旧文件：目录里存在而生成器不再产出的 .json（生成器是唯一写入者）
+    expected = {OUT_DIR / rel for rel in files}
+    for sub in ("cases", "negatives"):
+        folder = OUT_DIR / sub
+        if folder.is_dir():
+            for path in sorted(folder.glob("*.json")):
+                if path not in expected:
+                    mismatched.append("%s（陈旧：生成器已不再产出）" % path.relative_to(OUT_DIR).as_posix())
     if mismatched:
         print("FROZEN_TRUTH_DRIFT: %s" % ", ".join(mismatched))
         return 1
