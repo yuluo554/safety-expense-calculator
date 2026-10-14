@@ -1,0 +1,22 @@
+{
+  "case_id": "SYN-POWER-GEN",
+  "enterprise": {
+    "basis_kind": "revenue",
+    "basis_unit": "CNY",
+    "basis_value": "1000000000",
+    "enterprise_id": "90000000SYN0000005E",
+    "enterprise_name": "示例电力（合成）有限公司",
+    "industry_id": "power",
+    "variant_id": "power_generation",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第四十三条"
+    },
+    "amount": "10650000.00",
+    "mechanism": "by_revenue_tiered"
+  },
+  "note": "电力生产（第四十三条 power_generation）营收 1000000000 元",
+  "ruleset_id": "财资-2022-136"
+}

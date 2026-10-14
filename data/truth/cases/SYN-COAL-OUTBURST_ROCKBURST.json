@@ -1,0 +1,22 @@
+{
+  "case_id": "SYN-COAL-OUTBURST_ROCKBURST",
+  "enterprise": {
+    "basis_kind": "output",
+    "basis_unit": "ton",
+    "basis_value": "80000",
+    "enterprise_id": "90000000SYN0000001A",
+    "enterprise_name": "示例煤炭（合成）有限公司",
+    "industry_id": "coal",
+    "variant_id": "coal_outburst_rockburst",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第七条"
+    },
+    "amount": "4000000.00",
+    "mechanism": "by_output"
+  },
+  "note": "煤炭按产量（第七条 coal_outburst_rockburst）× 80000 吨",
+  "ruleset_id": "财资-2022-136"
+}

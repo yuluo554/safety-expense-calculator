@@ -1,0 +1,18 @@
+{
+  "enterprise": {
+    "basis_kind": "output",
+    "basis_unit": "ton",
+    "basis_value": "120000",
+    "enterprise_id": "90000000SYN0000001A",
+    "enterprise_name": "示例煤炭（合成）有限公司",
+    "industry_id": "coal",
+    "variant_id": "coal_high_gas",
+    "year": 2024
+  },
+  "expect": {
+    "zero_hit": true
+  },
+  "negative_id": "NEG-CLEAN-001",
+  "note": "干净档案：应零命中（不产生任何 warning，计提正确）",
+  "ruleset_id": "财资-2022-136"
+}

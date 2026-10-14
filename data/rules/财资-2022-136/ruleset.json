@@ -13,11 +13,13 @@
       "provenance": {
         "clause": "第七条",
         "doc_no": "财资〔2022〕136号",
-        "fetched_at": null,
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
         "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-        "verified": false
+        "verified": true
       },
-      "status": "pending",
+      "status": "verified",
       "variants": [
         {
           "clause": "第七条",
@@ -30,14 +32,16 @@
           "provenance": {
             "clause": "第七条",
             "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
+            "verified": true
           },
           "severity": 4,
-          "status": "pending",
+          "status": "verified",
           "unit": "CNY/ton",
-          "value": null,
+          "value": "50",
           "variant_id": "coal_outburst_rockburst",
           "variant_name": "煤（岩）与瓦斯（二氧化碳）突出矿井、冲击地压矿井"
         },
@@ -49,16 +53,18 @@
           "provenance": {
             "clause": "第七条",
             "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
+            "verified": true
           },
           "severity": 3,
-          "status": "pending",
+          "status": "verified",
           "unit": "CNY/ton",
-          "value": null,
+          "value": "30",
           "variant_id": "coal_high_gas",
-          "variant_name": "高瓦斯矿井"
+          "variant_name": "高瓦斯矿井，水文地质类型复杂、极复杂矿井，容易自燃煤层矿井"
         },
         {
           "clause": "第七条",
@@ -68,16 +74,18 @@
           "provenance": {
             "clause": "第七条",
             "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
+            "verified": true
           },
           "severity": 2,
-          "status": "pending",
+          "status": "verified",
           "unit": "CNY/ton",
-          "value": null,
+          "value": "15",
           "variant_id": "coal_other_underground",
-          "variant_name": "其他井工矿井"
+          "variant_name": "其他井工矿"
         },
         {
           "clause": "第七条",
@@ -87,16 +95,18 @@
           "provenance": {
             "clause": "第七条",
             "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
+            "verified": true
           },
           "severity": 1,
-          "status": "pending",
+          "status": "verified",
           "unit": "CNY/ton",
-          "value": null,
+          "value": "5",
           "variant_id": "coal_opencast",
-          "variant_name": "露天矿井"
+          "variant_name": "露天矿"
         }
       ]
     },
@@ -105,146 +115,110 @@
       "implementation": "deferred",
       "industry_id": "noncoal_mine",
       "industry_name": "非煤矿山开采",
-      "mechanism": "by_revenue_tiered",
+      "mechanism": "by_output",
       "provenance": {
         "clause": "第十条",
         "doc_no": "财资〔2022〕136号",
         "fetched_at": null,
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
         "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
         "verified": false
       },
-      "segments": [
-        {
-          "clause": "第十条",
-          "lower": "0",
-          "provenance": {
-            "clause": "第十条",
-            "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
-            "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
-          },
-          "rate": null,
-          "status": "pending",
-          "upper": "10000000"
-        },
-        {
-          "clause": "第十条",
-          "lower": "10000000",
-          "provenance": {
-            "clause": "第十条",
-            "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
-            "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
-          },
-          "rate": null,
-          "status": "pending",
-          "upper": "100000000"
-        },
-        {
-          "clause": "第十条",
-          "lower": "100000000",
-          "provenance": {
-            "clause": "第十条",
-            "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
-            "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
-          },
-          "rate": null,
-          "status": "pending",
-          "upper": "1000000000"
-        },
-        {
-          "clause": "第十条",
-          "lower": "1000000000",
-          "provenance": {
-            "clause": "第十条",
-            "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
-            "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
-          },
-          "rate": null,
-          "status": "pending",
-          "upper": null
-        }
-      ],
-      "status": "pending"
+      "rate": null,
+      "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
+      "status": "pending",
+      "value": null
     },
     {
-      "clause": "第十一条",
+      "clause": "第十四条",
       "implementation": "deferred",
       "industry_id": "oil_gas",
       "industry_name": "石油天然气开采",
       "mechanism": "by_revenue_tiered",
       "provenance": {
-        "clause": "第十一条",
+        "clause": "第十四条",
         "doc_no": "财资〔2022〕136号",
         "fetched_at": null,
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
         "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
         "verified": false
       },
+      "rate": null,
+      "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
       "segments": [
         {
-          "clause": "第十一条",
+          "clause": "第十四条",
           "lower": "0",
           "provenance": {
-            "clause": "第十一条",
+            "clause": "第十四条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "10000000"
         },
         {
-          "clause": "第十一条",
+          "clause": "第十四条",
           "lower": "10000000",
           "provenance": {
-            "clause": "第十一条",
+            "clause": "第十四条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "100000000"
         },
         {
-          "clause": "第十一条",
+          "clause": "第十四条",
           "lower": "100000000",
           "provenance": {
-            "clause": "第十一条",
+            "clause": "第十四条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "1000000000"
         },
         {
-          "clause": "第十一条",
+          "clause": "第十四条",
           "lower": "1000000000",
           "provenance": {
-            "clause": "第十一条",
+            "clause": "第十四条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": null
         }
       ],
-      "status": "pending"
+      "status": "pending",
+      "value": null
     },
     {
       "clause": "第十七条",
@@ -255,23 +229,27 @@
       "provenance": {
         "clause": "第十七条",
         "doc_no": "财资〔2022〕136号",
-        "fetched_at": null,
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
         "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-        "verified": false
+        "verified": true
       },
-      "status": "pending",
+      "status": "verified",
       "variants": [
         {
           "clause": "第十七条",
           "provenance": {
             "clause": "第十七条",
             "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "status": "pending",
+          "rate": "0.035",
+          "status": "verified",
           "variant_id": "mine_engineering",
           "variant_name": "矿山工程"
         },
@@ -280,26 +258,30 @@
           "provenance": {
             "clause": "第十七条",
             "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "status": "pending",
+          "rate": "0.03",
+          "status": "verified",
           "variant_id": "railway_building_rail_transit",
-          "variant_name": "铁路、房屋建筑工程、城市轨道交通"
+          "variant_name": "铁路工程、房屋建筑工程、城市轨道交通工程"
         },
         {
           "clause": "第十七条",
           "provenance": {
             "clause": "第十七条",
             "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "status": "pending",
+          "rate": "0.025",
+          "status": "verified",
           "variant_id": "water_power_electric",
           "variant_name": "水利水电工程、电力工程"
         },
@@ -308,12 +290,14 @@
           "provenance": {
             "clause": "第十七条",
             "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "status": "pending",
+          "rate": "0.02",
+          "status": "verified",
           "variant_id": "smelting_mechanical_chemical_telecom",
           "variant_name": "冶炼工程、机电安装工程、化工石油工程、通信工程"
         },
@@ -322,12 +306,14 @@
           "provenance": {
             "clause": "第十七条",
             "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "status": "pending",
+          "rate": "0.015",
+          "status": "verified",
           "variant_id": "municipal_port_highway",
           "variant_name": "市政公用工程、港口与航道工程、公路工程"
         }
@@ -342,9 +328,11 @@
       "provenance": {
         "clause": "第二十一条",
         "doc_no": "财资〔2022〕136号",
-        "fetched_at": null,
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
         "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-        "verified": false
+        "verified": true
       },
       "segments": [
         {
@@ -353,12 +341,14 @@
           "provenance": {
             "clause": "第二十一条",
             "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "status": "pending",
+          "rate": "0.045",
+          "status": "verified",
           "upper": "10000000"
         },
         {
@@ -367,12 +357,14 @@
           "provenance": {
             "clause": "第二十一条",
             "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "status": "pending",
+          "rate": "0.0225",
+          "status": "verified",
           "upper": "100000000"
         },
         {
@@ -381,12 +373,14 @@
           "provenance": {
             "clause": "第二十一条",
             "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "status": "pending",
+          "rate": "0.0055",
+          "status": "verified",
           "upper": "1000000000"
         },
         {
@@ -395,16 +389,18 @@
           "provenance": {
             "clause": "第二十一条",
             "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "status": "pending",
+          "rate": "0.002",
+          "status": "verified",
           "upper": null
         }
       ],
-      "status": "pending"
+      "status": "verified"
     },
     {
       "clause": "第二十四条",
@@ -416,9 +412,13 @@
         "clause": "第二十四条",
         "doc_no": "财资〔2022〕136号",
         "fetched_at": null,
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
         "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
         "verified": false
       },
+      "rate": null,
+      "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
       "segments": [
         {
           "clause": "第二十四条",
@@ -427,10 +427,13 @@
             "clause": "第二十四条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "10000000"
         },
@@ -441,10 +444,13 @@
             "clause": "第二十四条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "100000000"
         },
@@ -455,10 +461,13 @@
             "clause": "第二十四条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "1000000000"
         },
@@ -469,380 +478,469 @@
             "clause": "第二十四条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": null
         }
       ],
-      "status": "pending"
+      "status": "pending",
+      "value": null
     },
     {
-      "clause": "第二十六条",
+      "clause": "第二十七条",
       "implementation": "deferred",
       "industry_id": "metallurgy",
       "industry_name": "冶金",
       "mechanism": "by_revenue_tiered",
       "provenance": {
-        "clause": "第二十六条",
+        "clause": "第二十七条",
         "doc_no": "财资〔2022〕136号",
         "fetched_at": null,
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
         "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
         "verified": false
       },
+      "rate": null,
+      "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
       "segments": [
         {
-          "clause": "第二十六条",
+          "clause": "第二十七条",
           "lower": "0",
           "provenance": {
-            "clause": "第二十六条",
+            "clause": "第二十七条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "10000000"
         },
         {
-          "clause": "第二十六条",
+          "clause": "第二十七条",
           "lower": "10000000",
           "provenance": {
-            "clause": "第二十六条",
+            "clause": "第二十七条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "100000000"
         },
         {
-          "clause": "第二十六条",
+          "clause": "第二十七条",
           "lower": "100000000",
           "provenance": {
-            "clause": "第二十六条",
+            "clause": "第二十七条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "1000000000"
         },
         {
-          "clause": "第二十六条",
+          "clause": "第二十七条",
           "lower": "1000000000",
           "provenance": {
-            "clause": "第二十六条",
+            "clause": "第二十七条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": null
         }
       ],
-      "status": "pending"
+      "status": "pending",
+      "value": null
     },
     {
-      "clause": "第二十七条",
+      "clause": "第三十条",
       "implementation": "deferred",
       "industry_id": "machinery",
       "industry_name": "机械制造",
       "mechanism": "by_revenue_tiered",
       "provenance": {
-        "clause": "第二十七条",
+        "clause": "第三十条",
         "doc_no": "财资〔2022〕136号",
         "fetched_at": null,
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
         "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
         "verified": false
       },
+      "rate": null,
+      "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
       "segments": [
         {
-          "clause": "第二十七条",
+          "clause": "第三十条",
           "lower": "0",
           "provenance": {
-            "clause": "第二十七条",
+            "clause": "第三十条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "10000000"
         },
         {
-          "clause": "第二十七条",
+          "clause": "第三十条",
           "lower": "10000000",
           "provenance": {
-            "clause": "第二十七条",
+            "clause": "第三十条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "100000000"
         },
         {
-          "clause": "第二十七条",
+          "clause": "第三十条",
           "lower": "100000000",
           "provenance": {
-            "clause": "第二十七条",
+            "clause": "第三十条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "1000000000"
         },
         {
-          "clause": "第二十七条",
+          "clause": "第三十条",
           "lower": "1000000000",
           "provenance": {
-            "clause": "第二十七条",
+            "clause": "第三十条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": null
         }
       ],
-      "status": "pending"
+      "status": "pending",
+      "value": null
     },
     {
-      "clause": "第二十九条",
+      "clause": "第三十三条",
       "implementation": "deferred",
       "industry_id": "fireworks",
       "industry_name": "烟花爆竹生产",
       "mechanism": "by_revenue_tiered",
       "provenance": {
-        "clause": "第二十九条",
+        "clause": "第三十三条",
         "doc_no": "财资〔2022〕136号",
         "fetched_at": null,
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
         "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
         "verified": false
       },
+      "rate": null,
+      "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
       "segments": [
         {
-          "clause": "第二十九条",
+          "clause": "第三十三条",
           "lower": "0",
           "provenance": {
-            "clause": "第二十九条",
+            "clause": "第三十三条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "10000000"
         },
         {
-          "clause": "第二十九条",
+          "clause": "第三十三条",
           "lower": "10000000",
           "provenance": {
-            "clause": "第二十九条",
+            "clause": "第三十三条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "100000000"
         },
         {
-          "clause": "第二十九条",
+          "clause": "第三十三条",
           "lower": "100000000",
           "provenance": {
-            "clause": "第二十九条",
+            "clause": "第三十三条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "1000000000"
         },
         {
-          "clause": "第二十九条",
+          "clause": "第三十三条",
           "lower": "1000000000",
           "provenance": {
-            "clause": "第二十九条",
+            "clause": "第三十三条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": null
         }
       ],
-      "status": "pending"
+      "status": "pending",
+      "value": null
     },
     {
-      "clause": "第三十二条",
+      "clause": "第三十六条",
       "implementation": "deferred",
       "industry_id": "civil_explosives",
       "industry_name": "民用爆炸物品生产",
       "mechanism": "by_revenue_tiered",
       "provenance": {
-        "clause": "第三十二条",
+        "clause": "第三十六条",
         "doc_no": "财资〔2022〕136号",
         "fetched_at": null,
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
         "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
         "verified": false
       },
+      "rate": null,
+      "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
       "segments": [
         {
-          "clause": "第三十二条",
+          "clause": "第三十六条",
           "lower": "0",
           "provenance": {
-            "clause": "第三十二条",
+            "clause": "第三十六条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "10000000"
         },
         {
-          "clause": "第三十二条",
+          "clause": "第三十六条",
           "lower": "10000000",
           "provenance": {
-            "clause": "第三十二条",
+            "clause": "第三十六条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "100000000"
         },
         {
-          "clause": "第三十二条",
+          "clause": "第三十六条",
           "lower": "100000000",
           "provenance": {
-            "clause": "第三十二条",
+            "clause": "第三十六条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "1000000000"
         },
         {
-          "clause": "第三十二条",
+          "clause": "第三十六条",
           "lower": "1000000000",
           "provenance": {
-            "clause": "第三十二条",
+            "clause": "第三十六条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": null
         }
       ],
-      "status": "pending"
+      "status": "pending",
+      "value": null
     },
     {
-      "clause": "第三十六条",
+      "clause": "第三十九条",
       "implementation": "deferred",
       "industry_id": "weapons",
       "industry_name": "武器装备研制生产与试验",
       "mechanism": "by_revenue_tiered",
       "provenance": {
-        "clause": "第三十六条",
+        "clause": "第三十九条",
         "doc_no": "财资〔2022〕136号",
         "fetched_at": null,
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
         "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
         "verified": false
       },
+      "rate": null,
+      "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
       "segments": [
         {
-          "clause": "第三十六条",
+          "clause": "第三十九条",
           "lower": "0",
           "provenance": {
-            "clause": "第三十六条",
+            "clause": "第三十九条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "10000000"
         },
         {
-          "clause": "第三十六条",
+          "clause": "第三十九条",
           "lower": "10000000",
           "provenance": {
-            "clause": "第三十六条",
+            "clause": "第三十九条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "100000000"
         },
         {
-          "clause": "第三十六条",
+          "clause": "第三十九条",
           "lower": "100000000",
           "provenance": {
-            "clause": "第三十六条",
+            "clause": "第三十九条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": "1000000000"
         },
         {
-          "clause": "第三十六条",
+          "clause": "第三十九条",
           "lower": "1000000000",
           "provenance": {
-            "clause": "第三十六条",
+            "clause": "第三十九条",
             "doc_no": "财资〔2022〕136号",
             "fetched_at": null,
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
             "verified": false
           },
           "rate": null,
+          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/136-body.paragraphs.txt），数值落库与机制重定型排期 M2",
           "status": "pending",
           "upper": null
         }
       ],
-      "status": "pending"
+      "status": "pending",
+      "value": null
     },
     {
       "clause": "第四十三条",
@@ -853,100 +951,211 @@
       "provenance": {
         "clause": "第四十三条",
         "doc_no": "财资〔2022〕136号",
-        "fetched_at": null,
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
         "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-        "verified": false
+        "verified": true
       },
-      "segments": [
+      "status": "verified",
+      "variants": [
         {
           "clause": "第四十三条",
-          "lower": "0",
           "provenance": {
             "clause": "第四十三条",
             "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "status": "pending",
-          "upper": "10000000"
+          "segments": [
+            {
+              "clause": "第四十三条",
+              "lower": "0",
+              "provenance": {
+                "clause": "第四十三条",
+                "doc_no": "财资〔2022〕136号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+                "snapshot": "data/knowledge/raw/136-body.docx",
+                "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+                "verified": true
+              },
+              "rate": "0.03",
+              "status": "verified",
+              "upper": "10000000"
+            },
+            {
+              "clause": "第四十三条",
+              "lower": "10000000",
+              "provenance": {
+                "clause": "第四十三条",
+                "doc_no": "财资〔2022〕136号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+                "snapshot": "data/knowledge/raw/136-body.docx",
+                "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+                "verified": true
+              },
+              "rate": "0.015",
+              "status": "verified",
+              "upper": "100000000"
+            },
+            {
+              "clause": "第四十三条",
+              "lower": "100000000",
+              "provenance": {
+                "clause": "第四十三条",
+                "doc_no": "财资〔2022〕136号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+                "snapshot": "data/knowledge/raw/136-body.docx",
+                "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+                "verified": true
+              },
+              "rate": "0.01",
+              "status": "verified",
+              "upper": "1000000000"
+            },
+            {
+              "clause": "第四十三条",
+              "lower": "1000000000",
+              "provenance": {
+                "clause": "第四十三条",
+                "doc_no": "财资〔2022〕136号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+                "snapshot": "data/knowledge/raw/136-body.docx",
+                "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+                "verified": true
+              },
+              "rate": "0.008",
+              "status": "verified",
+              "upper": "5000000000"
+            },
+            {
+              "clause": "第四十三条",
+              "lower": "5000000000",
+              "provenance": {
+                "clause": "第四十三条",
+                "doc_no": "财资〔2022〕136号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+                "snapshot": "data/knowledge/raw/136-body.docx",
+                "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+                "verified": true
+              },
+              "rate": "0.006",
+              "status": "verified",
+              "upper": "10000000000"
+            },
+            {
+              "clause": "第四十三条",
+              "lower": "10000000000",
+              "provenance": {
+                "clause": "第四十三条",
+                "doc_no": "财资〔2022〕136号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+                "snapshot": "data/knowledge/raw/136-body.docx",
+                "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+                "verified": true
+              },
+              "rate": "0.002",
+              "status": "verified",
+              "upper": null
+            }
+          ],
+          "status": "verified",
+          "variant_id": "power_generation",
+          "variant_name": "电力生产企业"
         },
         {
           "clause": "第四十三条",
-          "lower": "10000000",
           "provenance": {
             "clause": "第四十三条",
             "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+            "snapshot": "data/knowledge/raw/136-body.docx",
             "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "status": "pending",
-          "upper": "100000000"
-        },
-        {
-          "clause": "第四十三条",
-          "lower": "100000000",
-          "provenance": {
-            "clause": "第四十三条",
-            "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
-            "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
-          },
-          "rate": null,
-          "status": "pending",
-          "upper": "500000000"
-        },
-        {
-          "clause": "第四十三条",
-          "lower": "500000000",
-          "provenance": {
-            "clause": "第四十三条",
-            "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
-            "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
-          },
-          "rate": null,
-          "status": "pending",
-          "upper": "1000000000"
-        },
-        {
-          "clause": "第四十三条",
-          "lower": "1000000000",
-          "provenance": {
-            "clause": "第四十三条",
-            "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
-            "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
-          },
-          "rate": null,
-          "status": "pending",
-          "upper": "5000000000"
-        },
-        {
-          "clause": "第四十三条",
-          "lower": "5000000000",
-          "provenance": {
-            "clause": "第四十三条",
-            "doc_no": "财资〔2022〕136号",
-            "fetched_at": null,
-            "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-            "verified": false
-          },
-          "rate": null,
-          "status": "pending",
-          "upper": null
+          "segments": [
+            {
+              "clause": "第四十三条",
+              "lower": "0",
+              "provenance": {
+                "clause": "第四十三条",
+                "doc_no": "财资〔2022〕136号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+                "snapshot": "data/knowledge/raw/136-body.docx",
+                "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+                "verified": true
+              },
+              "rate": "0.005",
+              "status": "verified",
+              "upper": "50000000000"
+            },
+            {
+              "clause": "第四十三条",
+              "lower": "50000000000",
+              "provenance": {
+                "clause": "第四十三条",
+                "doc_no": "财资〔2022〕136号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+                "snapshot": "data/knowledge/raw/136-body.docx",
+                "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+                "verified": true
+              },
+              "rate": "0.004",
+              "status": "verified",
+              "upper": "100000000000"
+            },
+            {
+              "clause": "第四十三条",
+              "lower": "100000000000",
+              "provenance": {
+                "clause": "第四十三条",
+                "doc_no": "财资〔2022〕136号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+                "snapshot": "data/knowledge/raw/136-body.docx",
+                "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+                "verified": true
+              },
+              "rate": "0.003",
+              "status": "verified",
+              "upper": "200000000000"
+            },
+            {
+              "clause": "第四十三条",
+              "lower": "200000000000",
+              "provenance": {
+                "clause": "第四十三条",
+                "doc_no": "财资〔2022〕136号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+                "snapshot": "data/knowledge/raw/136-body.docx",
+                "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+                "verified": true
+              },
+              "rate": "0.002",
+              "status": "verified",
+              "upper": null
+            }
+          ],
+          "status": "verified",
+          "variant_id": "power_supply",
+          "variant_name": "电力供应企业"
         }
-      ],
-      "status": "pending"
+      ]
     }
   ],
-  "issued_date": "2022-11-21",
   "issuer": [
     "财政部",
     "应急部"
@@ -954,11 +1163,13 @@
   "provenance": {
     "clause": "全文",
     "doc_no": "财资〔2022〕136号",
-    "fetched_at": null,
+    "fetched_at": "2026-10-14",
+    "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+    "snapshot": "data/knowledge/raw/136-body.docx",
     "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-    "verified": false
+    "verified": true
   },
   "ruleset_id": "财资-2022-136",
-  "status": "pending",
+  "status": "verified",
   "supersedes": "财企-2012-16"
 }

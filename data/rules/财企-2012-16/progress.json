@@ -3,20 +3,19 @@
   "status": "pending",
   "thresholds": [
     {
-      "clause": "第五十一条",
-      "criterion": "当年实际使用不足年度应计提金额规定比例须披露并提交书面说明",
-      "disclosure_points": [
-        "说明本年度实际使用情况与未达比例原因",
-        "列示下一年度整改与使用计划",
-        "说明结余资金结转安排"
-      ],
+      "clause": "第十四条",
+      "criterion": "2012 版无按比例披露条款：第十四条为上年末结余达标（中小微企业达上年营业收入5%、大型企业达1.5%）时经批准可缓提少提的规则，与 2022 版第五十一条结构不同——门槛不套用，待 M2 重定型",
+      "disclosure_points": [],
       "provenance": {
-        "clause": "第五十一条",
+        "clause": "第十四条",
         "doc_no": "财企〔2012〕16号",
         "fetched_at": null,
+        "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+        "snapshot": "data/knowledge/raw/2012-gongbao.htm",
         "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
         "verified": false
       },
+      "reason": "2012 版无按比例披露条款：第十四条为上年末结余达标（中小微企业达上年营业收入5%、大型企业达1.5%）时经批准可缓提少提的规则，与 2022 版第五十一条结构不同——门槛不套用，待 M2 重定型",
       "status": "pending",
       "threshold": null,
       "threshold_id": "default"

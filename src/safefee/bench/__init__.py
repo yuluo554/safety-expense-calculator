@@ -93,7 +93,10 @@ def _evaluate_ratio(suite: str, total: int, passed: int, threshold: dict) -> Tup
 def run_tiered_boundary(manifest: Manifest, rulesets: Sequence[dict]) -> SuiteResult:
     """**规则驱动**：从规则表推导分段点，做邻域枚举断言段归属自洽。
 
-    不读真值库——专治"样本没覆盖的端点"。
+    不读真值库——专治"样本没覆盖的端点"。边界枚举按**独立阶梯**进行：
+    行业级 ``segments`` 与各变体的 ``segments``（如电力第四十三条的生产/供应两套
+    标准）是互不相干的阶梯，"段内依据量之和 == 依据量"只在同一条阶梯内成立，
+    **不得合并枚举**（合并会让两套标准各取一段被误判为段归属错误）。
     """
     total = 0
     passed = 0
@@ -102,22 +105,25 @@ def run_tiered_boundary(manifest: Manifest, rulesets: Sequence[dict]) -> SuiteRe
 
     for ruleset in rulesets:
         for industry in ruleset.get("industries", []):
-            segments = _all_segments(industry)
-            if not segments:
-                continue
-            specs = tiers_from_rules(segments)
-            finite_bounds = sorted({s.upper for s in specs if s.upper is not None})
-            for bound in finite_bounds:
-                boundaries += 1
-                for delta in BOUNDARY_NEIGHBOURHOOD:
-                    value = bound + delta
-                    total += 1
-                    try:
-                        _assert_boundary_consistent(value, specs)
-                    except AssertionError as exc:
-                        failed.append("boundary=%s delta=%s: %s" % (bound, delta, exc))
-                    else:
-                        passed += 1
+            for ladder in _ladders(industry):
+                specs = tiers_from_rules(ladder)
+                finite_bounds = sorted({s.upper for s in specs if s.upper is not None})
+                for bound in finite_bounds:
+                    boundaries += 1
+                    for delta in BOUNDARY_NEIGHBOURHOOD:
+                        value = bound + delta
+                        total += 1
+                        try:
+                            _assert_boundary_consistent(value, specs)
+                        except AssertionError as exc:
+                            failed.append(
+                                "%s/%s boundary=%s delta=%s: %s"
+                                % (ruleset.get("ruleset_id", "?"),
+                                   industry.get("industry_id", "?"),
+                                   bound, delta, exc)
+                            )
+                        else:
+                            passed += 1
 
     notes = "规则驱动：从规则表推导分段点（未读真值库）；共 %d 个有限边界" % boundaries
     if total == 0:
@@ -158,10 +164,14 @@ def _node_has_pending(node: dict) -> bool:
     return False
 
 
-def _all_segments(industry: dict) -> list:
-    out = list(industry.get("segments") or [])
+def _ladders(industry: dict) -> List[list]:
+    """一个行业的全部**独立分段阶梯**（每条阶梯单独枚举边界，见 run_tiered_boundary）。"""
+    out = []
+    if industry.get("segments"):
+        out.append(list(industry["segments"]))
     for variant in industry.get("variants") or []:
-        out.extend(variant.get("segments") or [])
+        if variant.get("segments"):
+            out.append(list(variant["segments"]))
     return out
 
 
@@ -249,7 +259,15 @@ def run_synthetic_ledger(manifest: Manifest, truth_dir, rulesets_by_id: Dict[str
 
     真值库缺省（M1 前）→ 记 ``notes`` 如实说明"该类用例未生成"，**不假装覆盖**。
     """
-    from safefee.truth import iter_cases, evaluate_case
+    from safefee.rules.units import load_units
+    from safefee.truth import iter_cases, iter_negatives, evaluate_negative, evaluate_case
+
+    root = manifest.data_dir
+    units = None
+    try:
+        units = load_units(root)
+    except Exception:  # noqa: BLE001 —— units 缺失时退回旧路径（错配用例会如实失败）
+        units = None
 
     cases = list(iter_cases(truth_dir))
     total = 0
@@ -263,13 +281,27 @@ def run_synthetic_ledger(manifest: Manifest, truth_dir, rulesets_by_id: Dict[str
             failed.append("%s: 规则集 %s 未加载" % (case.case_id, case.ruleset_id))
             continue
         try:
-            evaluate_case(case, ruleset)
+            evaluate_case(case, ruleset, units)
         except AssertionError as exc:
             failed.append("%s: %s" % (case.case_id, exc))
         else:
             passed += 1
 
-    notes = "样本驱动：真值库 %d 例" % len(cases)
+    for neg in iter_negatives(truth_dir):
+        total += 1
+        ruleset = rulesets_by_id.get(neg.ruleset_id)
+        if ruleset is None:
+            failed.append("%s: 规则集 %s 未加载" % (neg.negative_id, neg.ruleset_id))
+            continue
+        try:
+            evaluate_negative(neg, ruleset, units)
+        except AssertionError as exc:
+            failed.append("%s: %s" % (neg.negative_id, exc))
+        else:
+            passed += 1
+
+    notes = "样本驱动：真值库 %d 例 + 误报对照 %d 例" % (
+        len(cases), total - len(cases))
     if not cases:
         notes = "样本驱动：真值库尚未生成（M1 待建），该类用例未生成——不假装覆盖"
     threshold = manifest.threshold_for("synthetic_ledger")

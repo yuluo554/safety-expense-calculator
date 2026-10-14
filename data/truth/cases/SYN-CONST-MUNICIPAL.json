@@ -1,0 +1,22 @@
+{
+  "case_id": "SYN-CONST-MUNICIPAL",
+  "enterprise": {
+    "basis_kind": "project_cost",
+    "basis_unit": "CNY",
+    "basis_value": "80000000",
+    "enterprise_id": "90000000SYN0000003C",
+    "enterprise_name": "示例建设工程（合成）有限公司",
+    "industry_id": "construction",
+    "variant_id": "municipal_port_highway",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第十七条"
+    },
+    "amount": "1200000.00",
+    "mechanism": "by_project_cost"
+  },
+  "note": "建设工程按造价比例（第十七条 municipal_port_highway）× 80000000 元",
+  "ruleset_id": "财资-2022-136"
+}

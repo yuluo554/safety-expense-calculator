@@ -65,8 +65,8 @@ def test_readme_quickstart_steps_run_with_documented_exit_codes():
         (["-m", "safefee", "rulesets"], 0),
         (["-m", "safefee", "bench"], 0),
         (["-m", "safefee", "diff", "--from-year", "2020", "--to-year", "2024"], 0),
-        # M0 全 pending → calc 应被门控拦截（README 已写明）
-        (["-m", "safefee", "calc", "data/samples/archive-coal.json"], 1),
+        # M1 已核对煤炭 → calc 输出金额与条款依据（README 逐字链，退出码 0）
+        (["-m", "safefee", "calc", "data/samples/archive-coal.json"], 0),
     ]
     for argv, expected in steps:
         proc = subprocess.run(

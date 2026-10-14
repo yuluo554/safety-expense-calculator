@@ -1,0 +1,148 @@
+{
+  "benchmark_day": "2026-10-14",
+  "fetch_method": "curl 直连 gov.cn 落盘 data/knowledge/raw/，本地逐字核对；搜索摘要一律不采信",
+  "items": [
+    {
+      "clause_id": "CL-2022-136",
+      "title": "企业安全生产费用提取和使用管理办法",
+      "doc_no": "财资〔2022〕136号",
+      "role": "ruleset-2022",
+      "status": "verified",
+      "facts": {
+        "成文日期": "2022-11-21",
+        "网站发布": "2022-12-14",
+        "施行": "自印发之日起施行（2022-11-21）",
+        "废止": "第六十九条：财企〔2012〕16号同时废止（.docx 解析逐字确认）",
+        "结构": "四章六十九条，十二节（煤炭/非煤矿山/石油天然气/建设工程/危险品/交通运输/冶金/机械制造/烟花爆竹/民用爆炸物品/武器装备/电力）"
+      },
+      "provenance": {
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "fetched_at": "2026-10-14"
+      }
+    },
+    {
+      "clause_id": "CL-2012-16",
+      "title": "企业安全生产费用提取和使用管理办法",
+      "doc_no": "财企〔2012〕16号",
+      "role": "ruleset-2012",
+      "status": "verified",
+      "facts": {
+        "发布日期": "2012-02-14",
+        "施行": "自公布之日起施行（第四十条）",
+        "结构": "五章四十条，九类行业（石油天然气并入非煤矿山第六条；武器装备为第十三条）"
+      },
+      "provenance": {
+        "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+        "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+        "sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+        "fetched_at": "2026-10-14"
+      }
+    },
+    {
+      "clause_id": "CL-DECREE-8",
+      "title": "中华人民共和国应急管理部令（第8号）：应急管理部关于修改《煤矿安全规程》的决定",
+      "doc_no": "应急管理部令第8号",
+      "role": "cited-by-136-第七条",
+      "status": "verified",
+      "facts": {
+        "审议通过": "2021-08-17 应急管理部第27次部务会议",
+        "公布落款": "2022-01-06（部长黄明）",
+        "施行": "自2022-04-01起施行"
+      },
+      "provenance": {
+        "url": "http://www.gov.cn/gongbao/content/2022/content_5683852.htm",
+        "snapshot": "data/knowledge/raw/decree-8-gongbao.htm",
+        "sha256": "4e432a2b09fa44a2bf99c1f66cdc6858770554d0e60c8fd7dc22c41320ef9821",
+        "fetched_at": "2026-10-14"
+      }
+    },
+    {
+      "clause_id": "CL-MAJJ-2018-9",
+      "title": "国家煤矿安监局 国家能源局关于印发《煤矿瓦斯等级鉴定办法》的通知",
+      "doc_no": "煤安监技装〔2018〕9号",
+      "role": "cited-by-136-第七条",
+      "status": "verified",
+      "facts": {
+        "成文日期": "2018-04-27（通知落款，两署名机关同日）",
+        "废止": "《煤矿瓦斯等级鉴定暂行办法》（安监总煤装〔2011〕第162号）同时废止"
+      },
+      "provenance": {
+        "url": "https://www.gov.cn/zhengce/zhengceku/2018-12/31/content_5448746.htm",
+        "snapshot": "data/knowledge/raw/wasiji-2018-9.htm",
+        "sha256": "e3626891fb58c20c3dd4bca5543b3c9496019888e58820b65deb0c036547f7c8",
+        "fetched_at": "2026-10-14"
+      }
+    },
+    {
+      "clause_id": "CL-MAJJ-2018-8",
+      "title": "国家煤矿安监局关于印发《防治煤矿冲击地压细则》的通知",
+      "doc_no": "煤安监技装〔2018〕8号",
+      "role": "cited-by-136-第七条",
+      "status": "verified",
+      "facts": {
+        "成文日期": "2018-05-02（国家煤矿安全监察局落款）",
+        "施行": "自2018-08-01起施行"
+      },
+      "provenance": {
+        "url": "https://www.gov.cn/zhengce/zhengceku/2019-12/09/content_5459585.htm",
+        "snapshot": "data/knowledge/raw/chongji-yadi-2018-8.htm",
+        "sha256": "b32218b25428a5a97ede525541a5bbe3cda47b7529d6b25af146e1eefeea2e51",
+        "fetched_at": "2026-10-14"
+      }
+    },
+    {
+      "clause_id": "CL-MAJJ-2018-14",
+      "title": "国家煤矿安全监察局关于印发《煤矿防治水细则》的通知",
+      "doc_no": "煤安监调查〔2018〕14号",
+      "role": "cited-by-136-第七条",
+      "status": "verified",
+      "facts": {
+        "成文日期": "2018-06-04（国家煤矿安全监察局落款）",
+        "施行": "自2018-09-01起施行",
+        "废止": "《煤矿防治水规定》（国家安全监管总局令第28号）同时废止"
+      },
+      "provenance": {
+        "url": "https://www.gov.cn/zhengce/zhengceku/2018-12/31/content_5448431.htm",
+        "snapshot": "data/knowledge/raw/fangzhishui-2018-14.htm",
+        "sha256": "9d881c37dac6e1c2407dc1913a1d424d9a5f77a859a7690a0b958daae5008db8",
+        "fetched_at": "2026-10-14"
+      }
+    },
+    {
+      "clause_id": "CL-SAFETY-LAW",
+      "title": "中华人民共和国安全生产法",
+      "doc_no": "主席令第七十号（2002年公布）",
+      "role": "legal-basis",
+      "status": "pending",
+      "facts": {
+        "已核对": "2002-06-29 第九届全国人大常委会第二十八次会议通过，自2002-11-01起施行（主席令第七十号，2002年第22号国务院公报）",
+        "待核对": "2014 与 2021 两次修正的通过会议、日期与施行日期——现行文本页（国家法律法规数据库为 JS 应用、npc.gov.cn 直连握手失败、gov.cn 检索接口未收录法律）未取到官方原文，未核对不得写入"
+      },
+      "provenance": {
+        "url": "https://www.gov.cn/gongbao/content/2002/content_61618.htm",
+        "snapshot": "data/knowledge/raw/safety-law-2002-gongbao.htm",
+        "sha256": "945e72e337c3e42853db7c9d4fe5a24436ddb176dfd6cae84b7650601a83c5b2",
+        "fetched_at": "2026-10-14"
+      }
+    },
+    {
+      "clause_id": "CL-GB-12268",
+      "title": "国家标准《危险货物品名表》GB 12268",
+      "doc_no": "GB 12268",
+      "role": "cited-by-136-第二十条",
+      "status": "pending",
+      "facts": {
+        "已核对": "标准名经 136 号第二十条正文引述确认（危险品范围判定依据）",
+        "待核对": "现行版本号（GB 12268-2012 之后是否换版）——强制性国家标准全文公开系统未直连核对，不得臆断"
+      },
+      "provenance": {
+        "url": null,
+        "snapshot": null,
+        "sha256": null,
+        "fetched_at": null
+      }
+    }
+  ]
+}

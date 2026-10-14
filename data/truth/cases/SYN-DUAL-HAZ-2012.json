@@ -1,0 +1,21 @@
+{
+  "case_id": "SYN-DUAL-HAZ-2012",
+  "enterprise": {
+    "basis_kind": "revenue",
+    "basis_unit": "CNY",
+    "basis_value": "50000000",
+    "enterprise_id": "90000000SYN0000002B",
+    "enterprise_name": "示例危险品（合成）有限公司",
+    "industry_id": "hazardous_chemicals",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第八条"
+    },
+    "amount": "1200000.00",
+    "mechanism": "by_revenue_tiered"
+  },
+  "note": "双版本对照（财企-2012-16）危险品营收 50000000 元",
+  "ruleset_id": "财企-2012-16"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "SYN-HAZ-UNIT-MISMATCH",
+  "enterprise": {
+    "basis_kind": "revenue",
+    "basis_unit": "CNY10k",
+    "basis_value": "5000",
+    "enterprise_id": "90000000SYN0000002B",
+    "enterprise_name": "示例危险品（合成）有限公司",
+    "industry_id": "hazardous_chemicals",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第二十一条"
+    },
+    "amount": "1350000.00",
+    "mechanism": "by_revenue_tiered",
+    "unit_warning": "不一致"
+  },
+  "note": "单位口径错配：档案以 CNY10k 填报 5000，规则包以元计价——定义性换算 ×10000 后按 5×10^7 元计算，且必须报 warning（不静默）",
+  "ruleset_id": "财资-2022-136"
+}

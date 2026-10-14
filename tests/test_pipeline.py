@@ -4,6 +4,7 @@
 """
 
 import json
+import shutil
 import subprocess
 import sys
 from decimal import Decimal
@@ -73,34 +74,9 @@ def test_calc_report_coordinate_matches_manifest(data_dir):
 
 
 def test_three_way_reconciliation_on_verified_ruleset(tmp_path, monkeypatch):
-    """三方对账：**编排直调 == 报告章节**（用一份 verified 规则包，避免门控拦截）。"""
-    import shutil
-
+    """三方对账：**编排直调 == 报告章节**（M1 真数据已 verified，直接用仓内规则包）。"""
     target = tmp_path / "data"
     shutil.copytree(ROOT / "data", target)
-    ruleset_path = target / "rules" / "财资-2022-136" / "ruleset.json"
-    payload = json.loads(ruleset_path.read_text(encoding="utf-8"))
-    # 只把 coal 的数值置为 verified（模拟 M1 核对完成后的形态）
-    coal = payload["industries"][0]
-    coal["status"] = "verified"
-    coal["variants"][1]["value"] = "30"
-    coal["variants"][1]["status"] = "verified"
-    ruleset_path.write_bytes(
-        (json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
-    )
-    # 同步 manifest 指纹（否则完整性校验会拦下）
-    import hashlib
-
-    digest = hashlib.sha256(ruleset_path.read_bytes()).hexdigest()
-    manifest_path = target / "rules" / "manifest.json"
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    for entry in manifest["rulesets"]:
-        if entry["dir"] == "财资-2022-136":
-            entry["files"]["ruleset.json"] = digest
-    manifest_path.write_bytes(
-        (json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
-    )
-
     monkeypatch.setenv("SAFEFEE_DATA_DIR", str(target))
 
     from safefee.engine import build_case, compute_calc
@@ -113,7 +89,9 @@ def test_three_way_reconciliation_on_verified_ruleset(tmp_path, monkeypatch):
     })
     report = compute_calc(case)
     assert report.result is not None
+    assert not report.gate_blockers
     amount = str(report.result.amount)
+    assert amount == "30000.00"  # 第七条高瓦斯 30 元/吨 × 1000 吨
 
     # 报告章节里的金额必须与编排直调一致（同一数据源）
     sections = build_sections(ReportInput(

@@ -25,7 +25,7 @@ def test_selfcheck_ok(capsys):
     assert main(["selfcheck"]) == EXIT_OK
     out = capsys.readouterr().out
     assert "数据目录" in out
-    assert "门控拦截" in out  # M0 全 pending → 门控必然拦截
+    assert "门控通过" in out  # M1 已核对作用域 → 放行（2012 版 progress 仍留 pending）
 
 
 def test_rulesets_lists_two(capsys):
@@ -39,8 +39,8 @@ def test_units_ok(capsys):
     assert "CNY10k" in capsys.readouterr().out
 
 
-def test_calc_gate_blocks_pending(data_dir, tmp_path, capsys):
-    """M0 全 pending → calc 被门控拦截（退出码 1）。"""
+def test_calc_verified_outputs_amount(data_dir, tmp_path, capsys):
+    """M1 已核对煤炭 → calc 输出金额与条款依据（退出码 0）。"""
     archive = tmp_path / "a.json"
     archive.write_bytes(json.dumps({
         "enterprise_id": "90000000SYN0000001A",
@@ -48,8 +48,38 @@ def test_calc_gate_blocks_pending(data_dir, tmp_path, capsys):
         "industry_id": "coal", "variant_id": "coal_high_gas", "year": 2024,
         "basis_kind": "output", "basis_value": "1000", "basis_unit": "ton",
     }).encode("utf-8"))
-    assert main(["calc", str(archive)]) == EXIT_GATE
-    assert "不得进入计算路径" in capsys.readouterr().err
+    assert main(["calc", str(archive)]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "30000.00" in out       # 第七条高瓦斯 30 元/吨 × 1000 吨
+    assert "第七条" in out
+
+
+def test_calc_deferred_industry_is_usage_error(data_dir, tmp_path, capsys):
+    """M1 首期未覆盖行业（metallurgy，deferred）→ 退出码 2，不臆造结论。"""
+    archive = tmp_path / "m.json"
+    archive.write_bytes(json.dumps({
+        "enterprise_id": "90000000SYN0000004D",
+        "enterprise_name": "示例冶金（合成）",
+        "industry_id": "metallurgy", "year": 2024,
+        "basis_kind": "revenue", "basis_value": "1000", "basis_unit": "CNY",
+    }).encode("utf-8"))
+    assert main(["calc", str(archive)]) == EXIT_USAGE
+    assert "首期未覆盖" in capsys.readouterr().err
+
+
+def test_calc_tiered_outputs_tier_lines(data_dir, tmp_path, capsys):
+    """超额累退逐段明细随主输出（审计留痕）。"""
+    archive = tmp_path / "h.json"
+    archive.write_bytes(json.dumps({
+        "enterprise_id": "90000000SYN0000002B",
+        "enterprise_name": "示例危险品（合成）",
+        "industry_id": "hazardous_chemicals", "year": 2024,
+        "basis_kind": "revenue", "basis_value": "50000000", "basis_unit": "CNY",
+    }).encode("utf-8"))
+    assert main(["calc", str(archive)]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "1350000.00" in out
+    assert "段 1" in out and "第二十一条" in out
 
 
 def test_calc_missing_field_is_usage_error(tmp_path, capsys):
@@ -69,9 +99,11 @@ def test_bench_only_unknown_suite_is_usage_error(capsys):
     assert "未知基准套件" in capsys.readouterr().err
 
 
-def test_bench_ok_with_unmeasured_suites(capsys):
-    """可评估套件达标 + 未评估套件（用例数为 0）不阻断 → 退出码 0。"""
+def test_bench_ok_all_suites_measured(capsys):
+    """M1 后三类套件全部可评估且达标 → 退出码 0。"""
     assert main(["bench"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "未评估" not in out
 
 
 def test_diff_between_versions(capsys):

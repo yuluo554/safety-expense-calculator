@@ -1,24 +1,26 @@
 {
   "doc_no": "财资〔2022〕136号",
-  "status": "pending",
+  "status": "verified",
   "thresholds": [
     {
       "clause": "第五十一条",
-      "criterion": "当年实际使用不足年度应计提金额规定比例须披露并提交书面说明",
+      "criterion": "当年实际使用的安全生产费用不足年度应计提金额60%的，除按规定进行信息披露外，还应当于下一年度4月底前按属地监管权限向县级以上负有安全生产监督管理职责的部门提交经企业董事会、股东会等机构审议的书面说明",
       "disclosure_points": [
-        "说明本年度实际使用情况与未达比例原因",
-        "列示下一年度整改与使用计划",
-        "说明结余资金结转安排"
+        "按规定进行信息披露",
+        "于下一年度4月底前按属地监管权限提交书面说明",
+        "书面说明须经企业董事会、股东会等机构审议"
       ],
       "provenance": {
         "clause": "第五十一条",
         "doc_no": "财资〔2022〕136号",
-        "fetched_at": null,
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
         "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
-        "verified": false
+        "verified": true
       },
-      "status": "pending",
-      "threshold": null,
+      "status": "verified",
+      "threshold": "0.6",
       "threshold_id": "default"
     }
   ]

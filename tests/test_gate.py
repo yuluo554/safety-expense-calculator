@@ -2,11 +2,11 @@
 
 断言：
 
-* ``pending`` 条目**绝不进入计算路径**；
+* ``pending`` 条目**绝不进入计算路径**（M1 后以 2012 版 progress 留存项为活体样本）；
 * 门控**按计算路径分作用域**（``calc``/``check``/``progress``），互不误伤；
-* ``input_required`` **不阻断**门控（放行但运行时必索）；
-* ``calc`` 门控**收窄到本次计算的行业**——算 coal 时不被 machinery 的 pending 拖累；
-* ``deferred`` 行业**不阻断**可用行业的口径。
+* ``calc`` 门控**收窄到本次计算的行业**——算 coal 时不被 deferred 行业的 pending 拖累；
+* ``deferred`` 行业**不阻断**可用行业的口径；
+* M1 已核对落值的行业（verified）→ 三作用域全放行。
 """
 
 from pathlib import Path
@@ -22,47 +22,82 @@ def ruleset_2022(data_dir):
     return load_ruleset(data_dir, "财资-2022-136")
 
 
-def test_scope_calc_blocks_on_pending(ruleset_2022):
-    """M0 规则包全 pending → calc 门控必然拦截（**门控生效的证据**，不是缺陷）。"""
-    result = check_scope(ruleset_2022, "calc", industry_id="coal")
+@pytest.fixture(scope="module")
+def ruleset_2012(data_dir):
+    return load_ruleset(data_dir, "财企-2012-16")
+
+
+def test_m1_verified_calc_scope_passes(ruleset_2022):
+    """M1 已核对四节（煤炭/建设工程/危险品/电力）→ calc 门控放行。"""
+    for industry_id in ("coal", "construction", "hazardous_chemicals", "power"):
+        result = check_scope(ruleset_2022, "calc", industry_id=industry_id)
+        assert result.ok is True, (industry_id, result.describe())
+
+
+def test_pending_never_enters_gate_pass(data_dir, ruleset_2012):
+    """**pending 绝不放行**：2012 版 progress 门槛留 pending（第十四条，无对应比例
+    条款）→ progress 门控拦截（活体样本：M1 后仓库里唯一的门控级 pending）。"""
+    progress = load_progress(data_dir, "财企-2012-16")
+    result = check_scope(ruleset_2012, "progress", progress=progress)
     assert result.ok is False
     assert len(result.blockers) > 0
     assert all(b.status == "pending" for b in result.blockers)
 
 
-def test_scope_calc_narrows_to_industry(ruleset_2022):
-    """门控收窄：coal 的 blocker 只应来自 coal 行业。"""
-    coal = check_scope(ruleset_2022, "calc", industry_id="coal")
-    assert all("industries[0]" in b.path for b in coal.blockers)
+def test_deferred_pending_skipped_by_calc_gate(ruleset_2012):
+    """deferred 行业的 pending **不产生 calc blocker**——它们本就不在计算路径上
+    （引擎以"首期未覆盖"拒绝），不属于门控职责；in_scope 行业已全量核对。"""
+    for industry_id in ("metallurgy", "transport", "machinery"):
+        result = check_scope(ruleset_2012, "calc", industry_id=industry_id)
+        assert result.ok is True, (industry_id, result.describe())
+
+
+def test_scope_calc_narrows_to_industry():
+    """门控收窄：pending 只在**本次行业**路径上时才成为 blocker（合成规则集）。"""
+    ruleset = {
+        "industries": [
+            {"industry_id": "coal", "implementation": "in_scope", "status": "verified",
+             "clause": "第七条",
+             "variants": [{"variant_id": "v", "status": "verified", "clause": "第七条"}]},
+            {"industry_id": "machinery", "implementation": "in_scope", "status": "pending",
+             "clause": "第三十条", "reason": "未核对"},
+        ],
+    }
+    coal = check_scope(ruleset, "calc", industry_id="coal")
+    assert coal.ok is True and coal.blockers == ()
+    machinery = check_scope(ruleset, "calc", industry_id="machinery")
+    assert machinery.ok is False
+    assert all("industries[1]" in b.path for b in machinery.blockers)
 
 
 def test_deferred_industry_not_blocking_available(ruleset_2022):
     """deferred 行业的 pending **不得**阻断可用行业（与核算无关的 pending 不该拦路）。"""
-    result = check_scope(ruleset_2022, "calc", industry_id="coal")
-    deferred_ids = {
-        i.get("industry_id") for i in ruleset_2022["industries"]
-        if i.get("implementation") == "deferred"
-    }
-    for blocker in result.blockers:
-        assert not any("deferred" in blocker.reason for _ in [0])
-        # 逐条确认 blocker 不来自 deferred 行业
-        for index, industry in enumerate(ruleset_2022["industries"]):
-            if industry.get("industry_id") in deferred_ids:
-                assert "industries[%d]" % index not in blocker.path
+    for industry_id in ("coal", "construction", "hazardous_chemicals", "power"):
+        result = check_scope(ruleset_2022, "calc", industry_id=industry_id)
+        assert result.ok is True, (industry_id, result.describe())
 
 
-def test_scope_check_blocks_on_pending(data_dir, ruleset_2022):
+def test_scope_check_passes_m1(data_dir, ruleset_2022):
+    """M1 支出条目（要点引用 + 红线条款）已核对 → check 门控放行。"""
     spending = load_spending(data_dir, "财资-2022-136")
     result = check_scope(ruleset_2022, "check", spending=spending)
-    assert result.ok is False
-    assert all(b.status == "pending" for b in result.blockers)
+    assert result.ok is True
 
 
-def test_scope_progress_blocks_on_pending(data_dir, ruleset_2022):
+def test_scope_progress_2022_passes(data_dir, ruleset_2022):
+    """2022 版第五十一条（60%）已核对落值 → progress 门控放行。"""
     progress = load_progress(data_dir, "财资-2022-136")
     result = check_scope(ruleset_2022, "progress", progress=progress)
+    assert result.ok is True
+
+
+def test_scope_progress_2012_pending_block(data_dir, ruleset_2012):
+    """2012 版无对应比例条款（显式 pending）→ progress 门控拦截（诚实留白）。"""
+    progress = load_progress(data_dir, "财企-2012-16")
+    result = check_scope(ruleset_2012, "progress", progress=progress)
     assert result.ok is False
     assert all(b.status == "pending" for b in result.blockers)
+    assert all(b.clause == "第十四条" for b in result.blockers)
 
 
 def test_unknown_scope_is_config_error(ruleset_2022):
@@ -91,8 +126,9 @@ def test_verified_entries_pass_gate():
     assert result.blockers == ()
 
 
-def test_gate_result_describe_lists_blockers(ruleset_2022):
-    result = check_scope(ruleset_2022, "calc", industry_id="coal")
+def test_gate_result_describe_lists_blockers(data_dir, ruleset_2012):
+    progress = load_progress(data_dir, "财企-2012-16")
+    result = check_scope(ruleset_2012, "progress", progress=progress)
     text = result.describe()
     assert "门控拦截" in text
-    assert "第七条" in text
+    assert "第十四条" in text

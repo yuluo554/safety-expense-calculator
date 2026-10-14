@@ -20,12 +20,12 @@
       "effective_from": "2022-11-21",
       "effective_to": null,
       "files": {
-        "progress.json": "43ae9ef50d1787c2a37dcccb5a98a21253d164f5a2fa5da53cf89eb690d76494",
-        "ruleset.json": "ebd9451b0f011b6efe4b97114651ff58c8b243ed14f097359d590459717b9be6",
-        "spending.json": "e269759b37df9e554138d78ce03a43abe7f49ef3331927432e55eeb88f9aa002"
+        "progress.json": "bb5828ace2bf628b1ba9c9c59a6194f2cf0f4ba3c771f89dc8b4fbacabe8d8bf",
+        "ruleset.json": "9a59ad2c26469175c738111cdb98e9ecd3bf106a56eacb99bd537c6ed2f3dbb6",
+        "spending.json": "8967bf5b59766e469dfd2d7b2674281eed6cd834fb7dd9e951e9c7c06ce5e151"
       },
       "ruleset_id": "财资-2022-136",
-      "status": "pending"
+      "status": "verified"
     },
     {
       "dir": "财企-2012-16",
@@ -34,12 +34,12 @@
       "effective_from": "2012-02-14",
       "effective_to": "2022-11-20",
       "files": {
-        "progress.json": "19b4feb4d2875751159de791de1dedf8d162b5a51d0cbdf79486344beab1d3aa",
-        "ruleset.json": "187dbdb0c15e1115c4c82469ed98c818f42fc493de56e3130645b210f008a040",
-        "spending.json": "af0e9c097e3a06dea167068c03759948f0c828d3f21fda08be7911e5252ece72"
+        "progress.json": "d948598fabae68bc52374c1c607ba0c0418cf741c594c8adfa6fbab7ce4107d5",
+        "ruleset.json": "d4aa1aa08adc6b24537802e58f5fa98fda845295abc03faa3963022e4e5fe426",
+        "spending.json": "1f1fe97c274a9fadc91f037f8c5edb7f527203c7c88a630c332e6a34b90eb8c5"
       },
       "ruleset_id": "财企-2012-16",
-      "status": "pending"
+      "status": "verified"
     }
   ],
   "schema_version": 1

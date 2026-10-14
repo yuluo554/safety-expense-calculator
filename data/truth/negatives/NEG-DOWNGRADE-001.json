@@ -1,0 +1,17 @@
+{
+  "enterprise": {
+    "basis_kind": "revenue",
+    "basis_unit": "CNY10k",
+    "basis_value": "2000",
+    "enterprise_id": "90000000SYN0000002B",
+    "enterprise_name": "示例危险品（合成）有限公司",
+    "industry_id": "hazardous_chemicals",
+    "year": 2024
+  },
+  "expect": {
+    "downgrade_warning": true
+  },
+  "negative_id": "NEG-DOWNGRADE-001",
+  "note": "应降级：CNY10k 可定义性换算 → 只报单位口径 warning",
+  "ruleset_id": "财资-2022-136"
+}
