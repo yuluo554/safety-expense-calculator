@@ -6,7 +6,7 @@
 
 **全本地处理、零上传**：企业台账可能含经营敏感信息，工具默认不联网、不做任何数据外发。
 
-> 状态：🚧 **M4 基准定稿已完成（2026-10-14）**——M3 支出核查与对账之上，**基准三类套件达标并冻结指标口径**（216/216、42/42、129/129，退出码 0）；**探活实测留痕**（每套件注入缺陷 → 基准实测变红，记录进 plan/06 E23）；**`diff --out` 双版本对照报告可导出**（复用单一渲染源，MD/XLSX/evidence 三件，无外链 + 字节冻结断言）；README 基准指标表升级为最终口径（M5 打包后冻结）。186 项测试 py3.8/3.12 双绿。
+> 状态：🚧 **M5 桌面交付已完成（2026-10-14）**——M4 基准定稿之上，**PySide6 桌面界面**（四页签：计提/核查/进度/对照；只消费编排层 API，AST 三条守门 + CLI==编排==GUI 三方对账锁定）；**PyInstaller 双 exe 打包**（CLI + GUI，onedir，随包数据白名单 `rules/truth/samples`）；**构建后断言 + 中立目录验收全链实测过**（`tools/verify_frozen.py`：selfcheck / bench 三套件达标 / calc / check / progress / diff / 报告导出，退出码语义双向验证）；**演示素材可复现**（E21 口径：`--fixed-time` 两次导出 sha256 一致）；**[技术报告](docs/技术报告.md) 入仓**。202 项测试 py3.8/3.12 双绿。
 
 ---
 
@@ -77,6 +77,8 @@ safefee selfcheck                        # 数据目录定位 + 规则集加载 
 safefee rulesets                          # 规则集清单与状态
 safefee bench                             # 内置评测基准（三类套件）
 safefee calc data/samples/archive-coal.json    # 计提计算（已核对行业输出金额，退出码 0）
+safefee calc data/samples/archive-coal.json --out <报告目录> --fixed-time 2026-10-14T00:00:00
+                                               # 计提 + 报告导出（MD/XLSX/evidence；--fixed-time 为复现断言用）
 safefee check data/samples/ledger-demo.csv --archive data/samples/archive-coal.json
 safefee progress data/samples/archive-coal.json --accrued 100000 --used 40000
 safefee diff --from-year 2020 --to-year 2024   # 双版本差异对照
@@ -87,6 +89,31 @@ safefee scan <台账目录> --out <报告目录> --report --baseline <上轮scan
                                                # 结果直接驱动报告导出 + 两轮对账
 safefee gui                                    # 桌面界面（M5 交付；缺依赖退出码 3）
 ```
+
+## 桌面交付（M5）
+
+**双形态**：源码态 `safefee gui`（惰性导入 PySide6，缺依赖退出码 3）+ 发行包双 exe。
+
+**桌面界面**（四页签，全部动作走编排层 `engine/pipeline.py`，展示文本与 CLI stdout 同一实现源）：
+
+| 页签 | 输入 | 输出 |
+|---|---|---|
+| 计提计算 | 企业档案表单（编号/行业/年度/依据量/变体） | 机制/公式/条款/逐段明细/依据选择判定/提示 + 报告导出（MD/XLSX/evidence） |
+| 支出核查 | 档案 JSON 路径 + 台账 CSV 路径 | 四态逐笔结论 + 红线清单 |
+| 使用进度 | 档案路径 + 应计提/实际使用额 | 门槛比例 + 披露义务 + 条款依据 |
+| 版本对照 | 起始/目标年度 | 差异计数 + 差异明细 + 对照报告导出 |
+
+**打包与验收**（构建固定 `py -3.12` 通道，PyInstaller ≥6 onedir）：
+
+```bash
+py -3.12 -X utf8 -m PyInstaller tools/safefee_cli.spec --distpath dist/m5 --workpath build/m5 --noconfirm
+py -3.12 -X utf8 -m PyInstaller tools/safefee_gui.spec --distpath dist/m5 --workpath build/m5 --noconfirm
+py -3.12 -X utf8 tools/verify_frozen.py --dist dist/m5/safefee-cli   # 退出码 0 = 全部断言过
+```
+
+- **随包数据白名单**：`rules` / `truth` / `samples` 三目录进 `_internal/data/`（核对底稿不进发行包）；冻结态数据目录定位优先级见 `src/safefee/data_paths.py`。
+- **构建后断言 + 中立目录验收**（M5 实测留痕，2026-10-14）：`verify_frozen.py` 断言 8 项——selfcheck（数据目录命中 `_internal/data`）、bench 三套件达标（216/216、42/42、129/129）、calc/check/progress/diff 全链、calc --out 与 diff --out 三件产物；双 exe 拷至无 `SAFEFEE_DATA_DIR` 的中立目录、以 exe 目录为 CWD 实测通过；GUI exe 实机启动验证。
+- **演示素材可复现**（E21 口径）：报告默认含真实时间；`--fixed-time` 下同输入两次导出，MD/XLSX/evidence **sha256 逐字节一致**（测试锁定 + 实测留痕）；差异对照报告默认即字节冻结（对照报告不含生成时间）。
 
 > **数据文件 ≠ 命令输入**：演示夹具是可直接喂给命令的裸档案/台账
 > （`data/samples/archive-*.json`、`data/samples/ledger-demo.csv`），
@@ -124,9 +151,10 @@ src/safefee/           核心包（零第三方依赖）
   batch/              批量扫描（失败隔离）+ 跨年对账（四集合）
   report/             单一渲染源 → Markdown / 自写最小 XLSX writer
   engine/pipeline.py  编排层（CLI 与 GUI 唯一入口）
+  gui/                PySide6 界面（只消费编排层；AST 三条守门）
   cli/                子命令（退出码 0/1/2/3 契约）
-tools/                生成器与扫描器（冻结产物唯一写入者）
-tests/                186 项（py3.8 / py3.12 双绿）
+tools/                生成器、扫描器与打包 spec / 冻结态验收
+tests/                202 项（py3.8 / py3.12 双绿）
 ```
 
 工程纪律（逐条有测试守门）：规则包**禁手改**（生成器唯一写入者，`--check` 逐字节一致）；**零政策字面量门禁**（数值只能来自规则包）；**溯源完整性**（导出前断言，不留半溯源）；报告**无外链**且 XLSX **逐字节可复现**；**字节冻结两层**（文本 EOL + zip 容器）；**编码三道加固**；**退出码三语义**锁进测试。
@@ -140,7 +168,7 @@ tests/                186 项（py3.8 / py3.12 双绿）
 | M2 | 计提引擎：三类机制 + 超额累退分段 + 依据选择判定 | ✅ 本地等价校验通过（十二节全落值可算 + 依据判定接入 + 真值库 122 例 + 基准三套件全达标；详见 HANDOFF-M2 §DoD） |
 | M3 | 支出核查与对账：四态判定 + 批量扫描 + 跨年对账 + 报告/证据链 | ✅ 本地等价校验通过（spending 扩至十二节 + scan 接真四态 + 四集合对账 + scan 驱动报告 + 指纹防篡改；详见 HANDOFF-M3 §DoD） |
 | M4 | 基准：三类套件达标，指标进 README；双版本差异对照 | ✅ 本地等价校验通过（三套件 216/216、42/42、129/129 退出码 0 + 探活实测变红留痕（plan/06 E23）+ README 指标表终稿 + `diff --out` 对照报告导出（MD/XLSX/evidence，无外链 + 字节冻结）） |
-| M5 | 桌面交付：PySide6 界面 + PyInstaller 打包 + 报告导出 + 技术报告 | ⬜ |
+| M5 | 桌面交付：PySide6 界面 + PyInstaller 打包 + 报告导出 + 技术报告 | ✅ 本地等价校验通过（GUI 四页签只消费编排层 API（AST 三条守门 + 三方对账 16 项新测试）+ 双 exe onedir 构建 + 随包数据白名单 + 构建后断言/中立目录验收全链实测 + `--fixed-time` 复现 sha256 一致 + [技术报告](docs/技术报告.md) 入仓；202 项测试双绿） |
 | M6 | 脱敏发布 GitHub + Release（exe）+ 收尾固化 | ⬜ |
 
 ## 限制与免责

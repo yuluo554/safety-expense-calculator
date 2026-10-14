@@ -48,17 +48,21 @@ def _build_parser() -> argparse.ArgumentParser:
     p_calc = sub.add_parser("calc", help="计提计算")
     p_calc.add_argument("archive", help="企业档案 JSON")
     p_calc.add_argument("--json", action="store_true", help="以 JSON 输出")
+    p_calc.add_argument("--out", default=None, help="报告输出目录（MD/XLSX/evidence）")
+    p_calc.add_argument("--fixed-time", default=None, help="固定报告头生成时间（E21 复现断言用）")
 
     p_check = sub.add_parser("check", help="支出范围合规核查")
     p_check.add_argument("ledger", help="支出明细台账 CSV")
     p_check.add_argument("--archive", required=True, help="企业档案 JSON（提供行业与年度）")
     p_check.add_argument("--json", action="store_true")
+    p_check.add_argument("--fixed-time", default=None, help="固定报告头生成时间（E21 复现断言用）")
 
     p_prog = sub.add_parser("progress", help="使用进度与披露核查")
     p_prog.add_argument("archive", help="企业档案 JSON")
     p_prog.add_argument("--accrued", required=True, help="年度应计提额（元）")
     p_prog.add_argument("--used", required=True, help="当年实际使用额（元）")
     p_prog.add_argument("--json", action="store_true")
+    p_prog.add_argument("--fixed-time", default=None, help="固定报告头生成时间（E21 复现断言用）")
 
     p_scan = sub.add_parser("scan", help="批量台账扫描")
     p_scan.add_argument("directory", help="台账目录")

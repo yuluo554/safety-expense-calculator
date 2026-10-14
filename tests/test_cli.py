@@ -124,8 +124,23 @@ def test_diff_between_versions(capsys):
     assert "对照" in capsys.readouterr().out
 
 
-def test_gui_missing_dependency_is_exit_3(capsys):
-    """缺 PySide6 → 退出码 3（**不是裸异常**）。"""
+def test_gui_missing_dependency_is_exit_3(monkeypatch, capsys):
+    """缺 PySide6 → 退出码 3（**不是裸异常**）。
+
+    M5 起本机装有 PySide6，"缺依赖"场景用 import 桩构造（下一测试同型）；
+    真实界面的启动路径由 ``tests/test_gui_smoke.py`` 以 offscreen 桩住
+    ``app.exec`` 验证，**不在 CLI 测试里真进事件循环**。
+    """
+    import builtins
+
+    real_import = builtins.__import__
+
+    def fake_import(name, *args, **kwargs):
+        if name.startswith("PySide6"):
+            raise ImportError("mocked missing PySide6")
+        return real_import(name, *args, **kwargs)
+
+    monkeypatch.setattr(builtins, "__import__", fake_import)
     assert main(["gui"]) == EXIT_DEP
     assert "依赖缺失" in capsys.readouterr().err
 

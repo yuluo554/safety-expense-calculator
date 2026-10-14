@@ -128,13 +128,18 @@ def load_archive(path: Path) -> dict:
         raise ScanItemError("parse_error", "档案不是合法 JSON：%s（%s）" % (path, exc))
 
 
-def compute_calc(case: Case, data_dir: Optional[str] = None) -> CalcReport:
+def compute_calc(
+    case: Case, data_dir: Optional[str] = None, *, fixed_time: Optional[str] = None
+) -> CalcReport:
     """门控 → **依据选择判定** → 计算 → 结果（含规则包坐标与判定留痕）。
 
     依据选择判定（第五十二/五十三条、从高提取）在计算**之前**收口：
 
     * 档案属性缺失（如矿井 ``mine_type``）→ ``inputs_required`` 非空 → 调用方退出码 2；
     * 净额口径命中 → 用净额替换依据量，并把判定留痕进结果与报告。
+
+    ``fixed_time``（E21）：替换报告头的生成时间——"逐字节可复现"按它断言，
+    默认（None）含真实时间。
     """
     root = find_data_dir(data_dir)
     manifest = load_manifest(root)
@@ -143,7 +148,7 @@ def compute_calc(case: Case, data_dir: Optional[str] = None) -> CalcReport:
     units = load_units(root)
 
     gate = check_scope(ruleset, "calc", industry_id=case.industry_id)
-    coordinate = _coordinate(ref, root, manifest)
+    coordinate = _coordinate(ref, root, manifest, fixed_time)
 
     warnings: List[str] = []
     basis_value, unit_warning = units.to_base(case.basis_value, case.basis_unit)
@@ -186,8 +191,11 @@ def compute_calc(case: Case, data_dir: Optional[str] = None) -> CalcReport:
                       gate_blockers=(), warnings=merged, basis=basis_payload)
 
 
-def check_ledger_file(case: Case, ledger_path: Path, data_dir: Optional[str] = None) -> dict:
-    """支出核查（须先过 ``check`` 作用域门控）。"""
+def check_ledger_file(
+    case: Case, ledger_path: Path, data_dir: Optional[str] = None,
+    *, fixed_time: Optional[str] = None,
+) -> dict:
+    """支出核查（须先过 ``check`` 作用域门控）。``fixed_time`` 见 :func:`compute_calc`。"""
     root = find_data_dir(data_dir)
     manifest = load_manifest(root)
     ref = manifest.resolve_year(case.year)
@@ -195,11 +203,11 @@ def check_ledger_file(case: Case, ledger_path: Path, data_dir: Optional[str] = N
     gate = check_scope(load_ruleset(root, ref.directory), "check", spending=spending)
     if not gate.ok:
         return {"gate_blocked": True, "blockers": [b.__dict__ for b in gate.blockers],
-                "coordinate": _coordinate(ref, root, manifest)}
+                "coordinate": _coordinate(ref, root, manifest, fixed_time)}
     items = _read_ledger(ledger_path)
     report = check_ledger(spending, case.industry_id, items)
     payload = report.as_dict()
-    payload["coordinate"] = _coordinate(ref, root, manifest)
+    payload["coordinate"] = _coordinate(ref, root, manifest, fixed_time)
     return payload
 
 
@@ -227,9 +235,10 @@ def _read_ledger(path: Path) -> List[LedgerItem]:
 
 
 def compute_progress_for(
-    case: Case, *, accrued: Decimal, used: Decimal, data_dir: Optional[str] = None
+    case: Case, *, accrued: Decimal, used: Decimal,
+    data_dir: Optional[str] = None, fixed_time: Optional[str] = None,
 ) -> dict:
-    """使用进度判定（须先过 ``progress`` 作用域门控）。"""
+    """使用进度判定（须先过 ``progress`` 作用域门控）。``fixed_time`` 见 :func:`compute_calc`。"""
     root = find_data_dir(data_dir)
     manifest = load_manifest(root)
     ref = manifest.resolve_year(case.year)
@@ -237,13 +246,29 @@ def compute_progress_for(
     gate = check_scope(load_ruleset(root, ref.directory), "progress", progress=progress_rules)
     if not gate.ok:
         return {"gate_blocked": True, "blockers": [b.__dict__ for b in gate.blockers],
-                "coordinate": _coordinate(ref, root, manifest)}
+                "coordinate": _coordinate(ref, root, manifest, fixed_time)}
     result = compute_progress(
         progress_rules, year=case.year, accrued=accrued, used=used
     )
     payload = result.as_dict()
-    payload["coordinate"] = _coordinate(ref, root, manifest)
+    payload["coordinate"] = _coordinate(ref, root, manifest, fixed_time)
     return payload
+
+
+def compute_diff(
+    from_year: int, to_year: int, data_dir: Optional[str] = None,
+) -> object:
+    """双版本差异对照（``diff`` 的编排；同版返回 ``None`` 表示无数值差异）。"""
+    root = find_data_dir(data_dir)
+    manifest = load_manifest(root)
+    old_ref = manifest.resolve_year(int(from_year))
+    new_ref = manifest.resolve_year(int(to_year))
+    if old_ref.ruleset_id == new_ref.ruleset_id:
+        return None
+    from safefee.ruleset import compare
+
+    return compare(load_ruleset(root, old_ref.directory),
+                   load_ruleset(root, new_ref.directory))
 
 
 def scan(
@@ -324,6 +349,13 @@ def build_report_input(
     )
 
 
+def export_diff_report(report, out_dir: Path) -> list:
+    """差异对照报告导出收口（GUI 经此导出；ruleset.diff_report 不直接进界面层）。"""
+    from safefee.ruleset.diff_report import export_diff_report as _export
+
+    return _export(report, Path(out_dir))
+
+
 def _assert_traceability(report_input: ReportInput) -> None:
     """**溯源完整性硬约束**：有计提结论 → 参数来源块必须有**可核证的真出处**。
 
@@ -372,8 +404,8 @@ def selfcheck(data_dir: Optional[str] = None) -> dict:
     }
 
 
-def _coordinate(ref, root: Path, manifest) -> dict:
-    """规则包坐标（报告头固定输出）。"""
+def _coordinate(ref, root: Path, manifest, fixed_time: Optional[str] = None) -> dict:
+    """规则包坐标（报告头固定输出）。``fixed_time``（E21）替换生成时间。"""
     ruleset_path = root / "rules" / ref.directory / "ruleset.json"
     return {
         "ruleset_id": ref.ruleset_id,
@@ -384,8 +416,86 @@ def _coordinate(ref, root: Path, manifest) -> dict:
         "status": ref.status,
         "ruleset_sha256": sha256_file(ruleset_path) if ruleset_path.is_file() else "",
         "tool_version": __version__,
-        "generated_at": datetime.now().isoformat(timespec="seconds"),
+        "generated_at": fixed_time or datetime.now().isoformat(timespec="seconds"),
     }
+
+
+# ---------------------------------------------------------------------------
+# 结果文本格式化（CLI 与 GUI 的**同一实现源**——三方对账按此对齐）。
+# 纯函数、只渲染传入结果：零判定逻辑、零政策数值（数值都在结果对象里）。
+# ---------------------------------------------------------------------------
+
+def format_calc(report: CalcReport) -> str:
+    """计提结果 → 面向人的文本（与 ``calc`` CLI stdout 同一实现源）。"""
+    case = report.case
+    result = report.result
+    if result is None:
+        return ""
+    lines = [
+        "企业：%s（%s）" % (case.enterprise_name, case.enterprise_id),
+        "规则包：%s（%s）" % (report.coordinate["doc_no"], report.coordinate["ruleset_id"]),
+        "计提机制：%s" % result.mechanism,
+        "计算公式：%s" % result.formula,
+        "条款依据：%s" % result.clause,
+    ]
+    if report.basis:
+        lines.append("依据选择：%s（条款 %s）"
+                     % (report.basis.get("kind"), report.basis.get("clause")))
+        for note in report.basis.get("notes", []):
+            lines.append("  - %s" % note)
+        for item in report.basis.get("excluded", []):
+            lines.append("  排除 %s：%s" % (item.get("item"), item.get("reason")))
+    lines.append("应计提金额：%s 元" % result.amount)
+    for line in result.tiers:
+        lines.append("  段 %d：%s ~ %s × %s = %s（%s）"
+                     % (line.index, line.lower, line.upper or "∞", line.rate,
+                        line.amount, line.clause))
+    for warning in report.warnings:
+        lines.append("提示：%s" % warning)
+    return "\n".join(lines)
+
+
+def format_check(payload: dict) -> str:
+    """支出核查结果 → 面向人的文本（与 ``check`` CLI stdout 同一实现源）。"""
+    lines = []
+    for key, count in sorted(payload["counts"].items()):
+        lines.append("%s：%d" % (key, count))
+    for finding in payload["findings"]:
+        lines.append("  %s | %s | %s | %s | %s"
+                     % (finding["item_key"], finding["state"], finding["amount"],
+                        finding["clause"] or "—", finding["reason"]))
+    return "\n".join(lines)
+
+
+def format_progress(payload: dict) -> str:
+    """进度判定结果 → 面向人的文本（与 ``progress`` CLI stdout 同一实现源）。"""
+    if not payload["applicable"]:
+        return "年度应计提额为 0：进度门槛不适用"
+    lines = [
+        "使用进度：%s（门槛 %s）" % (payload["ratio"], payload["threshold"]),
+        "是否触发披露义务：%s" % ("是" if payload["disclosure_required"] else "否"),
+        "条款依据：%s" % payload["clause"],
+    ]
+    for point in payload["points"]:
+        lines.append("  - %s" % point)
+    return "\n".join(lines)
+
+
+def format_diff(report) -> str:
+    """差异对照结果 → 面向人的文本（与 ``diff`` CLI stdout 同一实现源）。"""
+    lines = [
+        "对照：%s → %s" % (report.old_doc_no, report.new_doc_no),
+        "已比对行业（%d）：%s" % (len(report.compared_industries),
+                                 "、".join(report.compared_industries)),
+    ]
+    for kind, count in sorted(report.counts().items()):
+        lines.append("  %s：%d" % (kind, count))
+    for item in report.items:
+        lines.append("  %s/%s %s：%s → %s（%s → %s）"
+                     % (item.industry_id, item.variant_id or "—", item.kind,
+                        item.old_value or "—", item.new_value or "—",
+                        item.old_clause or "—", item.new_clause or "—"))
+    return "\n".join(lines)
 
 
 __all__ = [
@@ -398,6 +508,12 @@ __all__ = [
     "compute_calc",
     "check_ledger_file",
     "compute_progress_for",
+    "compute_diff",
+    "export_diff_report",
+    "format_calc",
+    "format_check",
+    "format_progress",
+    "format_diff",
     "scan",
     "export_report",
     "selfcheck",
