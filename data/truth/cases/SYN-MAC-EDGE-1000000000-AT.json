@@ -1,0 +1,21 @@
+{
+  "case_id": "SYN-MAC-EDGE-1000000000-AT",
+  "enterprise": {
+    "basis_kind": "revenue",
+    "basis_unit": "CNY",
+    "basis_value": "1000000000",
+    "enterprise_id": "90000000SYN0000009J",
+    "enterprise_name": "示例机械制造（合成）有限公司",
+    "industry_id": "machinery",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第三十条"
+    },
+    "amount": "3610000.00",
+    "mechanism": "by_revenue_tiered"
+  },
+  "note": "机械制造第三十条分段点 1000000000 元邻域（AT；边界口径 [lower, upper)，恰好等于归下一段）",
+  "ruleset_id": "财资-2022-136"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "SYN-NONCOAL-SMALL-QUARRY",
+  "enterprise": {
+    "basis_kind": "output",
+    "basis_unit": "ton",
+    "basis_value": "200000",
+    "enterprise_id": "90000000SYN0000004D",
+    "enterprise_name": "示例非煤矿山（合成）有限公司",
+    "industry_id": "noncoal_mine",
+    "variant_id": "nc_small_quarry",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第十条"
+    },
+    "amount": "400000.00",
+    "mechanism": "by_output"
+  },
+  "note": "非煤矿山（第十条 小型露天采石场 2 元/吨）× 200000 吨",
+  "ruleset_id": "财资-2022-136"
+}

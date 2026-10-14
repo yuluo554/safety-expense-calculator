@@ -24,8 +24,9 @@ def _report_input() -> ReportInput:
         },
         parameter_sources=[
             {"parameter": "煤炭高瓦斯矿井单价", "issuer": "财政部、应急部",
-             "effective_year": "2022", "doc_no": "财资〔2022〕136号",
-             "url": "https://www.gov.cn/", "fetched_at": "2026-10-14"},
+             "effective_year": "2022", "doc_no": "财资〔2022〕136号", "clause": "第七条",
+             "url": "https://www.gov.cn/", "snapshot": "data/knowledge/raw/136-body.docx",
+             "fetched_at": "2026-10-14"},
         ],
     )
 

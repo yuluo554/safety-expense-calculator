@@ -1,0 +1,18 @@
+{
+  "enterprise": {
+    "basis_kind": "output",
+    "basis_unit": "ton",
+    "basis_value": "150000",
+    "enterprise_id": "90000000SYN0000004D",
+    "enterprise_name": "示例非煤矿山（合成）有限公司",
+    "industry_id": "noncoal_mine",
+    "variant_id": "nc_metal_underground",
+    "year": 2024
+  },
+  "expect": {
+    "zero_hit": true
+  },
+  "negative_id": "NEG-CLEAN-004",
+  "note": "干净档案：应零命中（不产生任何 warning，计提正确）",
+  "ruleset_id": "财资-2022-136"
+}

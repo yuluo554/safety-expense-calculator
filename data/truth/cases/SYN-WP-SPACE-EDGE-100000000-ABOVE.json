@@ -1,0 +1,22 @@
+{
+  "case_id": "SYN-WP-SPACE-EDGE-100000000-ABOVE",
+  "enterprise": {
+    "basis_kind": "revenue",
+    "basis_unit": "CNY",
+    "basis_value": "100000000.01",
+    "enterprise_id": "90000000SYN0000012M",
+    "enterprise_name": "示例武器装备（合成）有限公司",
+    "industry_id": "weapons",
+    "variant_id": "wp_spacecraft",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第三十九条"
+    },
+    "amount": "1550000.00",
+    "mechanism": "by_revenue_tiered"
+  },
+  "note": "武器装备第三十九条·飞船卫星分段点 100000000 元邻域（ABOVE；边界口径 [lower, upper)，恰好等于归下一段）",
+  "ruleset_id": "财资-2022-136"
+}

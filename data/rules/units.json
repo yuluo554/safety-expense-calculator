@@ -3,6 +3,7 @@
     "CNY": "1",
     "CNY100m": "100000000",
     "CNY10k": "10000",
+    "kilo_m3": "1",
     "ton": "1"
   },
   "schema_version": 1

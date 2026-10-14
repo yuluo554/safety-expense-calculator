@@ -44,12 +44,14 @@ class DiffReport:
     old_doc_no: str
     new_doc_no: str
     items: Tuple[DiffItem, ...]
+    compared_industries: Tuple[str, ...] = ()
 
     def as_dict(self) -> dict:
         return {
             "old_doc_no": self.old_doc_no,
             "new_doc_no": self.new_doc_no,
             "counts": self.counts(),
+            "compared_industries": list(self.compared_industries),
             "items": [item.as_dict() for item in self.items],
         }
 
@@ -61,7 +63,10 @@ class DiffReport:
 
 
 def _index(ruleset: dict) -> Dict[Tuple[str, Optional[str]], dict]:
-    """把规则集的行业/变体摊平成 ``(industry_id, variant_id) -> node``。"""
+    """把规则集的行业/变体摊平成 ``(industry_id, variant_id) -> node``。
+
+    变体可**覆写机制**（如地质勘探按费用比例）——保留之，供 ``_metric`` 判别。
+    """
     index: Dict[Tuple[str, Optional[str]], dict] = {}
     for industry in ruleset.get("industries", []):
         industry_id = str(industry.get("industry_id"))
@@ -69,16 +74,23 @@ def _index(ruleset: dict) -> Dict[Tuple[str, Optional[str]], dict]:
         if not variants:
             index[(industry_id, None)] = dict(industry, _industry_id=industry_id)
         for variant in variants:
-            index[(industry_id, str(variant.get("variant_id")))] = dict(
-                variant, _industry_id=industry_id
-            )
+            node = dict(variant, _industry_id=industry_id)
+            node.setdefault("mechanism", industry.get("mechanism"))
+            index[(industry_id, str(variant.get("variant_id")))] = node
     return index
 
 
 def _metric(node: dict) -> Tuple[Optional[str], Optional[str]]:
-    """取节点的可比数值：``(value, rate)``（字符串形态，None = 未落值）。"""
+    """取节点的可比数值：``(value, rate)``（字符串形态，None = 未落值）。
+
+    超额累退节点的"数值"是**分段费率序列**（如危险品的四段费率），以 ``|``
+    连接成单串——否则两版费率差异会被静默漏掉（见 M2 diff 覆盖门）。
+    """
     value = node.get("value")
     rate = node.get("rate")
+    segments = node.get("segments")
+    if segments and value is None and rate is None:
+        rate = "|".join(str(seg.get("rate")) for seg in segments)
     return (
         None if value is None else str(value),
         None if rate is None else str(rate),
@@ -128,7 +140,11 @@ def compare(old_ruleset: dict, new_ruleset: dict) -> DiffReport:
                          str(old_node.get("clause", "")), str(new_node.get("clause", "")),
                          old_doc, new_doc)
             )
-    return DiffReport(old_doc_no=old_doc, new_doc_no=new_doc, items=tuple(items))
+    # **配对覆盖留痕**：两版都登记的行业（即便数值一致也记录"已比对"）——
+    # 否则"无差异"与"未比对"无法区分（见 M2 diff 九类配对覆盖门）。
+    compared = tuple(sorted({ind for ind, _ in old_index} & {ind for ind, _ in new_index}))
+    return DiffReport(old_doc_no=old_doc, new_doc_no=new_doc, items=tuple(items),
+                      compared_industries=compared)
 
 
 __all__ = ["DiffItem", "DiffReport", "compare"]

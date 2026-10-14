@@ -9,14 +9,14 @@
 """
 
 import json
-from dataclasses import dataclass, field
-from datetime import date, datetime
+from dataclasses import dataclass, field, replace
+from datetime import datetime
 from decimal import Decimal
 from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Tuple
 
 from safefee import __version__
-from safefee.accrual import AccrualRequest, AccrualResult, compute
+from safefee.accrual import AccrualRequest, AccrualResult, compute, decide_basis
 from safefee.batch import ObservedItem, ScanFailure, ScanOutcome, compare_nonpass, scan_sources
 from safefee.data_paths import find_data_dir
 from safefee.errors import (
@@ -26,7 +26,7 @@ from safefee.errors import (
     ScanItemError,
 )
 from safefee.evidence import Evidence
-from safefee.report import ReportInput, build_sections, render_markdown, render_xlsx
+from safefee.report import ReportInput, build_parameter_sources, build_sections, render_markdown, render_xlsx
 from safefee.rules import (
     check_scope,
     load_manifest,
@@ -78,6 +78,8 @@ class CalcReport:
     result: Optional[AccrualResult]
     gate_blockers: Tuple[object, ...] = ()
     warnings: Tuple[str, ...] = ()
+    basis: Optional[dict] = None
+    inputs_required: Tuple[str, ...] = ()
 
     def as_dict(self) -> dict:
         return {
@@ -85,6 +87,8 @@ class CalcReport:
             "case": self.case.as_dict(),
             "result": self.result.as_dict() if self.result else None,
             "warnings": list(self.warnings),
+            "basis": self.basis,
+            "inputs_required": list(self.inputs_required),
         }
 
 
@@ -125,7 +129,13 @@ def load_archive(path: Path) -> dict:
 
 
 def compute_calc(case: Case, data_dir: Optional[str] = None) -> CalcReport:
-    """门控 → 计算 → 结果（含规则包坐标）。"""
+    """门控 → **依据选择判定** → 计算 → 结果（含规则包坐标与判定留痕）。
+
+    依据选择判定（第五十二/五十三条、从高提取）在计算**之前**收口：
+
+    * 档案属性缺失（如矿井 ``mine_type``）→ ``inputs_required`` 非空 → 调用方退出码 2；
+    * 净额口径命中 → 用净额替换依据量，并把判定留痕进结果与报告。
+    """
     root = find_data_dir(data_dir)
     manifest = load_manifest(root)
     ref = manifest.resolve_year(case.year)
@@ -144,19 +154,36 @@ def compute_calc(case: Case, data_dir: Optional[str] = None) -> CalcReport:
         return CalcReport(case=case, coordinate=coordinate, result=None,
                           gate_blockers=gate.blockers, warnings=tuple(warnings))
 
+    decision = decide_basis(ruleset, case)
+    if decision.inputs_required:
+        # **必索**：档案属性缺失 → 调用方据此退出码 2（绝不静默取 0/1）
+        return CalcReport(case=case, coordinate=coordinate, result=None,
+                          warnings=tuple(warnings), basis=decision.as_dict(),
+                          inputs_required=decision.inputs_required)
+
+    variant_id = case.variant_id or decision.chosen_variant
+    if decision.basis_value is not None:
+        basis_value = Decimal(decision.basis_value)
+        warnings.append("依据选择：第五十三条净额口径生效——依据量取净额 %s 元"
+                        % decision.basis_value)
+
     request = AccrualRequest(
         industry_id=case.industry_id,
         basis_kind=case.basis_kind,
         basis_value=basis_value,
         basis_unit="CNY" if case.basis_kind != "output" else case.basis_unit,
         year=case.year,
-        variant_id=case.variant_id,
+        variant_id=variant_id,
         warnings=tuple(warnings),
     )
     result = compute(ruleset, request)
-    merged = tuple(warnings) + tuple(result.warnings)
+    # 请求已把 warnings 带入结果；此处按出现序去重（避免同一条提示重复列出）
+    merged = tuple(dict.fromkeys(warnings + list(result.warnings)))
+    basis_payload = decision.as_dict() if decision.kind != "none" else None
+    if basis_payload is not None and result.basis is None:
+        result = replace(result, basis=basis_payload)
     return CalcReport(case=case, coordinate=coordinate, result=result,
-                      gate_blockers=(), warnings=merged)
+                      gate_blockers=(), warnings=merged, basis=basis_payload)
 
 
 def check_ledger_file(case: Case, ledger_path: Path, data_dir: Optional[str] = None) -> dict:
@@ -262,25 +289,62 @@ def export_report(
     return written
 
 
-def _assert_traceability(report_input: ReportInput) -> None:
-    """**溯源完整性硬约束**：明细行数 == 溯源行数 + 参数行数，引用 id 可解析。
+def build_report_input(
+    case: Case,
+    report: CalcReport,
+    *,
+    check: Optional[dict] = None,
+    progress: Optional[dict] = None,
+    reconcile: Optional[dict] = None,
+    data_dir: Optional[str] = None,
+) -> ReportInput:
+    """组装报告输入：**参数来源块接真 provenance**（不再用测试占位）。
 
-    "半溯源"比"无溯源"更危险（读者以为已可核证）——故做成**导出前断言**。
+    从规则包逐节点提取出处（发布机关/适用年度/文号/条款/URL/快照/sha256/抓取日期），
+    收窄到**本次计算路径上的行业/变体**——读者不开仓库即可核证"这个数字哪来的"。
+    """
+    root = find_data_dir(data_dir)
+    manifest = load_manifest(root)
+    ref = manifest.resolve_year(case.year)
+    ruleset = load_ruleset(root, ref.directory)
+    sources = build_parameter_sources(
+        ruleset,
+        industry_id=case.industry_id,
+        variant_id=(case.variant_id
+                    or (report.basis or {}).get("chosen_variant")),
+    )
+    return ReportInput(
+        ruleset_coordinate=report.coordinate,
+        enterprise=case.as_dict(),
+        accrual=report.result.as_dict() if report.result else None,
+        check=check,
+        progress=progress,
+        reconcile=reconcile,
+        parameter_sources=sources,
+    )
+
+
+def _assert_traceability(report_input: ReportInput) -> None:
+    """**溯源完整性硬约束**：有计提结论 → 参数来源块必须有**可核证的真出处**。
+
+    "半溯源"比"无溯源"更危险（读者以为已可核证）——故做成**导出前断言**：
+    参数来源块非空，且每行都带 文号 + 条款 + URL + 快照 + sha256 + 抓取日期。
     """
     sections = build_sections(report_input)
-    detail_rows = 0
-    for section in sections:
-        if section.enabled and section.rows and "参数来源块" not in section.title:
-            detail_rows += len(section.rows)
-    source_rows = 0
+    source_rows = []
     for section in sections:
         if section.title == "参数来源块" and section.enabled:
-            source_rows = len(section.rows)
-    # 计提明细 + 支出核查的每一行都必须能在溯源块里找到对应参数（或显式声明无参数）
-    if report_input.accrual is not None and source_rows == 0:
+            source_rows = list(section.rows)
+    if report_input.accrual is not None and not source_rows:
         raise SchemaError(
             "溯源完整性不满足：计提结论存在但参数来源块为空——拒导（半溯源不可接受）"
         )
+    # 参数行必须携带可核证出处（列序：参数/发布机关/适用年度/文号/条款/URL/快照/抓取日期）
+    for row in source_rows:
+        if len(row) < 8 or not row[3] or not row[4] or not row[5] or not row[7]:
+            raise SchemaError(
+                "溯源完整性不满足：参数来源行缺少 文号/条款/URL/抓取日期 ——拒导（%s）" % (row,)
+            )
 
 
 def selfcheck(data_dir: Optional[str] = None) -> dict:
@@ -329,6 +393,7 @@ __all__ = [
     "Case",
     "CalcReport",
     "build_case",
+    "build_report_input",
     "load_archive",
     "compute_calc",
     "check_ledger_file",

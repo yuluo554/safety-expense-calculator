@@ -1,0 +1,22 @@
+{
+  "case_id": "SYN-2012-TRANSPORT-PASSENGER",
+  "enterprise": {
+    "basis_kind": "revenue",
+    "basis_unit": "CNY",
+    "basis_value": "80000000",
+    "enterprise_id": "90000000SYN0000007G",
+    "enterprise_name": "示例交通运输（合成）有限公司",
+    "industry_id": "transport",
+    "variant_id": "passenger_special_freight",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第九条"
+    },
+    "amount": "1200000.00",
+    "mechanism": "by_revenue_rate"
+  },
+  "note": "2012 版交通运输第九条（客运等特殊货运 1.5%）",
+  "ruleset_id": "财企-2012-16"
+}

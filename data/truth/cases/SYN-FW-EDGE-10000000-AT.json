@@ -1,0 +1,21 @@
+{
+  "case_id": "SYN-FW-EDGE-10000000-AT",
+  "enterprise": {
+    "basis_kind": "revenue",
+    "basis_unit": "CNY",
+    "basis_value": "10000000",
+    "enterprise_id": "90000000SYN0000010K",
+    "enterprise_name": "示例烟花爆竹（合成）有限公司",
+    "industry_id": "fireworks",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第三十三条"
+    },
+    "amount": "400000.00",
+    "mechanism": "by_revenue_tiered"
+  },
+  "note": "烟花爆竹第三十三条分段点 10000000 元邻域（AT；边界口径 [lower, upper)，恰好等于归下一段）",
+  "ruleset_id": "财资-2022-136"
+}

@@ -1,0 +1,18 @@
+{
+  "enterprise": {
+    "basis_kind": "revenue",
+    "basis_unit": "CNY",
+    "basis_value": "60000000",
+    "enterprise_id": "90000000SYN0000007G",
+    "enterprise_name": "示例交通运输（合成）有限公司",
+    "industry_id": "transport",
+    "variant_id": "general_freight",
+    "year": 2024
+  },
+  "expect": {
+    "zero_hit": true
+  },
+  "negative_id": "NEG-CLEAN-005",
+  "note": "干净档案：应零命中（不产生任何 warning，计提正确）",
+  "ruleset_id": "财资-2022-136"
+}

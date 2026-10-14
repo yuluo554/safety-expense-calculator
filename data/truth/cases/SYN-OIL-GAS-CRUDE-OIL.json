@@ -1,0 +1,22 @@
+{
+  "case_id": "SYN-OIL-GAS-CRUDE-OIL",
+  "enterprise": {
+    "basis_kind": "output",
+    "basis_unit": "ton",
+    "basis_value": "1000000",
+    "enterprise_id": "90000000SYN0000006F",
+    "enterprise_name": "示例石油天然气（合成）有限公司",
+    "industry_id": "oil_gas",
+    "variant_id": "og_crude_oil",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第十四条"
+    },
+    "amount": "20000000.00",
+    "mechanism": "by_output"
+  },
+  "note": "石油天然气按产量（第十四条 原油 20 元/吨）× 1000000 吨",
+  "ruleset_id": "财资-2022-136"
+}

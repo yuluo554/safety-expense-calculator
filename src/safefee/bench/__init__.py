@@ -154,9 +154,10 @@ def _node_has_pending(node: dict) -> bool:
     """节点是否含未核对（pending）数值——未核对不得进入计算路径，基准同样跳过。"""
     if node.get("status") == "pending":
         return True
-    if node.get("value") is None and node.get("mechanism") == "by_output":
+    mechanism = node.get("mechanism")
+    if mechanism == "by_output" and node.get("value") is None:
         return True
-    if node.get("rate") is None and node.get("mechanism") == "by_project_cost":
+    if mechanism in ("by_project_cost", "by_revenue_rate") and node.get("rate") is None:
         return True
     segments = node.get("segments") or []
     if segments and any(seg.get("status") == "pending" or seg.get("rate") is None for seg in segments):
@@ -215,6 +216,16 @@ def run_dual_version(manifest: Manifest, old_ruleset: dict, new_ruleset: dict) -
     return SuiteResult("dual_version", total, passed, failed, notes, threshold, met, measured)
 
 
+def _probe_basis(node: dict) -> Decimal:
+    """版本隔离探活的依据量——**从规则包分段结构推导**（不硬编码政策数值）。"""
+    segments = node.get("segments") or []
+    for seg in sorted(segments, key=lambda s: Decimal(str(s.get("lower", 0)))):
+        upper = seg.get("upper")
+        if upper is not None:
+            return Decimal(str(upper)) * 2   # 跨过首个分段点
+    return Decimal("1000000")               # 无分段结构时的中性探活值
+
+
 def _assert_version_isolated(ruleset: dict, industry_id: str, variant_id: Optional[str], node: dict) -> None:
     """断言某版本节点的计算结果只依赖**本版本**数值（不被另一版污染）。"""
     from safefee.accrual import AccrualRequest, compute
@@ -232,11 +243,16 @@ def _assert_version_isolated(ruleset: dict, industry_id: str, variant_id: Option
         if rate is None:
             raise AssertionError("未落值（pending）")
         request = AccrualRequest(industry_id, "project_cost", Decimal("1000000"), "CNY", 2020, variant_id)
+    elif mechanism == "by_revenue_rate":
+        rate = node.get("rate")
+        if rate is None:
+            raise AssertionError("未落值（pending）")
+        request = AccrualRequest(industry_id, "revenue", _probe_basis(node), "CNY", 2020, variant_id)
     else:
         segments = node.get("segments") or []
         if not segments:
             raise AssertionError("缺 segments")
-        request = AccrualRequest(industry_id, "revenue", Decimal("20000000"), "CNY", 2020, variant_id)
+        request = AccrualRequest(industry_id, "revenue", _probe_basis(node), "CNY", 2020, variant_id)
     result = compute(ruleset, request)
     if result.amount < 0:
         raise AssertionError("金额为负")
@@ -250,7 +266,10 @@ def _index_nodes(ruleset: dict) -> Dict[Tuple[str, Optional[str]], dict]:
         if not variants:
             index[(industry_id, None)] = industry
         for variant in variants:
-            index[(industry_id, str(variant.get("variant_id")))] = dict(variant, mechanism=industry.get("mechanism"))
+            node = dict(variant)
+            # 变体可覆写机制（如地质勘探按费用比例）；无覆写时继承行业机制
+            node.setdefault("mechanism", industry.get("mechanism"))
+            index[(industry_id, str(variant.get("variant_id")))] = node
     return index
 
 

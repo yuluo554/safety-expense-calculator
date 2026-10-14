@@ -1,0 +1,21 @@
+{
+  "case_id": "SYN-2012-MET-MID",
+  "enterprise": {
+    "basis_kind": "revenue",
+    "basis_unit": "CNY",
+    "basis_value": "2000000000",
+    "enterprise_id": "90000000SYN0000008H",
+    "enterprise_name": "示例冶金（合成）有限公司",
+    "industry_id": "metallurgy",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第十条"
+    },
+    "amount": "8150000.00",
+    "mechanism": "by_revenue_tiered"
+  },
+  "note": "2012 版冶金第十条（六段超额累退）营收 2×10^9 元",
+  "ruleset_id": "财企-2012-16"
+}

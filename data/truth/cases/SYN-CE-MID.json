@@ -1,0 +1,21 @@
+{
+  "case_id": "SYN-CE-MID",
+  "enterprise": {
+    "basis_kind": "revenue",
+    "basis_unit": "CNY",
+    "basis_value": "2000000000",
+    "enterprise_id": "90000000SYN0000011L",
+    "enterprise_name": "示例民用爆炸物品（合成）有限公司",
+    "industry_id": "civil_explosives",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第三十六条"
+    },
+    "amount": "8700000.00",
+    "mechanism": "by_revenue_tiered"
+  },
+  "note": "民用爆炸物品（第三十六条 四段超额累退）营收 2×10^9 元",
+  "ruleset_id": "财资-2022-136"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "SYN-TRANSPORT-GENERAL-FREIGHT",
+  "enterprise": {
+    "basis_kind": "revenue",
+    "basis_unit": "CNY",
+    "basis_value": "80000000",
+    "enterprise_id": "90000000SYN0000007G",
+    "enterprise_name": "示例交通运输（合成）有限公司",
+    "industry_id": "transport",
+    "variant_id": "general_freight",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第二十四条"
+    },
+    "amount": "800000.00",
+    "mechanism": "by_revenue_rate"
+  },
+  "note": "交通运输（第二十四条 普通货运 1%）× 8×10^7 元",
+  "ruleset_id": "财资-2022-136"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "SYN-WP-SPACECRAFT",
+  "enterprise": {
+    "basis_kind": "revenue",
+    "basis_unit": "CNY",
+    "basis_value": "2000000000",
+    "enterprise_id": "90000000SYN0000012M",
+    "enterprise_name": "示例武器装备（合成）有限公司",
+    "industry_id": "weapons",
+    "variant_id": "wp_spacecraft",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第三十九条"
+    },
+    "amount": "8050000.00",
+    "mechanism": "by_revenue_tiered"
+  },
+  "note": "武器装备（第三十九条 飞船/卫星等变体，五段）营收 2×10^9 元",
+  "ruleset_id": "财资-2022-136"
+}

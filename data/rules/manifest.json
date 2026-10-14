@@ -21,7 +21,7 @@
       "effective_to": null,
       "files": {
         "progress.json": "bb5828ace2bf628b1ba9c9c59a6194f2cf0f4ba3c771f89dc8b4fbacabe8d8bf",
-        "ruleset.json": "9a59ad2c26469175c738111cdb98e9ecd3bf106a56eacb99bd537c6ed2f3dbb6",
+        "ruleset.json": "74db7df644477a27d0c9c1e76649530313957a78a8ef229e93f2a36ca21bbf44",
         "spending.json": "8967bf5b59766e469dfd2d7b2674281eed6cd834fb7dd9e951e9c7c06ce5e151"
       },
       "ruleset_id": "财资-2022-136",
@@ -35,7 +35,7 @@
       "effective_to": "2022-11-20",
       "files": {
         "progress.json": "d948598fabae68bc52374c1c607ba0c0418cf741c594c8adfa6fbab7ce4107d5",
-        "ruleset.json": "d4aa1aa08adc6b24537802e58f5fa98fda845295abc03faa3963022e4e5fe426",
+        "ruleset.json": "7355e36a51a63724027d143af5e819dbdc0844b58c912895ec27fd39acc3ec75",
         "spending.json": "1f1fe97c274a9fadc91f037f8c5edb7f527203c7c88a630c332e6a34b90eb8c5"
       },
       "ruleset_id": "财企-2012-16",

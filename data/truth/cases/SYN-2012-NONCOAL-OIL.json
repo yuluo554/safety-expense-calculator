@@ -1,0 +1,22 @@
+{
+  "case_id": "SYN-2012-NONCOAL-OIL",
+  "enterprise": {
+    "basis_kind": "output",
+    "basis_unit": "ton",
+    "basis_value": "100000",
+    "enterprise_id": "90000000SYN0000004D",
+    "enterprise_name": "示例非煤矿山（合成）有限公司",
+    "industry_id": "noncoal_mine",
+    "variant_id": "nc_oil",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第六条"
+    },
+    "amount": "1700000.00",
+    "mechanism": "by_output"
+  },
+  "note": "2012 版非煤矿山第六条（石油并入本行业）17 元/吨 × 100000 吨",
+  "ruleset_id": "财企-2012-16"
+}

@@ -99,7 +99,8 @@ def test_three_way_reconciliation_on_verified_ruleset(tmp_path, monkeypatch):
         enterprise=case.as_dict(),
         accrual=report.result.as_dict(),
         parameter_sources=[{"parameter": "p", "issuer": "i", "effective_year": "2022",
-                            "doc_no": "d", "url": "u", "fetched_at": "2026-10-14"}],
+                            "doc_no": "d", "clause": "第七条", "url": "u",
+                            "snapshot": "s", "fetched_at": "2026-10-14"}],
     ))
     accrual_section = next(s for s in sections if s.title == "计提明细")
     assert any(amount in paragraph for paragraph in accrual_section.paragraphs)
@@ -121,9 +122,34 @@ def test_export_report_writes_both_formats(tmp_path):
         accrual={"amount": "1.00", "mechanism": "by_output", "formula": "f", "clause": "第七条",
                  "tiers": []},
         parameter_sources=[{"parameter": "p", "issuer": "i", "effective_year": "2022",
-                            "doc_no": "d", "url": "u", "fetched_at": "2026-10-14"}],
+                            "doc_no": "d", "clause": "第七条", "url": "u",
+                            "snapshot": "s", "fetched_at": "2026-10-14"}],
     )
     written = export_report(payload, tmp_path)
     assert (tmp_path / "报告.md").is_file()
     assert (tmp_path / "报告.xlsx").is_file()
     assert (tmp_path / "evidence.json").is_file()
+
+
+def test_build_report_input_uses_real_provenance(data_dir):
+    """**报告参数来源块接真 provenance**（不再用测试占位）：文号/条款/URL/快照/
+    抓取日期全部来自规则包节点。"""
+    from safefee.engine import build_case, build_report_input, compute_calc
+
+    case = build_case({
+        "enterprise_id": "X", "enterprise_name": "Y", "industry_id": "coal",
+        "variant_id": "coal_high_gas", "year": 2024,
+        "basis_kind": "output", "basis_value": "1000", "basis_unit": "ton",
+    })
+    report = compute_calc(case)
+    payload = build_report_input(case, report)
+    assert payload.parameter_sources, "参数来源块不得为空（否则拒导）"
+    first = payload.parameter_sources[0]
+    assert first["doc_no"] == "财资〔2022〕136号"
+    assert first["clause"] == "第七条"
+    assert first["url"].startswith("https://")
+    assert first["snapshot"] == "data/knowledge/raw/136-body.docx"
+    assert first["fetched_at"] == "2026-10-14"
+    # 判定规则（第五十二/五十三条）也在参数来源块中
+    clauses = {s["clause"] for s in payload.parameter_sources}
+    assert "第五十二条" in clauses and "第五十三条" in clauses

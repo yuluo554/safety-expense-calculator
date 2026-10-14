@@ -1,0 +1,22 @@
+{
+  "case_id": "SYN-NONCOAL-METAL-UNDERGROUND",
+  "enterprise": {
+    "basis_kind": "output",
+    "basis_unit": "ton",
+    "basis_value": "100000",
+    "enterprise_id": "90000000SYN0000004D",
+    "enterprise_name": "示例非煤矿山（合成）有限公司",
+    "industry_id": "noncoal_mine",
+    "variant_id": "nc_metal_underground",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第十条"
+    },
+    "amount": "1500000.00",
+    "mechanism": "by_output"
+  },
+  "note": "非煤矿山按产量（第十条 金属矿山·地下 15 元/吨）× 100000 吨",
+  "ruleset_id": "财资-2022-136"
+}

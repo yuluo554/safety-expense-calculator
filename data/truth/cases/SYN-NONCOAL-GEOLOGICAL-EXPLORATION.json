@@ -1,0 +1,22 @@
+{
+  "case_id": "SYN-NONCOAL-GEOLOGICAL-EXPLORATION",
+  "enterprise": {
+    "basis_kind": "project_cost",
+    "basis_unit": "CNY",
+    "basis_value": "50000000",
+    "enterprise_id": "90000000SYN0000004D",
+    "enterprise_name": "示例非煤矿山（合成）有限公司",
+    "industry_id": "noncoal_mine",
+    "variant_id": "nc_geological_exploration",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第十条"
+    },
+    "amount": "1000000.00",
+    "mechanism": "by_project_cost"
+  },
+  "note": "非煤矿山第十条第三款：地质勘探单位按工程总费用 2%（机制覆写）× 5×10^7 元",
+  "ruleset_id": "财资-2022-136"
+}

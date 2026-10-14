@@ -76,16 +76,17 @@ def _accrual_direct(ruleset: dict, industry_id: str, basis: Decimal,
     """**独立计算路径**：只用规则包 JSON 原始数值做一次性演算（不走 safefee 引擎）。
 
     返回 ``(两位小数金额, 期望附注)``——附注含机制、条款、变体名，供真值记录引用。
+    机制取**变体覆写优先**（如地质勘探/工程成本按费用比例）。
     """
     industry = _industry(ruleset, industry_id)
-    mechanism = industry["mechanism"]
     node = (_variant(industry, variant_id) if variant_id else industry) or industry
+    mechanism = node.get("mechanism") or industry["mechanism"]
 
     if mechanism == "by_output":
         amount = _q2(Decimal(str(node["value"])) * basis)
         return amount, {"mechanism": mechanism, "clause": str(node["clause"]),
                         "variant_name": node.get("variant_name")}
-    if mechanism == "by_project_cost":
+    if mechanism in ("by_project_cost", "by_revenue_rate"):
         amount = _q2(Decimal(str(node["rate"])) * basis)
         return amount, {"mechanism": mechanism, "clause": str(node["clause"]),
                         "variant_name": node.get("variant_name")}
@@ -150,69 +151,102 @@ def _negative(negative_id: str, ruleset_id: str, enterprise: dict, expect: dict,
     }
 
 
-def _segment_bounds(industry: dict) -> List[Decimal]:
-    """从规则包分段结构推导全部分段点（**不复制字面量**——数值只活在规则包）。"""
-    bounds = set()
-    for seg in industry.get("segments") or []:
-        if seg.get("upper") is not None:
-            bounds.add(Decimal(str(seg["upper"])))
-    return sorted(bounds)
+#: 合成企业白名单（虚构名称 + 测试号段，见 data/README.md §四）
+ENTERPRISES = {
+    "coal": ("示例煤炭（合成）有限公司", "90000000SYN0000001A"),
+    "hazardous_chemicals": ("示例危险品（合成）有限公司", "90000000SYN0000002B"),
+    "construction": ("示例建设工程（合成）有限公司", "90000000SYN0000003C"),
+    "noncoal_mine": ("示例非煤矿山（合成）有限公司", "90000000SYN0000004D"),
+    "power": ("示例电力（合成）有限公司", "90000000SYN0000005E"),
+    "oil_gas": ("示例石油天然气（合成）有限公司", "90000000SYN0000006F"),
+    "transport": ("示例交通运输（合成）有限公司", "90000000SYN0000007G"),
+    "metallurgy": ("示例冶金（合成）有限公司", "90000000SYN0000008H"),
+    "machinery": ("示例机械制造（合成）有限公司", "90000000SYN0000009J"),
+    "fireworks": ("示例烟花爆竹（合成）有限公司", "90000000SYN0000010K"),
+    "civil_explosives": ("示例民用爆炸物品（合成）有限公司", "90000000SYN0000011L"),
+    "weapons": ("示例武器装备（合成）有限公司", "90000000SYN0000012M"),
+}
 
 
-def _tier_cases(ruleset_id: str, ruleset: dict) -> List[dict]:
-    """危险品/电力超额累退：常规点 + 恰好等于分段点 + ±0.01 邻域。"""
+def _tiered_segments(ruleset: dict, industry_id: str,
+                     variant_id: Optional[str]) -> list:
+    """取某阶梯（行业级或变体级）的段列表。"""
+    industry = _industry(ruleset, industry_id)
+    if variant_id:
+        node = _variant(industry, variant_id)
+        if node is None or not node.get("segments"):
+            raise KeyError("变体 %s/%s 无分段结构" % (industry_id, variant_id))
+        return node["segments"]
+    return industry["segments"]
+
+
+def _finite_bounds(segments: list) -> List[Decimal]:
+    """从段列表推导有限分段点（**不复制字面量**）。"""
+    return sorted({Decimal(str(seg["upper"])) for seg in segments
+                   if seg.get("upper") is not None})
+
+
+def _edge_cases(ruleset_id: str, ruleset: dict, industry_id: str,
+                variant_id: Optional[str], prefix: str, label: str,
+                year: int = 2024) -> List[dict]:
+    """**新分段点边界**：``{p-0.01, p, p+0.01}`` 邻域（``[lower, upper)`` 口径）。"""
+    segments = _tiered_segments(ruleset, industry_id, variant_id)
+    name, code = ENTERPRISES[industry_id]
     cases: List[dict] = []
-    haz = _industry(ruleset, "hazardous_chemicals")
-    bounds = _segment_bounds(haz)
-    # 常规档内点：取各段中点（段下界与上界的平均值，同样从规则包推导）
+    for bound in _finite_bounds(segments):
+        for delta, tag in ((Decimal("-0.01"), "BELOW"), (Decimal("0"), "AT"),
+                           (Decimal("0.01"), "ABOVE")):
+            basis = bound + delta
+            amount, note = _accrual_direct(ruleset, industry_id, basis, variant_id)
+            cases.append(_case(
+                "%s-EDGE-%s-%s" % (prefix, bound, tag), ruleset_id,
+                _enterprise(name, code, industry_id, year, "revenue", str(basis), "CNY",
+                            variant_id),
+                amount, note,
+                "%s分段点 %s 元邻域（%s；边界口径 [lower, upper)，恰好等于归下一段）"
+                % (label, bound, tag),
+            ))
+    return cases
+
+
+def _haz_cases(ruleset_id: str, ruleset: dict) -> List[dict]:
+    """危险品：常规档内点 + 深端点 + 分段点邻域。"""
+    cases: List[dict] = []
+    name, code = ENTERPRISES["hazardous_chemicals"]
+    segs = _tiered_segments(ruleset, "hazardous_chemicals", None)
     mids: List[Decimal] = []
-    segs = sorted(haz["segments"], key=lambda s: Decimal(str(s["lower"])))
-    for seg in segs:
+    for seg in sorted(segs, key=lambda s: Decimal(str(s["lower"]))):
         lower = Decimal(str(seg["lower"]))
         upper = None if seg["upper"] is None else Decimal(str(seg["upper"]))
         mids.append(lower + (upper - lower) / 2 if upper is not None else lower * 2)
     del mids[-1]  # 末段无上界，中点无意义（深端点单列）
-    deep = segs[-2]["lower"] if len(segs) >= 2 else None  # 次末段下界作为深端点
-    for label, basis in zip(
-        ("mid-tier%d" % i for i in range(1, len(mids) + 1)), mids,
-    ):
+    deep = sorted(segs, key=lambda s: Decimal(str(s["lower"])))[-2]["lower"]
+    for label, basis in zip(("mid-tier%d" % i for i in range(1, len(mids) + 1)), mids):
         amount, note = _accrual_direct(ruleset, "hazardous_chemicals", basis)
         cases.append(_case(
             "SYN-HAZ-%s" % label.upper(), ruleset_id,
-            _enterprise("示例危险品（合成）有限公司", "90000000SYN0000002B",
-                        "hazardous_chemicals", 2024, "revenue", str(basis), "CNY"),
+            _enterprise(name, code, "hazardous_chemicals", 2024, "revenue", str(basis), "CNY"),
             amount, note, "危险品常规档内点 %s（营收 %s 元）" % (label, basis),
         ))
-    # 深端点：次末段下界（大营收仍正确分段）
-    if deep is not None:
-        amount, note = _accrual_direct(ruleset, "hazardous_chemicals", Decimal(str(deep)))
-        cases.append(_case(
-            "SYN-HAZ-DEEP-TIER", ruleset_id,
-            _enterprise("示例危险品（合成）有限公司", "90000000SYN0000002B",
-                        "hazardous_chemicals", 2024, "revenue", str(deep), "CNY"),
-            amount, note, "危险品深端点（次末段下界 %s 元）" % deep,
-        ))
-    # 分段点邻域（{p-0.01, p, p+0.01}）
-    for bound in bounds:
-        for delta, tag in ((Decimal("-0.01"), "BELOW"), (Decimal("0"), "AT"),
-                           (Decimal("0.01"), "ABOVE")):
-            basis = bound + delta
-            amount, note = _accrual_direct(ruleset, "hazardous_chemicals", basis)
-            cases.append(_case(
-                "SYN-HAZ-EDGE-%s-%s" % (bound, tag), ruleset_id,
-                _enterprise("示例危险品（合成）有限公司", "90000000SYN0000002B",
-                            "hazardous_chemicals", 2024, "revenue", str(basis), "CNY"),
-                amount, note,
-                "危险品恰好等于/邻近分段点 %s 元（%s；边界口径 [lower, upper)，"
-                "恰好等于归下一段）" % (bound, tag),
-            ))
-    # 电力：生产/供应两套标准各一例（取点同样从规则包推导：供应段一的中点 /
-    # 生产第四段下界，不复制字面量）
-    power = _industry(ruleset, "power")
-    gen_node = _variant(power, "power_generation")
-    sup_node = _variant(power, "power_supply")
-    sup_first_upper = Decimal(str(sup_node["segments"][0]["upper"]))
-    gen_deep_lower = Decimal(str(gen_node["segments"][3]["lower"]))
+    amount, note = _accrual_direct(ruleset, "hazardous_chemicals", Decimal(str(deep)))
+    cases.append(_case(
+        "SYN-HAZ-DEEP-TIER", ruleset_id,
+        _enterprise(name, code, "hazardous_chemicals", 2024, "revenue", str(deep), "CNY"),
+        amount, note, "危险品深端点（次末段下界 %s 元）" % deep,
+    ))
+    cases.extend(_edge_cases(ruleset_id, ruleset, "hazardous_chemicals", None,
+                             "SYN-HAZ", "危险品"))
+    return cases
+
+
+def _power_cases(ruleset_id: str, ruleset: dict) -> List[dict]:
+    """电力：生产/供应两套标准各一例（取点从规则包推导，不复制字面量）。"""
+    name, code = ENTERPRISES["power"]
+    gen = _tiered_segments(ruleset, "power", "power_generation")
+    sup = _tiered_segments(ruleset, "power", "power_supply")
+    gen_deep_lower = Decimal(str(sorted(gen, key=lambda s: Decimal(str(s["lower"])))[3]["lower"]))
+    sup_first_upper = Decimal(str(sorted(sup, key=lambda s: Decimal(str(s["lower"])))[0]["upper"]))
+    cases = []
     for variant_id, label, basis in (
         ("power_generation", "GEN", gen_deep_lower),
         ("power_supply", "SUP", sup_first_upper),
@@ -220,11 +254,27 @@ def _tier_cases(ruleset_id: str, ruleset: dict) -> List[dict]:
         amount, note = _accrual_direct(ruleset, "power", basis, variant_id)
         cases.append(_case(
             "SYN-POWER-%s" % label, ruleset_id,
-            _enterprise("示例电力（合成）有限公司", "90000000SYN0000005E",
-                        "power", 2024, "revenue", str(basis), "CNY", variant_id),
+            _enterprise(name, code, "power", 2024, "revenue", str(basis), "CNY", variant_id),
             amount, note,
             "电力%s（第四十三条 %s）营收 %s 元" % (
                 "生产" if variant_id == "power_generation" else "供应", variant_id, basis),
+        ))
+    return cases
+
+
+def _plain_cases(ruleset_id: str, ruleset: dict, rows: List[tuple]) -> List[dict]:
+    """每个行业**至少 1 例**（M2 八节扩例）。
+
+    ``rows`` 行 = ``(case_suffix, industry_id, variant_id, basis_kind, basis, unit, note)``。
+    """
+    cases: List[dict] = []
+    for suffix, industry_id, variant_id, kind, basis, unit, note in rows:
+        name, code = ENTERPRISES[industry_id]
+        amount, accrual = _accrual_direct(ruleset, industry_id, Decimal(str(basis)), variant_id)
+        cases.append(_case(
+            "SYN-%s" % suffix, ruleset_id,
+            _enterprise(name, code, industry_id, 2024, kind, str(basis), unit, variant_id),
+            amount, accrual, note,
         ))
     return cases
 
@@ -233,6 +283,9 @@ def _build_cases() -> List[dict]:
     cases: List[dict] = []
     rs_2022 = _load_ruleset("财资-2022-136")
     rs_2012 = _load_ruleset("财企-2012-16")
+    coal_name, coal_code = ENTERPRISES["coal"]
+    haz_name, haz_code = ENTERPRISES["hazardous_chemicals"]
+    const_name, const_code = ENTERPRISES["construction"]
 
     # ── 按产量（煤炭，2022 版）───────────────────────────────────────────────
     for variant_id, basis in (
@@ -244,8 +297,7 @@ def _build_cases() -> List[dict]:
         amount, note = _accrual_direct(rs_2022, "coal", Decimal(basis), variant_id)
         cases.append(_case(
             "SYN-COAL-%s" % variant_id.replace("coal_", "").upper(), "财资-2022-136",
-            _enterprise("示例煤炭（合成）有限公司", "90000000SYN0000001A", "coal", 2024,
-                        "output", basis, "ton", variant_id),
+            _enterprise(coal_name, coal_code, "coal", 2024, "output", basis, "ton", variant_id),
             amount, note, "煤炭按产量（第七条 %s）× %s 吨" % (variant_id, basis),
         ))
 
@@ -258,21 +310,94 @@ def _build_cases() -> List[dict]:
         amount, note = _accrual_direct(rs_2022, "construction", Decimal(basis), variant_id)
         cases.append(_case(
             "SYN-CONST-%s" % variant_id.split("_")[0].upper(), "财资-2022-136",
-            _enterprise("示例建设工程（合成）有限公司", "90000000SYN0000003C",
-                        "construction", 2024, "project_cost", basis, "CNY", variant_id),
+            _enterprise(const_name, const_code, "construction", 2024, "project_cost", basis,
+                        "CNY", variant_id),
             amount, note, "建设工程按造价比例（第十七条 %s）× %s 元" % (variant_id, basis),
         ))
 
     # ── 超额累退（危险品 + 电力，2022 版）───────────────────────────────────
-    cases.extend(_tier_cases("财资-2022-136", rs_2022))
+    cases.extend(_haz_cases("财资-2022-136", rs_2022))
+    cases.extend(_power_cases("财资-2022-136", rs_2022))
+
+    # ── M2 八节扩例：非煤矿山 / 石油天然气 / 交通运输（2022 版）─────────────
+    cases.extend(_plain_cases("财资-2022-136", rs_2022, [
+        ("NONCOAL-METAL-UNDERGROUND", "noncoal_mine", "nc_metal_underground", "output",
+         "100000", "ton", "非煤矿山按产量（第十条 金属矿山·地下 15 元/吨）× 100000 吨"),
+        ("NONCOAL-SMALL-QUARRY", "noncoal_mine", "nc_small_quarry", "output",
+         "200000", "ton", "非煤矿山（第十条 小型露天采石场 2 元/吨）× 200000 吨"),
+        ("NONCOAL-GEOLOGICAL-EXPLORATION", "noncoal_mine", "nc_geological_exploration",
+         "project_cost", "50000000", "CNY",
+         "非煤矿山第十条第三款：地质勘探单位按工程总费用 2%（机制覆写）× 5×10^7 元"),
+        ("OIL-GAS-CRUDE-OIL", "oil_gas", "og_crude_oil", "output",
+         "1000000", "ton", "石油天然气按产量（第十四条 原油 20 元/吨）× 1000000 吨"),
+        ("OIL-GAS-NATURAL-GAS", "oil_gas", "og_natural_gas", "output",
+         "3000000", "kilo_m3", "石油天然气（第十四条 原气 7.5 元/千方）× 3000000 千方"),
+        ("OIL-GAS-ENGINEERING", "oil_gas", "og_engineering", "project_cost",
+         "50000000", "CNY", "石油天然气第十四条：工程成本 2%（机制覆写）× 5×10^7 元"),
+        ("TRANSPORT-GENERAL-FREIGHT", "transport", "general_freight", "revenue",
+         "80000000", "CNY", "交通运输（第二十四条 普通货运 1%）× 8×10^7 元"),
+        ("TRANSPORT-PASSENGER-SPECIAL", "transport", "passenger_special_freight", "revenue",
+         "80000000", "CNY", "交通运输（第二十四条 客运/管道/危险品等特殊货运 1.5%）"),
+    ]))
+
+    # ── M2 八节扩例：冶金 / 机械制造 / 烟花爆竹 / 民用爆炸物品 / 武器装备 ────
+    cases.extend(_plain_cases("财资-2022-136", rs_2022, [
+        ("MET-MID", "metallurgy", None, "revenue", "2000000000", "CNY",
+         "冶金（第二十七条 六段超额累退）营收 2×10^9 元"),
+        ("MAC-MID", "machinery", None, "revenue", "2000000000", "CNY",
+         "机械制造（第三十条 五段超额累退）营收 2×10^9 元"),
+        ("FW-SHORT-TIER", "fireworks", None, "revenue", "30000000", "CNY",
+         "烟花爆竹（第三十三条 三段，跨 1000 万/2000 万分段点）营收 3×10^7 元"),
+        ("CE-MID", "civil_explosives", None, "revenue", "2000000000", "CNY",
+         "民用爆炸物品（第三十六条 四段超额累退）营收 2×10^9 元"),
+        ("WP-NAVAL-SHIP", "weapons", "wp_naval_ship", "revenue", "2000000000", "CNY",
+         "武器装备（第三十九条 军用舰船变体）营收 2×10^9 元"),
+        ("WP-SPACECRAFT", "weapons", "wp_spacecraft", "revenue", "2000000000", "CNY",
+         "武器装备（第三十九条 飞船/卫星等变体，五段）营收 2×10^9 元"),
+    ]))
+
+    # ── M2 新分段点边界（2022 版）：冶金 / 机械制造 / 烟花爆竹 / 民爆 / 武器装备
+    cases.extend(_edge_cases("财资-2022-136", rs_2022, "metallurgy", None,
+                             "SYN-MET", "冶金第二十七条"))
+    cases.extend(_edge_cases("财资-2022-136", rs_2022, "machinery", None,
+                             "SYN-MAC", "机械制造第三十条"))
+    cases.extend(_edge_cases("财资-2022-136", rs_2022, "fireworks", None,
+                             "SYN-FW", "烟花爆竹第三十三条"))
+    cases.extend(_edge_cases("财资-2022-136", rs_2022, "civil_explosives", None,
+                             "SYN-CE", "民用爆炸物品第三十六条"))
+    cases.extend(_edge_cases("财资-2022-136", rs_2022, "weapons", "wp_naval_ship",
+                             "SYN-WP-NAVAL", "武器装备第三十九条·军用舰船"))
+    cases.extend(_edge_cases("财资-2022-136", rs_2022, "weapons", "wp_spacecraft",
+                             "SYN-WP-SPACE", "武器装备第三十九条·飞船卫星"))
+
+    # ── M2 2012 版余下六类扩例 ──────────────────────────────────────────────
+    cases.extend(_plain_cases("财企-2012-16", rs_2012, [
+        ("2012-NONCOAL-OIL", "noncoal_mine", "nc_oil", "output",
+         "100000", "ton", "2012 版非煤矿山第六条（石油并入本行业）17 元/吨 × 100000 吨"),
+        ("2012-NONCOAL-GAS", "noncoal_mine", "nc_gas", "output",
+         "200000", "kilo_m3", "2012 版非煤矿山第六条（天然气 5 元/千方）× 200000 千方"),
+        ("2012-TRANSPORT-PASSENGER", "transport", "passenger_special_freight", "revenue",
+         "80000000", "CNY", "2012 版交通运输第九条（客运等特殊货运 1.5%）"),
+        ("2012-MET-MID", "metallurgy", None, "revenue", "2000000000", "CNY",
+         "2012 版冶金第十条（六段超额累退）营收 2×10^9 元"),
+        ("2012-MAC-MID", "machinery", None, "revenue", "2000000000", "CNY",
+         "2012 版机械制造第十一条（五段）营收 2×10^9 元"),
+        ("2012-FW-SHORT-TIER", "fireworks", None, "revenue", "30000000", "CNY",
+         "2012 版烟花爆竹第十二条（四段，分段点 200 万/500 万/1000 万——结构与 2022 版不同）"),
+        ("2012-WP-NAVAL-SHIP", "weapons", "wp_naval_ship", "revenue", "2000000000", "CNY",
+         "2012 版武器装备第十三条·军用舰船变体营收 2×10^9 元"),
+    ]))
+    # 2012 版新分段点边界：烟花爆竹（200 万/500 万/1000 万，结构差异点）
+    cases.extend(_edge_cases("财企-2012-16", rs_2012, "fireworks", None,
+                             "SYN-2012-FW", "2012 版烟花爆竹第十二条", year=2020))
 
     # ── 元/万元错配（台账以万元填报，规则包以元计价 → warning + 定义性换算）────
     basis_wan = Decimal("5000")  # 5000 万元 = 5000 万×10000 = 5×10^7 元
     amount, note = _accrual_direct(rs_2022, "hazardous_chemicals", basis_wan * Decimal("10000"))
     cases.append(_case(
         "SYN-HAZ-UNIT-MISMATCH", "财资-2022-136",
-        _enterprise("示例危险品（合成）有限公司", "90000000SYN0000002B",
-                    "hazardous_chemicals", 2024, "revenue", str(basis_wan), "CNY10k"),
+        _enterprise(haz_name, haz_code, "hazardous_chemicals", 2024, "revenue",
+                    str(basis_wan), "CNY10k"),
         amount, note,
         "单位口径错配：档案以 CNY10k 填报 5000，规则包以元计价——"
         "定义性换算 ×10000 后按 5×10^7 元计算，且必须报 warning（不静默）",
@@ -281,7 +406,6 @@ def _build_cases() -> List[dict]:
 
     # ── 双版本对照：同一对象按 136 号与 2012 版各算一套期望 ─────────────────
     for ruleset_id, ruleset in (("财资-2022-136", rs_2022), ("财企-2012-16", rs_2012)):
-        # 煤炭突出/高瓦斯（2022 拆档 50/30；2012 同档 30）
         for variant_2022, variant_2012 in (
             ("coal_outburst_rockburst", "coal_outburst_high_gas"),
             ("coal_high_gas", "coal_outburst_high_gas"),
@@ -292,30 +416,27 @@ def _build_cases() -> List[dict]:
             cases.append(_case(
                 "SYN-DUAL-COAL-%s" % ("2022" if ruleset_id == "财资-2022-136" else "2012"),
                 ruleset_id,
-                _enterprise("示例煤炭（合成）有限公司", "90000000SYN0000001A", "coal",
-                            2024, "output", str(basis), "ton", variant_id),
+                _enterprise(coal_name, coal_code, "coal", 2024, "output", str(basis), "ton",
+                            variant_id),
                 amount, note,
                 "双版本对照（%s，%s）× %s 吨" % (ruleset_id, variant_id, basis),
             ))
-        # 危险品（两版同机制不同费率）
         basis = Decimal("50000000")
         amount, note = _accrual_direct(ruleset, "hazardous_chemicals", basis)
         cases.append(_case(
             "SYN-DUAL-HAZ-%s" % ("2022" if ruleset_id == "财资-2022-136" else "2012"),
             ruleset_id,
-            _enterprise("示例危险品（合成）有限公司", "90000000SYN0000002B",
-                        "hazardous_chemicals", 2024, "revenue", str(basis), "CNY"),
+            _enterprise(haz_name, haz_code, "hazardous_chemicals", 2024, "revenue",
+                        str(basis), "CNY"),
             amount, note, "双版本对照（%s）危险品营收 %s 元" % (ruleset_id, basis),
         ))
-        # 建设工程矿山工程（2.5% → 3.5%）
         basis = Decimal("30000000")
         amount, note = _accrual_direct(ruleset, "construction", basis, "mine_engineering")
         cases.append(_case(
             "SYN-DUAL-CONST-%s" % ("2022" if ruleset_id == "财资-2022-136" else "2012"),
             ruleset_id,
-            _enterprise("示例建设工程（合成）有限公司", "90000000SYN0000003C",
-                        "construction", 2024, "project_cost", str(basis), "CNY",
-                        "mine_engineering"),
+            _enterprise(const_name, const_code, "construction", 2024, "project_cost",
+                        str(basis), "CNY", "mine_engineering"),
             amount, note, "双版本对照（%s）矿山工程造价 %s 元" % (ruleset_id, basis),
         ))
 
@@ -337,6 +458,10 @@ def _build_negatives() -> List[dict]:
          "project_cost", "80000000", "CNY", "municipal_port_highway"),
         ("示例危险品（合成）有限公司", "90000000SYN0000002B", "hazardous_chemicals",
          "revenue", "50000000", "CNY", None),
+        ("示例非煤矿山（合成）有限公司", "90000000SYN0000004D", "noncoal_mine",
+         "output", "150000", "ton", "nc_metal_underground"),
+        ("示例交通运输（合成）有限公司", "90000000SYN0000007G", "transport",
+         "revenue", "60000000", "CNY", "general_freight"),
     ]
     for index, (name, code, industry, kind, value, unit, variant) in enumerate(clean_enterprises, 1):
         negatives.append(_negative(
@@ -394,14 +519,14 @@ data/truth/
 演算（分段 = Σ 段内依据量 × 段费率），**不调用 safefee 引擎**；基准
 `synthetic_ledger` 套件再用引擎全量重算对账——两边一致才算达标。
 
-## 算例覆盖（M1）
+## 算例覆盖（M1 建库 → M2 随八节扩例）
 
 | 类别 | 算例 |
 |---|---|
-| 三类机制 | 煤炭（按产量，第七条 4 变体）/ 建设工程（按造价比例，第十七条 3 类别）/ 危险品与电力（超额累退，含生产/供应两套标准） |
-| 边界 | 恰好等于分段点（1000 万 / 1 亿 / 10 亿）及 ±0.01 邻域（`[lower, upper)` 口径：恰好等于归下一段） |
+| 三类机制 | 按产量（煤炭四变体、非煤矿山六档、石油天然气原油/原气）；按营业收入超额累退（危险品、冶金、机械制造、烟花爆竹、民用爆炸物品、武器装备五小类、电力生产/供应两套标准）；按营业收入单一比例（交通运输普通货运/客运等特殊货运）；按造价/费用比例（建设工程五档、地质勘探 2%、工程成本 2%） |
+| 边界 | 恰好等于分段点（危险品/冶金/机械制造/烟花爆竹/民爆/武器装备/电力的**全部分段点**）及 ±0.01 邻域（`[lower, upper)` 口径：恰好等于归下一段） |
 | 单位口径错配 | 台账以 CNY10k 填报、规则包以元计价 → 定义性换算 + 必报 warning |
-| 误报对照 | `negatives/`：3 份干净档案（应零命中）+ 2 份应降级档案（CNY10k / CNY100m → 只报 warning） |
+| 误报对照 | `negatives/`：干净档案（应零命中）+ 应降级档案（CNY10k / CNY100m → 只报 warning） |
 | 双版本对照 | 同一对象（煤炭/危险品/矿山工程）分别按 136 号与 2012 版生成两套期望值 |
 """
 

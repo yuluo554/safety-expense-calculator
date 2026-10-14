@@ -54,17 +54,30 @@ def test_calc_verified_outputs_amount(data_dir, tmp_path, capsys):
     assert "第七条" in out
 
 
-def test_calc_deferred_industry_is_usage_error(data_dir, tmp_path, capsys):
-    """M1 首期未覆盖行业（metallurgy，deferred）→ 退出码 2，不臆造结论。"""
-    archive = tmp_path / "m.json"
-    archive.write_bytes(json.dumps({
-        "enterprise_id": "90000000SYN0000004D",
-        "enterprise_name": "示例冶金（合成）",
-        "industry_id": "metallurgy", "year": 2024,
-        "basis_kind": "revenue", "basis_value": "1000", "basis_unit": "CNY",
-    }).encode("utf-8"))
-    assert main(["calc", str(archive)]) == EXIT_USAGE
-    assert "首期未覆盖" in capsys.readouterr().err
+def test_calc_all_twelve_industries_are_covered(data_dir, tmp_path, capsys):
+    """**M2 验收门**：十二节全部可算（退出码 0），deferred 行业清零。"""
+    cases = [
+        ("noncoal_mine", "output", "100000", "ton", "nc_metal_underground"),
+        ("oil_gas", "output", "1000", "ton", "og_crude_oil"),
+        ("transport", "revenue", "1000000", "CNY", "general_freight"),
+        ("metallurgy", "revenue", "2000000000", "CNY", None),
+        ("machinery", "revenue", "2000000000", "CNY", None),
+        ("fireworks", "revenue", "30000000", "CNY", None),
+        ("civil_explosives", "revenue", "2000000000", "CNY", None),
+        ("weapons", "revenue", "2000000000", "CNY", "wp_naval_ship"),
+    ]
+    for industry, kind, value, unit, variant in cases:
+        archive = tmp_path / ("%s.json" % industry)
+        payload = {
+            "enterprise_id": "90000000SYN0000009Z", "enterprise_name": "示例（合成）",
+            "industry_id": industry, "year": 2024,
+            "basis_kind": kind, "basis_value": value, "basis_unit": unit,
+        }
+        if variant:
+            payload["variant_id"] = variant
+        archive.write_bytes(json.dumps(payload, ensure_ascii=False).encode("utf-8"))
+        assert main(["calc", str(archive)]) == EXIT_OK, industry
+        capsys.readouterr()
 
 
 def test_calc_tiered_outputs_tier_lines(data_dir, tmp_path, capsys):

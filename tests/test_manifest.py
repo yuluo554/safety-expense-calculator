@@ -40,6 +40,14 @@ def test_anchor_is_by_day_not_by_year(data_dir):
     assert manifest.resolve(date(2022, 11, 21)).ruleset_id == "财资-2022-136"
 
 
+def test_year_anchor_boundary_2022_vs_2023(data_dir):
+    """**年度锚定边界（M2）**：只给年度时取该年 1 月 1 日 ——
+    ``year=2022`` → 2012 版（2022-01-01 < 2022-11-21）；``year=2023`` → 136 号。"""
+    manifest = load_manifest(data_dir)
+    assert manifest.resolve_year(2022).ruleset_id == "财企-2012-16"
+    assert manifest.resolve_year(2023).ruleset_id == "财资-2022-136"
+
+
 def test_year_before_any_ruleset_is_error(data_dir):
     manifest = load_manifest(data_dir)
     with pytest.raises(NoRulesetForYear):
@@ -60,13 +68,16 @@ def test_thresholds_registered_for_three_suites(data_dir):
 
 
 def test_integrity_check_detects_tampering(data_dir, tmp_path):
-    """规则包被手改 → :class:`IntegrityError`（冻结纪律被破坏可检出）。"""
+    """规则包被手改 → :class:`IntegrityError`（冻结纪律被破坏可检出）。
+
+    M2 后全部条目已 ``verified``，故注入 **带值的费率** 改动（而非 pending→verified）。
+    """
     import shutil
 
     target = tmp_path / "data"
     shutil.copytree(data_dir, target)
     ruleset = target / "rules" / "财资-2022-136" / "ruleset.json"
-    ruleset.write_bytes(ruleset.read_bytes().replace(b'"pending"', b'"verified"'))
+    ruleset.write_bytes(ruleset.read_bytes().replace(b'"0.035"', b'"0.99"'))
     with pytest.raises(IntegrityError):
         load_manifest(target)
 

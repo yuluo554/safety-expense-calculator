@@ -91,23 +91,216 @@
     },
     {
       "clause": "第六条",
-      "implementation": "deferred",
+      "implementation": "in_scope",
       "industry_id": "noncoal_mine",
       "industry_name": "非煤矿山开采",
       "mechanism": "by_output",
       "provenance": {
         "clause": "第六条",
         "doc_no": "财企〔2012〕16号",
-        "fetched_at": null,
+        "fetched_at": "2026-10-14",
         "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
         "snapshot": "data/knowledge/raw/2012-gongbao.htm",
         "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-        "verified": false
+        "verified": true
       },
-      "rate": null,
-      "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-      "status": "pending",
-      "value": null
+      "status": "verified",
+      "variants": [
+        {
+          "clause": "第六条",
+          "conditions": {
+            "ore_type": "oil"
+          },
+          "provenance": {
+            "clause": "第六条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": true
+          },
+          "severity": 2,
+          "status": "verified",
+          "unit": "CNY/ton",
+          "value": "17",
+          "variant_id": "nc_oil",
+          "variant_name": "石油"
+        },
+        {
+          "clause": "第六条",
+          "conditions": {
+            "ore_type": "gas"
+          },
+          "provenance": {
+            "clause": "第六条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": true
+          },
+          "severity": 2,
+          "status": "verified",
+          "unit": "CNY/kilo_m3",
+          "value": "5",
+          "variant_id": "nc_gas",
+          "variant_name": "天然气、煤层气（地面开采）"
+        },
+        {
+          "clause": "第六条",
+          "conditions": {
+            "mine_type": "opencast",
+            "ore_type": "metal"
+          },
+          "provenance": {
+            "clause": "第六条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": true
+          },
+          "severity": 2,
+          "status": "verified",
+          "unit": "CNY/ton",
+          "value": "5",
+          "variant_id": "nc_metal_opencast",
+          "variant_name": "金属矿山·露天矿山"
+        },
+        {
+          "clause": "第六条",
+          "conditions": {
+            "mine_type": "underground",
+            "ore_type": "metal"
+          },
+          "provenance": {
+            "clause": "第六条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": true
+          },
+          "severity": 2,
+          "status": "verified",
+          "unit": "CNY/ton",
+          "value": "10",
+          "variant_id": "nc_metal_underground",
+          "variant_name": "金属矿山·地下矿山"
+        },
+        {
+          "clause": "第六条",
+          "conditions": {
+            "ore_type": "nuclear"
+          },
+          "provenance": {
+            "clause": "第六条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": true
+          },
+          "severity": 2,
+          "status": "verified",
+          "unit": "CNY/ton",
+          "value": "25",
+          "variant_id": "nc_nuclear",
+          "variant_name": "核工业矿山"
+        },
+        {
+          "clause": "第六条",
+          "conditions": {
+            "mine_type": "opencast",
+            "ore_type": "nonmetal"
+          },
+          "provenance": {
+            "clause": "第六条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": true
+          },
+          "severity": 2,
+          "status": "verified",
+          "unit": "CNY/ton",
+          "value": "2",
+          "variant_id": "nc_nonmetal_opencast",
+          "variant_name": "非金属矿山·露天矿山"
+        },
+        {
+          "clause": "第六条",
+          "conditions": {
+            "mine_type": "underground",
+            "ore_type": "nonmetal"
+          },
+          "provenance": {
+            "clause": "第六条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": true
+          },
+          "severity": 2,
+          "status": "verified",
+          "unit": "CNY/ton",
+          "value": "4",
+          "variant_id": "nc_nonmetal_underground",
+          "variant_name": "非金属矿山·地下矿山"
+        },
+        {
+          "clause": "第六条",
+          "conditions": {
+            "ore_type": "small_quarry"
+          },
+          "provenance": {
+            "clause": "第六条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": true
+          },
+          "severity": 2,
+          "status": "verified",
+          "unit": "CNY/ton",
+          "value": "1",
+          "variant_id": "nc_small_quarry",
+          "variant_name": "小型露天采石场（年采剥总量 50 万吨以下且最大开采高度不超过 50 米）"
+        },
+        {
+          "clause": "第六条",
+          "conditions": {
+            "ore_type": "geological_exploration"
+          },
+          "mechanism": "by_project_cost",
+          "provenance": {
+            "clause": "第六条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": true
+          },
+          "rate": "0.02",
+          "severity": 1,
+          "status": "verified",
+          "unit": "ratio",
+          "variant_id": "nc_geological_exploration",
+          "variant_name": "地质勘探单位（按地质勘查项目或工程总费用的 2%）"
+        }
+      ]
     },
     {
       "clause": "第七条",
@@ -261,111 +454,70 @@
     },
     {
       "clause": "第九条",
-      "implementation": "deferred",
+      "implementation": "in_scope",
       "industry_id": "transport",
       "industry_name": "交通运输",
-      "mechanism": "by_revenue_tiered",
+      "mechanism": "by_revenue_rate",
       "provenance": {
         "clause": "第九条",
         "doc_no": "财企〔2012〕16号",
-        "fetched_at": null,
+        "fetched_at": "2026-10-14",
         "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
         "snapshot": "data/knowledge/raw/2012-gongbao.htm",
         "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-        "verified": false
+        "verified": true
       },
-      "rate": null,
-      "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-      "segments": [
+      "status": "verified",
+      "variants": [
         {
           "clause": "第九条",
-          "lower": "0",
           "provenance": {
             "clause": "第九条",
             "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
             "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
             "snapshot": "data/knowledge/raw/2012-gongbao.htm",
             "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
-          "upper": "10000000"
+          "rate": "0.01",
+          "status": "verified",
+          "variant_id": "general_freight",
+          "variant_name": "普通货运业务"
         },
         {
           "clause": "第九条",
-          "lower": "10000000",
           "provenance": {
             "clause": "第九条",
             "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
             "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
             "snapshot": "data/knowledge/raw/2012-gongbao.htm",
             "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
-          "upper": "100000000"
-        },
-        {
-          "clause": "第九条",
-          "lower": "100000000",
-          "provenance": {
-            "clause": "第九条",
-            "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
-            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
-            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
-            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
-          },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
-          "upper": "1000000000"
-        },
-        {
-          "clause": "第九条",
-          "lower": "1000000000",
-          "provenance": {
-            "clause": "第九条",
-            "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
-            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
-            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
-            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
-          },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
-          "upper": null
+          "rate": "0.015",
+          "status": "verified",
+          "variant_id": "passenger_special_freight",
+          "variant_name": "客运业务、管道运输、危险品等特殊货运业务"
         }
-      ],
-      "status": "pending",
-      "value": null
+      ]
     },
     {
       "clause": "第十条",
-      "implementation": "deferred",
+      "implementation": "in_scope",
       "industry_id": "metallurgy",
       "industry_name": "冶金",
       "mechanism": "by_revenue_tiered",
       "provenance": {
         "clause": "第十条",
         "doc_no": "财企〔2012〕16号",
-        "fetched_at": null,
+        "fetched_at": "2026-10-14",
         "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
         "snapshot": "data/knowledge/raw/2012-gongbao.htm",
         "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-        "verified": false
+        "verified": true
       },
-      "rate": null,
-      "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
       "segments": [
         {
           "clause": "第十条",
@@ -373,15 +525,14 @@
           "provenance": {
             "clause": "第十条",
             "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
             "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
             "snapshot": "data/knowledge/raw/2012-gongbao.htm",
             "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
+          "rate": "0.03",
+          "status": "verified",
           "upper": "10000000"
         },
         {
@@ -390,15 +541,14 @@
           "provenance": {
             "clause": "第十条",
             "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
             "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
             "snapshot": "data/knowledge/raw/2012-gongbao.htm",
             "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
+          "rate": "0.015",
+          "status": "verified",
           "upper": "100000000"
         },
         {
@@ -407,15 +557,14 @@
           "provenance": {
             "clause": "第十条",
             "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
             "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
             "snapshot": "data/knowledge/raw/2012-gongbao.htm",
             "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
+          "rate": "0.005",
+          "status": "verified",
           "upper": "1000000000"
         },
         {
@@ -424,38 +573,66 @@
           "provenance": {
             "clause": "第十条",
             "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
             "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
             "snapshot": "data/knowledge/raw/2012-gongbao.htm",
             "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
+          "rate": "0.002",
+          "status": "verified",
+          "upper": "5000000000"
+        },
+        {
+          "clause": "第十条",
+          "lower": "5000000000",
+          "provenance": {
+            "clause": "第十条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": true
+          },
+          "rate": "0.001",
+          "status": "verified",
+          "upper": "10000000000"
+        },
+        {
+          "clause": "第十条",
+          "lower": "10000000000",
+          "provenance": {
+            "clause": "第十条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": true
+          },
+          "rate": "0.0005",
+          "status": "verified",
           "upper": null
         }
       ],
-      "status": "pending",
-      "value": null
+      "status": "verified"
     },
     {
       "clause": "第十一条",
-      "implementation": "deferred",
+      "implementation": "in_scope",
       "industry_id": "machinery",
       "industry_name": "机械制造",
       "mechanism": "by_revenue_tiered",
       "provenance": {
         "clause": "第十一条",
         "doc_no": "财企〔2012〕16号",
-        "fetched_at": null,
+        "fetched_at": "2026-10-14",
         "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
         "snapshot": "data/knowledge/raw/2012-gongbao.htm",
         "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-        "verified": false
+        "verified": true
       },
-      "rate": null,
-      "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
       "segments": [
         {
           "clause": "第十一条",
@@ -463,15 +640,14 @@
           "provenance": {
             "clause": "第十一条",
             "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
             "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
             "snapshot": "data/knowledge/raw/2012-gongbao.htm",
             "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
+          "rate": "0.02",
+          "status": "verified",
           "upper": "10000000"
         },
         {
@@ -480,15 +656,14 @@
           "provenance": {
             "clause": "第十一条",
             "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
             "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
             "snapshot": "data/knowledge/raw/2012-gongbao.htm",
             "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
+          "rate": "0.01",
+          "status": "verified",
           "upper": "100000000"
         },
         {
@@ -497,15 +672,14 @@
           "provenance": {
             "clause": "第十一条",
             "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
             "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
             "snapshot": "data/knowledge/raw/2012-gongbao.htm",
             "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
+          "rate": "0.002",
+          "status": "verified",
           "upper": "1000000000"
         },
         {
@@ -514,38 +688,50 @@
           "provenance": {
             "clause": "第十一条",
             "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
             "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
             "snapshot": "data/knowledge/raw/2012-gongbao.htm",
             "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
+          "rate": "0.001",
+          "status": "verified",
+          "upper": "5000000000"
+        },
+        {
+          "clause": "第十一条",
+          "lower": "5000000000",
+          "provenance": {
+            "clause": "第十一条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": true
+          },
+          "rate": "0.0005",
+          "status": "verified",
           "upper": null
         }
       ],
-      "status": "pending",
-      "value": null
+      "status": "verified"
     },
     {
       "clause": "第十二条",
-      "implementation": "deferred",
+      "implementation": "in_scope",
       "industry_id": "fireworks",
       "industry_name": "烟花爆竹生产",
       "mechanism": "by_revenue_tiered",
       "provenance": {
         "clause": "第十二条",
         "doc_no": "财企〔2012〕16号",
-        "fetched_at": null,
+        "fetched_at": "2026-10-14",
         "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
         "snapshot": "data/knowledge/raw/2012-gongbao.htm",
         "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-        "verified": false
+        "verified": true
       },
-      "rate": null,
-      "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
       "segments": [
         {
           "clause": "第十二条",
@@ -553,15 +739,46 @@
           "provenance": {
             "clause": "第十二条",
             "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
             "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
             "snapshot": "data/knowledge/raw/2012-gongbao.htm",
             "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
+          "rate": "0.035",
+          "status": "verified",
+          "upper": "2000000"
+        },
+        {
+          "clause": "第十二条",
+          "lower": "2000000",
+          "provenance": {
+            "clause": "第十二条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": true
+          },
+          "rate": "0.03",
+          "status": "verified",
+          "upper": "5000000"
+        },
+        {
+          "clause": "第十二条",
+          "lower": "5000000",
+          "provenance": {
+            "clause": "第十二条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": true
+          },
+          "rate": "0.025",
+          "status": "verified",
           "upper": "10000000"
         },
         {
@@ -570,144 +787,458 @@
           "provenance": {
             "clause": "第十二条",
             "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
             "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
             "snapshot": "data/knowledge/raw/2012-gongbao.htm",
             "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
-          "upper": "100000000"
-        },
-        {
-          "clause": "第十二条",
-          "lower": "100000000",
-          "provenance": {
-            "clause": "第十二条",
-            "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
-            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
-            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
-            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
-          },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
-          "upper": "1000000000"
-        },
-        {
-          "clause": "第十二条",
-          "lower": "1000000000",
-          "provenance": {
-            "clause": "第十二条",
-            "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
-            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
-            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
-            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
-          },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
+          "rate": "0.02",
+          "status": "verified",
           "upper": null
         }
       ],
-      "status": "pending",
-      "value": null
+      "status": "verified"
     },
     {
       "clause": "第十三条",
-      "implementation": "deferred",
+      "implementation": "in_scope",
       "industry_id": "weapons",
       "industry_name": "武器装备研制生产与试验",
       "mechanism": "by_revenue_tiered",
       "provenance": {
         "clause": "第十三条",
         "doc_no": "财企〔2012〕16号",
-        "fetched_at": null,
+        "fetched_at": "2026-10-14",
         "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
         "snapshot": "data/knowledge/raw/2012-gongbao.htm",
         "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-        "verified": false
+        "verified": true
       },
-      "rate": null,
-      "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-      "segments": [
+      "status": "verified",
+      "variants": [
         {
           "clause": "第十三条",
-          "lower": "0",
           "provenance": {
             "clause": "第十三条",
             "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
             "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
             "snapshot": "data/knowledge/raw/2012-gongbao.htm",
             "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
-          "upper": "10000000"
+          "segments": [
+            {
+              "clause": "第十三条",
+              "lower": "0",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.05",
+              "status": "verified",
+              "upper": "10000000"
+            },
+            {
+              "clause": "第十三条",
+              "lower": "10000000",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.03",
+              "status": "verified",
+              "upper": "100000000"
+            },
+            {
+              "clause": "第十三条",
+              "lower": "100000000",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.01",
+              "status": "verified",
+              "upper": "1000000000"
+            },
+            {
+              "clause": "第十三条",
+              "lower": "1000000000",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.005",
+              "status": "verified",
+              "upper": null
+            }
+          ],
+          "status": "verified",
+          "variant_id": "wp_military_hazardous_chemicals",
+          "variant_name": "火炸药及其制品（含能材料，炸药、火药、推进剂，发动机，弹箭，引信、火工品）"
         },
         {
           "clause": "第十三条",
-          "lower": "10000000",
           "provenance": {
             "clause": "第十三条",
             "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
             "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
             "snapshot": "data/knowledge/raw/2012-gongbao.htm",
             "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
-          "upper": "100000000"
+          "segments": [
+            {
+              "clause": "第十三条",
+              "lower": "0",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.03",
+              "status": "verified",
+              "upper": "10000000"
+            },
+            {
+              "clause": "第十三条",
+              "lower": "10000000",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.02",
+              "status": "verified",
+              "upper": "100000000"
+            },
+            {
+              "clause": "第十三条",
+              "lower": "100000000",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.005",
+              "status": "verified",
+              "upper": "1000000000"
+            },
+            {
+              "clause": "第十三条",
+              "lower": "1000000000",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.002",
+              "status": "verified",
+              "upper": null
+            }
+          ],
+          "status": "verified",
+          "variant_id": "wp_nuclear",
+          "variant_name": "核装备及核燃料"
         },
         {
           "clause": "第十三条",
-          "lower": "100000000",
           "provenance": {
             "clause": "第十三条",
             "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
             "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
             "snapshot": "data/knowledge/raw/2012-gongbao.htm",
             "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
-          "upper": "1000000000"
+          "segments": [
+            {
+              "clause": "第十三条",
+              "lower": "0",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.025",
+              "status": "verified",
+              "upper": "10000000"
+            },
+            {
+              "clause": "第十三条",
+              "lower": "10000000",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.0175",
+              "status": "verified",
+              "upper": "100000000"
+            },
+            {
+              "clause": "第十三条",
+              "lower": "100000000",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.008",
+              "status": "verified",
+              "upper": "1000000000"
+            },
+            {
+              "clause": "第十三条",
+              "lower": "1000000000",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.004",
+              "status": "verified",
+              "upper": null
+            }
+          ],
+          "status": "verified",
+          "variant_id": "wp_naval_ship",
+          "variant_name": "军用舰船（含修理）"
         },
         {
           "clause": "第十三条",
-          "lower": "1000000000",
           "provenance": {
             "clause": "第十三条",
             "doc_no": "财企〔2012〕16号",
-            "fetched_at": null,
+            "fetched_at": "2026-10-14",
             "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
             "snapshot": "data/knowledge/raw/2012-gongbao.htm",
             "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
-            "verified": false
+            "verified": true
           },
-          "rate": null,
-          "reason": "首期范围外（deferred，不进入计算路径）：条款与节次已对原文定位（data/knowledge/raw/2012-gongbao.txt），数值落库与机制重定型排期 M2",
-          "status": "pending",
-          "upper": null
+          "segments": [
+            {
+              "clause": "第十三条",
+              "lower": "0",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.02",
+              "status": "verified",
+              "upper": "10000000"
+            },
+            {
+              "clause": "第十三条",
+              "lower": "10000000",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.015",
+              "status": "verified",
+              "upper": "100000000"
+            },
+            {
+              "clause": "第十三条",
+              "lower": "100000000",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.005",
+              "status": "verified",
+              "upper": "1000000000"
+            },
+            {
+              "clause": "第十三条",
+              "lower": "1000000000",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.002",
+              "status": "verified",
+              "upper": "10000000000"
+            },
+            {
+              "clause": "第十三条",
+              "lower": "10000000000",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.001",
+              "status": "verified",
+              "upper": null
+            }
+          ],
+          "status": "verified",
+          "variant_id": "wp_spacecraft",
+          "variant_name": "飞船、卫星、军用飞机、坦克车辆、火炮、轻武器、大型天线等"
+        },
+        {
+          "clause": "第十三条",
+          "provenance": {
+            "clause": "第十三条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": "2026-10-14",
+            "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+            "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": true
+          },
+          "segments": [
+            {
+              "clause": "第十三条",
+              "lower": "0",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.04",
+              "status": "verified",
+              "upper": "10000000"
+            },
+            {
+              "clause": "第十三条",
+              "lower": "10000000",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.02",
+              "status": "verified",
+              "upper": "100000000"
+            },
+            {
+              "clause": "第十三条",
+              "lower": "100000000",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.005",
+              "status": "verified",
+              "upper": "1000000000"
+            },
+            {
+              "clause": "第十三条",
+              "lower": "1000000000",
+              "provenance": {
+                "clause": "第十三条",
+                "doc_no": "财企〔2012〕16号",
+                "fetched_at": "2026-10-14",
+                "raw_sha256": "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812",
+                "snapshot": "data/knowledge/raw/2012-gongbao.htm",
+                "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+                "verified": true
+              },
+              "rate": "0.002",
+              "status": "verified",
+              "upper": null
+            }
+          ],
+          "status": "verified",
+          "variant_id": "wp_other_military_hazardous",
+          "variant_name": "其他军用危险品"
         }
-      ],
-      "status": "pending",
-      "value": null
+      ]
     }
   ],
   "issuer": [

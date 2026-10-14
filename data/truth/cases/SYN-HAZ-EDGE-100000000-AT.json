@@ -16,6 +16,6 @@
     "amount": "2475000.00",
     "mechanism": "by_revenue_tiered"
   },
-  "note": "危险品恰好等于/邻近分段点 100000000 元（AT；边界口径 [lower, upper)，恰好等于归下一段）",
+  "note": "危险品分段点 100000000 元邻域（AT；边界口径 [lower, upper)，恰好等于归下一段）",
   "ruleset_id": "财资-2022-136"
 }

@@ -26,6 +26,8 @@ def run(args) -> int:
         return EXIT_OK
 
     print("对照：%s → %s" % (report.old_doc_no, report.new_doc_no))
+    print("已比对行业（%d）：%s" % (len(report.compared_industries),
+                                    "、".join(report.compared_industries)))
     for kind, count in sorted(report.counts().items()):
         print("  %s：%d" % (kind, count))
     for item in report.items:

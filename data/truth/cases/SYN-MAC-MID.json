@@ -1,0 +1,21 @@
+{
+  "case_id": "SYN-MAC-MID",
+  "enterprise": {
+    "basis_kind": "revenue",
+    "basis_unit": "CNY",
+    "basis_value": "2000000000",
+    "enterprise_id": "90000000SYN0000009J",
+    "enterprise_name": "示例机械制造（合成）有限公司",
+    "industry_id": "machinery",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第三十条"
+    },
+    "amount": "4610000.00",
+    "mechanism": "by_revenue_tiered"
+  },
+  "note": "机械制造（第三十条 五段超额累退）营收 2×10^9 元",
+  "ruleset_id": "财资-2022-136"
+}

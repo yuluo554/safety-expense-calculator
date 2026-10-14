@@ -1,0 +1,22 @@
+{
+  "case_id": "SYN-WP-NAVAL-EDGE-10000000-AT",
+  "enterprise": {
+    "basis_kind": "revenue",
+    "basis_unit": "CNY",
+    "basis_value": "10000000",
+    "enterprise_id": "90000000SYN0000012M",
+    "enterprise_name": "示例武器装备（合成）有限公司",
+    "industry_id": "weapons",
+    "variant_id": "wp_naval_ship",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第三十九条"
+    },
+    "amount": "250000.00",
+    "mechanism": "by_revenue_tiered"
+  },
+  "note": "武器装备第三十九条·军用舰船分段点 10000000 元邻域（AT；边界口径 [lower, upper)，恰好等于归下一段）",
+  "ruleset_id": "财资-2022-136"
+}

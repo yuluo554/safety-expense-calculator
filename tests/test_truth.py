@@ -37,10 +37,21 @@ def test_truth_cases_cover_mechanisms_and_edges(data_dir):
     mechanisms = {c.expect.get("mechanism") for c in cases}
     assert {"by_output", "by_revenue_tiered", "by_project_cost"} <= mechanisms
     ids = {c.case_id for c in cases}
-    assert sum(1 for i in ids if "-EDGE-" in i and i.endswith("AT")) == 3, "缺恰好等于分段点档案（3 个分段点各一）"
+    # 恰好等于分段点的档案（M2 扩至全部行业的全部分段点：危险品/冶金/机械制造/
+    # 烟花爆竹/民爆/武器装备/电力，每点一个 AT）
+    at_edges = [i for i in ids if "-EDGE-" in i and i.endswith("AT")]
+    assert len(at_edges) >= 20, "缺恰好等于分段点档案（M2 扩例后应覆盖全部分段点）"
     assert any("UNIT-MISMATCH" in i for i in ids), "缺元/万元错配档案"
     assert any(i.startswith("SYN-DUAL-COAL-2022") for i in ids)
     assert any(i.startswith("SYN-DUAL-COAL-2012") for i in ids)
+    # M2 八节扩例：每个新行业至少一例
+    for prefix in ("SYN-NONCOAL-", "SYN-OIL-GAS-", "SYN-TRANSPORT-", "SYN-MET-",
+                   "SYN-MAC-", "SYN-FW-", "SYN-CE-", "SYN-WP-"):
+        assert any(i.startswith(prefix) for i in ids), "M2 缺 %s 扩例" % prefix
+    # M2 2012 版余下六类扩例
+    for prefix in ("SYN-2012-NONCOAL-", "SYN-2012-TRANSPORT-", "SYN-2012-MET-",
+                   "SYN-2012-MAC-", "SYN-2012-FW-", "SYN-2012-WP-"):
+        assert any(i.startswith(prefix) for i in ids), "M2 缺 2012 版 %s 扩例" % prefix
 
 
 def test_unit_mismatch_case_fails_without_units(data_dir):

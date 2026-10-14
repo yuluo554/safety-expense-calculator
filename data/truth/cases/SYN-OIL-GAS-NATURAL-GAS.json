@@ -1,0 +1,22 @@
+{
+  "case_id": "SYN-OIL-GAS-NATURAL-GAS",
+  "enterprise": {
+    "basis_kind": "output",
+    "basis_unit": "kilo_m3",
+    "basis_value": "3000000",
+    "enterprise_id": "90000000SYN0000006F",
+    "enterprise_name": "示例石油天然气（合成）有限公司",
+    "industry_id": "oil_gas",
+    "variant_id": "og_natural_gas",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第十四条"
+    },
+    "amount": "22500000.00",
+    "mechanism": "by_output"
+  },
+  "note": "石油天然气（第十四条 原气 7.5 元/千方）× 3000000 千方",
+  "ruleset_id": "财资-2022-136"
+}

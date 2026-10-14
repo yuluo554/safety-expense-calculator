@@ -108,6 +108,23 @@ def build_sections(payload: ReportInput) -> List[Section]:
                 columns=("段", "下界", "上界", "段内依据量", "费率", "段内金额", "条款"),
                 rows=rows,
             ))
+        basis = accrual.get("basis")
+        if basis:
+            lines = [
+                "判定类型：%s" % basis.get("kind", "—"),
+                "条款依据：%s" % basis.get("clause", "—"),
+            ]
+            if basis.get("chosen_variant"):
+                lines.append("选定变体：%s" % basis.get("chosen_variant"))
+            if basis.get("chosen_industry"):
+                lines.append("选定业务：%s" % basis.get("chosen_industry"))
+            if basis.get("basis_value"):
+                lines.append("净额口径后依据量：%s 元" % basis.get("basis_value"))
+            for note in basis.get("notes", []):
+                lines.append("说明：%s" % note)
+            for item in basis.get("excluded", []):
+                lines.append("排除 %s：%s" % (item.get("item"), item.get("reason")))
+            sections.append(Section("依据选择判定", "text", paragraphs=tuple(lines)))
     else:
         sections.append(Section("计提明细", "note", enabled=False,
                                 disabled_note="本次导出未启用计提计算（用 calc 子命令生成）"))
@@ -174,12 +191,14 @@ def build_sections(payload: ReportInput) -> List[Section]:
         rows = tuple(
             (str(s.get("parameter", "")), str(s.get("issuer", "")),
              str(s.get("effective_year", "")), str(s.get("doc_no", "")),
-             str(s.get("url", "")), str(s.get("fetched_at", "")))
+             str(s.get("clause", "")), str(s.get("url", "")),
+             str(s.get("snapshot", "")), str(s.get("fetched_at", "")))
             for s in sources
         )
         sections.append(Section(
             "参数来源块", "table",
-            columns=("参数", "发布机关", "适用年度", "文号", "URL", "抓取日期"), rows=rows,
+            columns=("参数", "发布机关", "适用年度", "文号", "条款", "URL", "原文快照", "抓取日期"),
+            rows=rows,
         ))
     else:
         sections.append(Section("参数来源块", "note", enabled=False,
@@ -190,4 +209,55 @@ def build_sections(payload: ReportInput) -> List[Section]:
     return sections
 
 
-__all__ = ["DISCLAIMER", "Section", "ReportInput", "build_sections"]
+def build_parameter_sources(ruleset: dict, *, industry_id: Optional[str] = None,
+                            variant_id: Optional[str] = None) -> List[dict]:
+    """从规则包 **真实 provenance** 组装参数来源块（不再用测试占位）。
+
+    每条参数 = 规则包里承载该数值的节点（行业/变体/段）的 provenance：
+    发布机关（规则集 issuer）+ 适用年度（生效年）+ 文号 + URL + 快照 + 抓取日期。
+    """
+    issuer = "、".join(ruleset.get("issuer") or [])
+    effective_year = str(ruleset.get("effective_from_year", ""))
+    rows: List[dict] = []
+
+    def _add(parameter: str, prov: dict) -> None:
+        if not prov:
+            return
+        rows.append({
+            "parameter": parameter,
+            "issuer": issuer,
+            "effective_year": effective_year,
+            "doc_no": str(prov.get("doc_no", ruleset.get("doc_no", ""))),
+            "clause": str(prov.get("clause", "")),
+            "url": str(prov.get("url", "")),
+            "snapshot": str(prov.get("snapshot", "")),
+            "raw_sha256": str(prov.get("raw_sha256", "")),
+            "fetched_at": str(prov.get("fetched_at", "")),
+        })
+
+    for industry in ruleset.get("industries", []):
+        iid = industry.get("industry_id")
+        if industry_id is not None and iid != industry_id:
+            continue
+        if industry.get("implementation") == "deferred":
+            continue
+        for variant in industry.get("variants") or []:
+            if variant_id is not None and variant.get("variant_id") != variant_id:
+                continue
+            _add("%s·%s" % (industry.get("industry_name", iid),
+                            variant.get("variant_name", variant.get("variant_id"))),
+                 variant.get("provenance") or industry.get("provenance") or {})
+        for segment in industry.get("segments") or []:
+            _add("%s·段 %s~%s" % (industry.get("industry_name", iid),
+                                  segment.get("lower"), segment.get("upper") or "∞"),
+                 segment.get("provenance") or industry.get("provenance") or {})
+        if not (industry.get("variants") or industry.get("segments")):
+            _add(str(industry.get("industry_name", iid)),
+                 industry.get("provenance") or {})
+    # 依据选择判定规则（第五十二/五十三条）也进参数来源块
+    for key, rule in (ruleset.get("basis_rules") or {}).items():
+        _add("依据选择·%s" % key, rule.get("provenance") or {})
+    return rows
+
+
+__all__ = ["DISCLAIMER", "Section", "ReportInput", "build_sections", "build_parameter_sources"]

@@ -1,0 +1,21 @@
+{
+  "case_id": "SYN-CE-EDGE-1000000000-BELOW",
+  "enterprise": {
+    "basis_kind": "revenue",
+    "basis_unit": "CNY",
+    "basis_value": "999999999.99",
+    "enterprise_id": "90000000SYN0000011L",
+    "enterprise_name": "示例民用爆炸物品（合成）有限公司",
+    "industry_id": "civil_explosives",
+    "year": 2024
+  },
+  "expect": {
+    "also_expect": {
+      "clause": "第三十六条"
+    },
+    "amount": "6700000.00",
+    "mechanism": "by_revenue_tiered"
+  },
+  "note": "民用爆炸物品第三十六条分段点 1000000000 元邻域（BELOW；边界口径 [lower, upper)，恰好等于归下一段）",
+  "ruleset_id": "财资-2022-136"
+}

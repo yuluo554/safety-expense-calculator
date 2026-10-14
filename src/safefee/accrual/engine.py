@@ -17,12 +17,13 @@ from typing import Optional, Sequence, Tuple
 from safefee.errors import MissingInput, NotCovered, SchemaError
 from safefee.tiered import TierLine, compute_tiered, quantize_money, tiered_total, tiers_from_rules
 
-MECHANISMS = ("by_output", "by_revenue_tiered", "by_project_cost")
+MECHANISMS = ("by_output", "by_revenue_tiered", "by_revenue_rate", "by_project_cost")
 
 #: 各机制期望的输入单位（来自规则包 ``basis_unit`` 声明）
 BASIS_KINDS = {
     "by_output": "output",
     "by_revenue_tiered": "revenue",
+    "by_revenue_rate": "revenue",
     "by_project_cost": "project_cost",
 }
 
@@ -53,6 +54,7 @@ class AccrualResult:
     tiers: Tuple[TierLine, ...] = ()
     warnings: Tuple[str, ...] = ()
     provenance: Tuple[dict, ...] = ()
+    basis: Optional[dict] = None          # 依据选择判定留痕（BasisDecision.as_dict()）
 
     def as_dict(self) -> dict:
         return {
@@ -65,6 +67,7 @@ class AccrualResult:
             "tiers": [line.as_dict() for line in self.tiers],
             "warnings": list(self.warnings),
             "provenance": list(self.provenance),
+            "basis": self.basis,
         }
 
 
@@ -116,7 +119,11 @@ def compute(ruleset: dict, request: AccrualRequest) -> AccrualResult:
             % (industry.get("industry_id"), industry.get("industry_name", ""))
         )
 
-    mechanism = industry.get("mechanism")
+    variant = _find_variant(industry, request.variant_id)
+    # 机制可在**变体上覆写**（一个行业节内含不同计提机制的变体，如非煤矿山第十条
+    # 的"地质勘探单位按工程总费用 2%"、石油天然气第十四条的"工程成本 2%"）。
+    node = variant or industry
+    mechanism = node.get("mechanism") or industry.get("mechanism")
     if mechanism not in MECHANISMS:
         raise SchemaError("未知计提机制：%r（支持 %s）" % (mechanism, ", ".join(MECHANISMS)))
 
@@ -127,11 +134,9 @@ def compute(ruleset: dict, request: AccrualRequest) -> AccrualResult:
             % (request.industry_id, mechanism, expected_kind, request.basis_kind)
         )
 
-    variant = _find_variant(industry, request.variant_id)
     warnings = list(request.warnings)
 
     if mechanism == "by_output":
-        node = variant or industry
         unit_value = Decimal(str(_require_value(node, "value", "industry/variant")))
         amount = quantize_money(unit_value * Decimal(request.basis_value))
         clause = str(node.get("clause") or industry.get("clause", ""))
@@ -150,7 +155,6 @@ def compute(ruleset: dict, request: AccrualRequest) -> AccrualResult:
         )
 
     if mechanism == "by_revenue_tiered":
-        node = variant or industry
         segments = node.get("segments")
         if not segments:
             raise SchemaError("超额累退行业 %s 缺少 segments" % request.industry_id)
@@ -172,8 +176,26 @@ def compute(ruleset: dict, request: AccrualRequest) -> AccrualResult:
             provenance=tuple(_prov_of(node, industry)),
         )
 
+    if mechanism == "by_revenue_rate":
+        # 按营业收入**单一比例**（无分段，如交通运输普通货运 1% / 客运等 1.5%）
+        rate = Decimal(str(_require_value(node, "rate", "industry/variant")))
+        amount = quantize_money(rate * Decimal(request.basis_value))
+        clause = str(node.get("clause") or industry.get("clause", ""))
+        formula = "营业收入 %s 元 × 费率 %s = %s 元" % (
+            request.basis_value, rate, amount
+        )
+        return AccrualResult(
+            amount=amount,
+            mechanism=mechanism,
+            formula=formula,
+            clause=clause,
+            industry_name=industry.get("industry_name", ""),
+            variant_name=(node.get("variant_name") if variant else None),
+            warnings=tuple(warnings),
+            provenance=tuple(_prov_of(node, industry)),
+        )
+
     # by_project_cost
-    node = variant or industry
     rate = Decimal(str(_require_value(node, "rate", "industry/variant")))
     amount = quantize_money(rate * Decimal(request.basis_value))
     clause = str(node.get("clause") or industry.get("clause", ""))
