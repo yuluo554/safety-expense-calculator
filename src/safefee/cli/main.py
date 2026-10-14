@@ -69,6 +69,7 @@ def _build_parser() -> argparse.ArgumentParser:
     p_diff = sub.add_parser("diff", help="双版本差异对照")
     p_diff.add_argument("--from-year", type=int, required=True)
     p_diff.add_argument("--to-year", type=int, required=True)
+    p_diff.add_argument("--out", default=None, help="对照报告输出目录（MD/XLSX/evidence）")
     p_diff.add_argument("--json", action="store_true")
 
     p_bench = sub.add_parser("bench", help="内置评测基准")

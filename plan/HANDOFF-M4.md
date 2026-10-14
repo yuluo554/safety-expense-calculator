@@ -1,9 +1,10 @@
 # HANDOFF-M4（M3 → M4 交接快照）
 
-> **用法**：新对话用 `/goal 读取 "plan/HANDOFF-M4.md" 继续完成任务`（绝对路径由用户侧拼）。
-> **上游**：[00-README总览.md](00-README总览.md) · [05-数据计划与里程碑.md](05-数据计划与里程碑.md) §三 · [06-决策记录.md](06-决策记录.md) §六
-> **快照时间**：2026-10-14（M3 收尾，同日完成 M1→M2→M3）
+> **用法**：新对话用 `/goal 读取 "plan/HANDOFF-M5.md" 继续完成任务`（绝对路径由用户侧拼）。
+> **上游**：[00-README总览.md](00-README总览.md) · [05-数据计划与里程碑.md](05-数据计划与里程碑.md) §三 · [06-决策记录.md](06-决策记录.md) §二 E23
+> **快照时间**：2026-10-14（M4 收尾，同日完成 M1→M2→M3→M4）
 > **上一棒**：[HANDOFF-M3.md](HANDOFF-M3.md)（§二 M3 待办已全部完成）
+> **状态**：M4 已完成——本文件保留为 M4 快照；**下一棒读 [HANDOFF-M5.md](HANDOFF-M5.md)**
 
 ---
 
@@ -114,19 +115,16 @@ PYTHONPATH=src py -3.12 -X utf8 -m pytest -q
 PYTHONPATH=src py -3.12 -X utf8 -m safefee bench
 ```
 
-## 六、M3 DoD checklist（逐项打勾，未做到写偏差说明）
+## 六、M4 DoD checklist（逐项打勾，未做到写偏差说明）
 
-- [x] 支出范围条目扩至十二节（2022 版 41 条 / 2012 版 30 条），逐条挂原文核对，`gen_rulesets.py --check` 逐字节一致
-- [x] `check_ledger` 覆盖十二行业；四态语义不虚高保留（无条目=未评估）
-- [x] `scan` 接真四态核查（7 列台账 CSV；失败件单列不改退出码；原因码含 unknown_year 新语义）
-- [x] 跨年对账接真结论（稳定身份键四集合划分 + content_changed 标记；baseline 为上轮 scan-result.json）
-- [x] scan 结果直接驱动报告导出（`--report`；check/reconcile 章节进 MD/XLSX；evidence.json 记录报告 sha256）
-- [x] **指纹防篡改测试**：报告改动一字 → evidence.json sha256 必须对不上
-- [x] `bench` 三套件仍全达标（216/216、42/42、129/129）——spending 扩节不触碰计提路径
-- [x] 测试全绿（py3.8 + py3.12，179 项）；零字面量门禁 + 脱敏审计 OK
-- [x] 里程碑状态回写（plan/00 + 05 + 06 + README + data/README + HANDOFF-M4 落盘）
+- [x] `bench` 三套件全达标且退出码 0（216/216、42/42、129/129）
+- [x] **探活实测留痕**：三套件各注入一次缺陷实跑变红（tiered_boundary 210/216、synthetic_ledger 114/129、dual_version 41/42；记录进 plan/06 E23）
+- [x] README 评测基准节升级为最终指标口径（用例数/门槛/实测值/退出码语义 + 探活记录表）
+- [x] `diff --out` 导出差异对照报告（差异对照.md/差异对照.xlsx/evidence.json 三件；单一渲染源 + 无外链 + 字节冻结 + CLI 接线，7 项新测试）
+- [x] 全链本地等价校验绿（三生成器 --check + 两扫描器 + 186 项测试 py3.8/3.12 双绿 + bench + CLI 冒烟）
+- [x] 里程碑状态回写（plan/00 + 05 + 06 + README + HANDOFF-M5 落盘）
 
-## 七、禁止事项（沿用 M1/M2 + M3 教训）
+## 七、禁止事项（沿用 M1/M2/M3 + M4 教训）
 
 - **不得手改** `data/rules/**` 与 `data/truth/**`（生成器唯一写入者；真值 `--check` 连"目录里多出的旧文件"都算漂移）。
 - **不得**把未核对数值落库或写进代码；`status=pending` 必须配 `value: null`。
@@ -138,3 +136,5 @@ PYTHONPATH=src py -3.12 -X utf8 -m safefee bench
 - **不得**把依据选择阈值（85%）写死在引擎——它是**数据**（`basis_rules`），改数据即改判定（M2）。
 - **不得**让 `scan` 因核查结论（含不符合）改退出码——那是"判出违规"不是"运行失败"；失败件（解析/读取层）同样不改退出码（M3：两层语义都锁进测试）。
 - **不得**把 spending 匹配关键词当"全文检索"——它们是**要点词**（逐条挂原文核对的关键词子集，宁缺勿滥：未命中=未评估，不臆造命中）。
+- **不得**用费率/单价类缺陷探活 `tiered_boundary`（它只查段归属自洽不查金额）；dual_version 探活注入点必须选**两版共享节点**（非共享变体不进配对，打不红）（M4 实测教训，见 06 E23）。
+- **不得**让 Markdown 表格单元格里裸出 `|`（费率序列）——`render_markdown` 已统一转义，改渲染层别撤掉（M4）。

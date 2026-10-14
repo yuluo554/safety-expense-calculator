@@ -21,6 +21,13 @@ def run(args) -> int:
     new_ruleset = load_ruleset(root, new_ref.directory)
     report = compare(old_ruleset, new_ruleset)
 
+    # 报告导出：单一渲染源（MD/XLSX/evidence 三件），不影响 stdout 摘要
+    if getattr(args, "out", None):
+        from safefee.ruleset.diff_report import export_diff_report
+
+        written = export_diff_report(report, args.out)
+        print("差异对照报告已导出：%s" % ", ".join(path.name for path in written))
+
     if args.json:
         print(json.dumps(report.as_dict(), ensure_ascii=False, indent=2))
         return EXIT_OK

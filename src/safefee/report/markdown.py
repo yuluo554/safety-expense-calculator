@@ -27,7 +27,9 @@ def render_markdown(sections: Sequence[Section], *, title: str = "安全生产�
             lines.append("| " + " | ".join(section.columns) + " |")
             lines.append("|" + "|".join([" --- "] * len(section.columns)) + "|")
             for row in section.rows:
-                lines.append("| " + " | ".join(row) + " |")
+                # 单元格内的 `|`（如费率序列）必须转义，否则撑破表格列
+                cells = (str(cell).replace("|", "\\|") for cell in row)
+                lines.append("| " + " | ".join(cells) + " |")
             lines.append("")
     return "\n".join(lines).rstrip("\n") + "\n"
 

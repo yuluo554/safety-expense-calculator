@@ -50,3 +50,91 @@ def test_diff_detects_fireworks_structural_difference(data_dir):
     assert fw and fw[0].kind == "rate_changed"
     assert fw[0].old_value.count("|") == 3   # 四段
     assert fw[0].new_value.count("|") == 2   # 三段
+
+
+# ---------------------------------------------------------------------------
+# M4：diff --out 对照报告导出（单一渲染源 / 无外链 / 字节冻结 / 管道转义）
+# ---------------------------------------------------------------------------
+
+import re
+import zipfile
+from io import BytesIO
+
+from safefee.cli.main import main
+from safefee.errors import EXIT_OK
+from safefee.ruleset.diff_report import build_diff_report_input, export_diff_report
+from safefee.report import build_sections
+
+
+def _diff_report(data_dir):
+    old, new = _pair(data_dir)
+    return compare(old, new)
+
+
+def test_diff_report_input_maps_all_items(data_dir):
+    """DiffReport 全部条目进差异对照章节（含费率序列与两版条款/文号列）。"""
+    report = _diff_report(data_dir)
+    payload = build_diff_report_input(report)
+    sections = build_sections(payload)
+    diff_section = next(s for s in sections if s.title == "双版本差异对照")
+    assert diff_section.enabled
+    assert len(diff_section.rows) == len(report.items)
+    header = ("行业", "变体", "差异类型", "旧值", "新值", "旧版条款", "新版条款",
+              "旧版文号", "新版文号")
+    assert diff_section.columns == header
+    # 费率序列整串进"新值"列（不拆单元格）
+    haz = next(row for row in diff_section.rows if row[0] == "hazardous_chemicals")
+    assert haz[4].startswith("0.045")
+
+
+def test_diff_out_export_three_artifacts(data_dir, tmp_path):
+    """``diff --out`` 产物三件：MD/XLSX/evidence；两格式消费同一章节结构。"""
+    written = export_diff_report(_diff_report(data_dir), tmp_path)
+    assert {p.name for p in written} == {"差异对照.md", "差异对照.xlsx", "evidence.json"}
+    md = (tmp_path / "差异对照.md").read_text(encoding="utf-8")
+    assert "双版本差异对照" in md
+    assert "财企〔2012〕16号" in md and "财资〔2022〕136号" in md
+    with zipfile.ZipFile(BytesIO((tmp_path / "差异对照.xlsx").read_bytes())) as archive:
+        sheet = archive.read("xl/worksheets/sheet1.xml").decode("utf-8")
+    assert "双版本差异对照" in sheet
+    evidence = (tmp_path / "evidence.json").read_text(encoding="utf-8")
+    assert "差异对照.md" in evidence and "差异对照.xlsx" in evidence
+
+
+def test_diff_out_markdown_no_external_links(data_dir, tmp_path):
+    """**无外链**：对照报告不得出现 markdown 链接形态。"""
+    export_diff_report(_diff_report(data_dir), tmp_path)
+    md = (tmp_path / "差异对照.md").read_text(encoding="utf-8")
+    assert not re.search(r"\]\(https?://", md)
+
+
+def test_diff_out_artifacts_byte_reproducible(data_dir, tmp_path):
+    """**字节冻结**：同输入两次导出，MD 与 XLSX 逐字节一致。"""
+    export_diff_report(_diff_report(data_dir), tmp_path / "a")
+    export_diff_report(_diff_report(data_dir), tmp_path / "b")
+    for name in ("差异对照.md", "差异对照.xlsx", "evidence.json"):
+        assert (tmp_path / "a" / name).read_bytes() == (tmp_path / "b" / name).read_bytes()
+
+
+def test_diff_out_rate_pipes_escaped_in_markdown(data_dir, tmp_path):
+    """费率序列的 ``|`` 进 Markdown 表格必须转义（否则撑破列）。"""
+    export_diff_report(_diff_report(data_dir), tmp_path)
+    md = (tmp_path / "差异对照.md").read_text(encoding="utf-8")
+    assert "0.045\\|0.0225" in md
+
+
+def test_diff_cli_out_exports_report(data_dir, tmp_path, capsys):
+    """CLI 接线：``diff --out`` 退出码 0 且产物落盘。"""
+    out = tmp_path / "diffout"
+    assert main(["diff", "--from-year", "2020", "--to-year", "2024",
+                 "--out", str(out)]) == EXIT_OK
+    assert (out / "差异对照.md").is_file()
+    assert (out / "差异对照.xlsx").is_file()
+    assert (out / "evidence.json").is_file()
+
+
+def test_diff_cli_same_ruleset_is_ok_without_output(tmp_path, capsys):
+    """两年度同版 → 提示无数值差异、退出码 0、不写产物。"""
+    assert main(["diff", "--from-year", "2024", "--to-year", "2025",
+                 "--out", str(tmp_path)]) == EXIT_OK
+    assert not (tmp_path / "差异对照.md").exists()

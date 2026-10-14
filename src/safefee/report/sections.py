@@ -61,6 +61,7 @@ class ReportInput:
     check: Optional[dict] = None                              # CheckReport.as_dict()
     progress: Optional[dict] = None                           # ProgressResult.as_dict()
     reconcile: Optional[dict] = None                          # ReconcileReport.as_dict()
+    diff: Optional[dict] = None                               # 差异对照（diff --out；rows 已成行）
     parameter_sources: Sequence[dict] = ()                    # 参数来源块
     enabled: Tuple[str, ...] = ("calc", "check", "progress", "reconcile")
 
@@ -184,6 +185,18 @@ def build_sections(payload: ReportInput) -> List[Section]:
     else:
         sections.append(Section("跨年对账", "note", enabled=False,
                                 disabled_note="本次导出未启用跨年对账（用 scan --baseline 启用）"))
+
+    # 5.5 双版本差异对照（diff --out 专用）
+    if payload.diff is not None:
+        sections.append(Section(
+            "双版本差异对照", "table",
+            columns=("行业", "变体", "差异类型", "旧值", "新值", "旧版条款", "新版条款",
+                     "旧版文号", "新版文号"),
+            rows=tuple(tuple(str(cell) for cell in row) for row in payload.diff.get("rows", ())),
+        ))
+    else:
+        sections.append(Section("双版本差异对照", "note", enabled=False,
+                                disabled_note="本次导出未启用双版本差异对照（用 diff --out 生成）"))
 
     # 6 参数来源块
     sources = payload.parameter_sources or ()
