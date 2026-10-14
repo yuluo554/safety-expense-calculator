@@ -52,9 +52,9 @@ def test_no_matching_entry_is_not_assessed_not_compliant():
 
 
 def test_out_of_scope_industry_rejected():
-    """首期未覆盖行业 → 退出码 2 语义（**不臆造结论**）。"""
+    """未覆盖行业 → 退出码 2 语义（**不臆造结论**）。"""
     with pytest.raises(NotCovered):
-        check_ledger(_spending(), "metallurgy", [])
+        check_ledger(_spending(), "no_such_industry", [])
 
 
 def test_progress_below_threshold_requires_disclosure():

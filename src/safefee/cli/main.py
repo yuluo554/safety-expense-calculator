@@ -64,6 +64,7 @@ def _build_parser() -> argparse.ArgumentParser:
     p_scan.add_argument("directory", help="台账目录")
     p_scan.add_argument("--out", required=True, help="报告输出目录")
     p_scan.add_argument("--baseline", default=None, help="上轮结果 JSON（启用跨年对账）")
+    p_scan.add_argument("--report", action="store_true", help="扫描结果直接驱动报告导出（MD/XLSX/evidence）")
 
     p_diff = sub.add_parser("diff", help="双版本差异对照")
     p_diff.add_argument("--from-year", type=int, required=True)

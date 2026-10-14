@@ -149,7 +149,10 @@ def test_scan_failure_isolation(data_dir, tmp_path, capsys):
     """**失败件 ≠ 违规**：坏件不中断整批、不改退出码。"""
     good = tmp_path / "ledger" / "ok.csv"
     good.parent.mkdir(parents=True)
-    good.write_bytes(b"item_key,subject,summary,amount\nEXP-1,\xe5\xae\x89\xe5\x85\xa8,\xe6\x94\xaf\xe5\x87\xba,100.00\n")
+    good.write_bytes(
+        b"enterprise_id,year,industry_id,item_key,subject,summary,amount\n"
+        b"90000000SYN0000001A,2024,coal,EXP-1,\xe5\xae\x89\xe5\x85\xa8,\xe6\x94\xaf\xe5\x87\xba,100.00\n"
+    )
     bad = tmp_path / "ledger" / "bad.csv"
     bad.write_bytes(b"wrong,header\n1,2\n")
 

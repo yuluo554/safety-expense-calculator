@@ -43,11 +43,197 @@
       "status": "verified"
     },
     {
+      "category": "允许",
+      "clause": "第八条",
+      "criterion": "安全生产宣传、教育、培训和从业人员发现并报告事故隐患的奖励支出（第八条第八项要点）",
+      "entry_id": "SP-COAL-03",
+      "industry_id": "coal",
+      "match_keywords": [
+        "培训",
+        "宣传教育"
+      ],
+      "provenance": {
+        "clause": "第八条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第八条",
+      "criterion": "应急救援技术装备设施配置维护保养与应急救援队伍建设、应急预案制修订与应急演练支出（第八条第四项要点）",
+      "entry_id": "SP-COAL-04",
+      "industry_id": "coal",
+      "match_keywords": [
+        "应急救援"
+      ],
+      "provenance": {
+        "clause": "第八条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
       "category": "禁止",
       "clause": "第四条",
       "criterion": "专项核算、不得挤占挪用安全生产费用（红线，第四条第三项）",
       "entry_id": "SP-COAL-99",
       "industry_id": "coal",
+      "match_keywords": [
+        "挤占",
+        "挪用"
+      ],
+      "provenance": {
+        "clause": "第四条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第十二条",
+      "criterion": "完善、改造和维护安全防护设施设备（不含“三同时”要求初期投入的安全设施）和重大事故隐患治理支出（第十二条第一项要点）",
+      "entry_id": "SP-NONCOAL-01",
+      "industry_id": "noncoal_mine",
+      "match_keywords": [
+        "安全防护",
+        "隐患治理"
+      ],
+      "provenance": {
+        "clause": "第十二条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第十二条",
+      "criterion": "安全生产检查、评估评价、咨询、标准化建设支出（第十二条第四项要点）",
+      "entry_id": "SP-NONCOAL-02",
+      "industry_id": "noncoal_mine",
+      "match_keywords": [
+        "标准化"
+      ],
+      "provenance": {
+        "clause": "第十二条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第十二条",
+      "criterion": "尾矿库闭库、销库费用支出（第十二条第九项要点）",
+      "entry_id": "SP-NONCOAL-03",
+      "industry_id": "noncoal_mine",
+      "match_keywords": [
+        "尾矿库闭库"
+      ],
+      "provenance": {
+        "clause": "第十二条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "禁止",
+      "clause": "第四条",
+      "criterion": "专项核算、不得挤占挪用安全生产费用（红线，第四条第三项）",
+      "entry_id": "SP-NONCOAL-99",
+      "industry_id": "noncoal_mine",
+      "match_keywords": [
+        "挤占",
+        "挪用"
+      ],
+      "provenance": {
+        "clause": "第四条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第十五条",
+      "criterion": "完善、改造和维护安全防护设施设备支出（第十五条第一项要点）",
+      "entry_id": "SP-OILGAS-01",
+      "industry_id": "oil_gas",
+      "match_keywords": [
+        "安全防护",
+        "防井喷"
+      ],
+      "provenance": {
+        "clause": "第十五条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第十五条",
+      "criterion": "野外或海上作业应急食品、应急器械、应急药品支出（第十五条第九项要点）",
+      "entry_id": "SP-OILGAS-02",
+      "industry_id": "oil_gas",
+      "match_keywords": [
+        "应急药品",
+        "应急器械"
+      ],
+      "provenance": {
+        "clause": "第十五条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "禁止",
+      "clause": "第四条",
+      "criterion": "专项核算、不得挤占挪用安全生产费用（红线，第四条第三项）",
+      "entry_id": "SP-OILGAS-99",
+      "industry_id": "oil_gas",
       "match_keywords": [
         "挤占",
         "挪用"
@@ -71,6 +257,26 @@
       "industry_id": "construction",
       "match_keywords": [
         "安全防护"
+      ],
+      "provenance": {
+        "clause": "第十九条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第十九条",
+      "criterion": "应急救援技术装备设施配置及维护保养与应急救援队伍建设、应急预案制修订与应急演练支出（第十九条第二项要点）",
+      "entry_id": "SP-CONST-02",
+      "industry_id": "construction",
+      "match_keywords": [
+        "应急救援"
       ],
       "provenance": {
         "clause": "第十九条",
@@ -126,11 +332,443 @@
       "status": "verified"
     },
     {
+      "category": "允许",
+      "clause": "第二十二条",
+      "criterion": "配备和更新现场作业人员安全防护用品支出（第二十二条第五项要点）",
+      "entry_id": "SP-HAZ-02",
+      "industry_id": "hazardous_chemicals",
+      "match_keywords": [
+        "安全防护用品"
+      ],
+      "provenance": {
+        "clause": "第二十二条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
       "category": "禁止",
       "clause": "第四条",
       "criterion": "专项核算、不得挤占挪用安全生产费用（红线，第四条第三项）",
       "entry_id": "SP-HAZ-99",
       "industry_id": "hazardous_chemicals",
+      "match_keywords": [
+        "挤占",
+        "挪用"
+      ],
+      "provenance": {
+        "clause": "第四条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第二十五条",
+      "criterion": "完善、改造和维护安全防护设施设备支出（第二十五条第一项要点）",
+      "entry_id": "SP-TRANS-01",
+      "industry_id": "transport",
+      "match_keywords": [
+        "安全防护"
+      ],
+      "provenance": {
+        "clause": "第二十五条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第二十五条",
+      "criterion": "购置、安装和使用具有行驶记录功能的车辆卫星定位装置、视频监控装置、船舶通信导航定位和自动识别系统等支出（第二十五条第二项要点）",
+      "entry_id": "SP-TRANS-02",
+      "industry_id": "transport",
+      "match_keywords": [
+        "卫星定位",
+        "视频监控"
+      ],
+      "provenance": {
+        "clause": "第二十五条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第二十五条",
+      "criterion": "安全生产责任保险及承运人责任保险支出（第二十五条第十一项要点）",
+      "entry_id": "SP-TRANS-03",
+      "industry_id": "transport",
+      "match_keywords": [
+        "承运人责任保险",
+        "安全生产责任保险"
+      ],
+      "provenance": {
+        "clause": "第二十五条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "禁止",
+      "clause": "第四条",
+      "criterion": "专项核算、不得挤占挪用安全生产费用（红线，第四条第三项）",
+      "entry_id": "SP-TRANS-99",
+      "industry_id": "transport",
+      "match_keywords": [
+        "挤占",
+        "挪用"
+      ],
+      "provenance": {
+        "clause": "第四条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第二十八条",
+      "criterion": "完善、改造和维护安全防护设备设施支出（第二十八条第一项要点）",
+      "entry_id": "SP-MET-01",
+      "industry_id": "metallurgy",
+      "match_keywords": [
+        "安全防护"
+      ],
+      "provenance": {
+        "clause": "第二十八条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第二十八条",
+      "criterion": "安全生产宣传、教育、培训和从业人员发现并报告事故隐患的奖励支出（第二十八条第五项要点）",
+      "entry_id": "SP-MET-02",
+      "industry_id": "metallurgy",
+      "match_keywords": [
+        "培训"
+      ],
+      "provenance": {
+        "clause": "第二十八条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "禁止",
+      "clause": "第四条",
+      "criterion": "专项核算、不得挤占挪用安全生产费用（红线，第四条第三项）",
+      "entry_id": "SP-MET-99",
+      "industry_id": "metallurgy",
+      "match_keywords": [
+        "挤占",
+        "挪用"
+      ],
+      "provenance": {
+        "clause": "第四条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第三十一条",
+      "criterion": "完善、改造和维护安全防护设施设备支出，含大型起重机械安装安全监控管理系统支出（第三十一条第一项要点）",
+      "entry_id": "SP-MAC-01",
+      "industry_id": "machinery",
+      "match_keywords": [
+        "安全防护",
+        "安全监控管理系统"
+      ],
+      "provenance": {
+        "clause": "第三十一条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第三十一条",
+      "criterion": "配备、维护、保养应急救援器材、设备支出和应急救援队伍建设、应急预案制修订与应急演练支出（第三十一条第二项要点）",
+      "entry_id": "SP-MAC-02",
+      "industry_id": "machinery",
+      "match_keywords": [
+        "应急救援"
+      ],
+      "provenance": {
+        "clause": "第三十一条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "禁止",
+      "clause": "第四条",
+      "criterion": "专项核算、不得挤占挪用安全生产费用（红线，第四条第三项）",
+      "entry_id": "SP-MAC-99",
+      "industry_id": "machinery",
+      "match_keywords": [
+        "挤占",
+        "挪用"
+      ],
+      "provenance": {
+        "clause": "第四条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第三十四条",
+      "criterion": "完善、改造和维护安全设备设施支出（第三十四条第一项要点）",
+      "entry_id": "SP-FW-01",
+      "industry_id": "fireworks",
+      "match_keywords": [
+        "安全设施",
+        "防护屏障"
+      ],
+      "provenance": {
+        "clause": "第三十四条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第三十四条",
+      "criterion": "配备、维护、保养防爆机械电器设备支出（第三十四条第二项要点）",
+      "entry_id": "SP-FW-02",
+      "industry_id": "fireworks",
+      "match_keywords": [
+        "防爆"
+      ],
+      "provenance": {
+        "clause": "第三十四条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "禁止",
+      "clause": "第四条",
+      "criterion": "专项核算、不得挤占挪用安全生产费用（红线，第四条第三项）",
+      "entry_id": "SP-FW-99",
+      "industry_id": "fireworks",
+      "match_keywords": [
+        "挤占",
+        "挪用"
+      ],
+      "provenance": {
+        "clause": "第四条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第三十七条",
+      "criterion": "完善、改造和维护安全防护设施设备支出（第三十七条第一项要点）",
+      "entry_id": "SP-CE-01",
+      "industry_id": "civil_explosives",
+      "match_keywords": [
+        "安全防护"
+      ],
+      "provenance": {
+        "clause": "第三十七条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第三十七条",
+      "criterion": "配备、维护、保养应急救援器材、设备支出和应急救援队伍建设、应急预案制修订与应急演练支出（第三十七条第二项要点）",
+      "entry_id": "SP-CE-02",
+      "industry_id": "civil_explosives",
+      "match_keywords": [
+        "应急救援"
+      ],
+      "provenance": {
+        "clause": "第三十七条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "禁止",
+      "clause": "第四条",
+      "criterion": "专项核算、不得挤占挪用安全生产费用（红线，第四条第三项）",
+      "entry_id": "SP-CE-99",
+      "industry_id": "civil_explosives",
+      "match_keywords": [
+        "挤占",
+        "挪用"
+      ],
+      "provenance": {
+        "clause": "第四条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第四十一条",
+      "criterion": "完善、改造和维护安全防护设施设备支出（第四十一条第一项要点）",
+      "entry_id": "SP-WP-01",
+      "industry_id": "weapons",
+      "match_keywords": [
+        "安全防护"
+      ],
+      "provenance": {
+        "clause": "第四十一条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第四十一条",
+      "criterion": "高新技术和特种专用设备安全鉴定评估、安全性能检验检测及操作人员上岗培训支出（第四十一条第四项要点）",
+      "entry_id": "SP-WP-02",
+      "industry_id": "weapons",
+      "match_keywords": [
+        "上岗培训",
+        "安全鉴定"
+      ],
+      "provenance": {
+        "clause": "第四十一条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第四十一条",
+      "criterion": "军工核设施（含核废物）防泄漏、防辐射的设施设备支出（第四十一条第七项要点）",
+      "entry_id": "SP-WP-03",
+      "industry_id": "weapons",
+      "match_keywords": [
+        "防辐射",
+        "防泄漏"
+      ],
+      "provenance": {
+        "clause": "第四十一条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "禁止",
+      "clause": "第四条",
+      "criterion": "专项核算、不得挤占挪用安全生产费用（红线，第四条第三项）",
+      "entry_id": "SP-WP-99",
+      "industry_id": "weapons",
       "match_keywords": [
         "挤占",
         "挪用"
@@ -155,6 +793,26 @@
       "match_keywords": [
         "安全防护",
         "安全监控"
+      ],
+      "provenance": {
+        "clause": "第四十四条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": "2026-10-14",
+        "raw_sha256": "fd6e880a0228c71f7e519b82b04e71eb31364ead02fd93ae12da53c037cd8477",
+        "snapshot": "data/knowledge/raw/136-body.docx",
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": true
+      },
+      "status": "verified"
+    },
+    {
+      "category": "允许",
+      "clause": "第四十四条",
+      "criterion": "配备和更新现场作业人员安全防护用品支出（第四十四条第六项要点）",
+      "entry_id": "SP-POWER-02",
+      "industry_id": "power",
+      "match_keywords": [
+        "安全防护用品"
       ],
       "provenance": {
         "clause": "第四十四条",

@@ -18,7 +18,8 @@
 * **无适用条目时** → 输出 ``未评估``（``not_assessed``），**绝不输出 ``符合``**
   ——"没查出问题"与"没检查过"必须可区分。
 
-首期覆盖煤炭 / 建设工程 / 危险品 / 电力四行业；其余行业被请求 → 退出码 2。
+首期四行业起家，M3 扩至 2022 版十二节（2012 版九类，无电力/石油天然气/民爆）；
+其余行业被请求 → 退出码 2。
 """
 
 from dataclasses import dataclass
@@ -34,8 +35,12 @@ STATE_NONCOMPLIANT = "不符合"
 STATE_NOT_APPLICABLE = "不适用"
 STATE_NOT_ASSESSED = "未评估"
 
-#: 首期覆盖行业
-IN_SCOPE_INDUSTRIES = ("coal", "construction", "hazardous_chemicals", "power")
+#: 核查覆盖行业（2022 版十二节）
+IN_SCOPE_INDUSTRIES = (
+    "coal", "noncoal_mine", "oil_gas", "construction", "hazardous_chemicals",
+    "transport", "metallurgy", "machinery", "fireworks", "civil_explosives",
+    "weapons", "power",
+)
 
 #: 非 pass = 不符合 ∪ 未评估（部分符合计入"需关注"）
 NON_PASS_STATES = frozenset({STATE_NONCOMPLIANT, STATE_NOT_ASSESSED})
