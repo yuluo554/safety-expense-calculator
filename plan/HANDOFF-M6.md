@@ -106,12 +106,12 @@ PYTHONPATH=src py -3.12 -X utf8 -m safefee diff --from-year 2020 --to-year 2024 
 - [x] 脱敏四步留痕（历史扫描 + 产物本体扫描 + 邮箱检查 + 品牌隔离复查）——[docs/发布检查单.md](../docs/发布检查单.md)：四步全 PASS；HEAD 品牌隔离 2 处措辞修复（plan/00+06 防撞域条目），历史 4 处显式定夺不改写
 - [x] 干净环境按 README 逐字跑通（venv 全新 → 快速开始全命令）——py -3.12 新 venv；快速开始 11 命令 + 桌面交付 3 命令（双 exe 重打包 + verify_frozen 八项断言）全过；check=1（检出不符合）、gui=3（缺依赖）均为契约语义
 - [x] 首推 GitHub + CI 首跑四矩阵结果据实补记——首推 302dba6；**首跑 run 38576840474 失败**（GUI 冒烟缺 PySide6，E22 预判应验）→ 修复 cbc4d7a（importorskip）→ **run 38579712303 四矩阵全绿**（E27）；补记进发布检查单 + 06 E27
-- [x] Release（exe）zip 附双 onedir；tag/release 说明经用户确认——zip 已构建并中立目录复验（bench 三套件达标）；**tag/Release 推送动作本身待用户确认（R4），确认即发**
+- [x] Release（exe）zip 附双 onedir；tag/release 说明经用户确认——**2026-10-14 用户确认后已发布**：tag `v0.1.0`（指向 3949987）+ Release（标题"v0.1.0 — 首个发布"，附件 `safefee-0.1.0-windows-x64-exe.zip` 88.2 MB / sha256 d136b5b3…ffc2b4）；发布后资产核验 draft=false、zip 在列；https://github.com/yuluo554/safety-expense-calculator/releases/tag/v0.1.0
 - [x] 缓议项清零（06 §五逐条定夺或显式顺延）——C1（建仓时机→M6 已建仓+CI 绿）/ C2（技术报告维持 Markdown）/ C3（不参赛已定）/ C4（M2/M3 已闭环）全部闭环；新增 E27/E28 决策
 - [x] 里程碑状态回写（plan/00 + 05 + 06 + README 终稿）——四处全部回写 ✅（2026-10-14）
 - [x] 全链本地等价校验绿（202 项测试双解释器；基准三套件达标不回退）——py3.12 带 Qt 209 全过（GUI 30 项实跑）；py3.8 209 全过；无 Qt 干净 venv 205 过 + 4 跳（CI 等价）；**CI 四矩阵全绿**（202 项在 CI 上的等价计数为 205+4 跳）
 
-> **M6 终态**：M0~M6 全部完成，项目进入维护模式。tag/Release 待用户确认后补发（R4 对外动作授权）。
+> **M6 终态**：M0~M6 全部完成，项目进入维护模式。tag v0.1.0 + Release 已于 2026-10-14 经用户确认发布（R4 闭环）。
 
 ## 七、禁止事项（沿用 M1~M5）
 
