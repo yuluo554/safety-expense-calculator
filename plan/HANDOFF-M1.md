@@ -117,10 +117,10 @@ python -m safefee version && python -m safefee selfcheck && python -m safefee be
 - [x] 十二节计提标准逐条核对落值：2022 版四节 verified（煤炭 50/30/15/5、建设工程 3.5/3/2.5/2/1.5%、危险品 4.5/2.25/0.55/0.2%、电力生产六段+供应四段）；其余八节 **deferred 显式留 pending 带理由**（条款已定位、数值 M2）
 - [x] 双版本规则包（136 号 + 2012 版）数值落库（2012 版煤炭第五条 30/15/5、建设工程第七条 2.5/2.0/1.5、危险品第八条 4/2/0.5/0.2）；**M0 节次假设勘误按公报原文纠正**（第五/七/八条，非七/十三/十六）；`safefee diff` 差异项可对照（added 10 / rate_changed 1 / removed 3）
 - [x] `tools/gen_rulesets.py --check` → FROZEN_RULESETS_OK（8 份逐字节一致）；`data/README.md` §一登记 8 份指纹
-- [x] 合成台账含三类机制算例（煤炭四变体/建设工程三类别/危险品全分段+电力两套标准）+ 恰好等于分段点 ±0.01 邻域 + 元/万元错配 + 误报对照集（3 零命中 + 2 应降级）+ 双版本对照 6 例
-- [x] `tools/gen_synthetic.py --check` → FROZEN_TRUTH_OK（29 份逐字节一致）；**双重记账**：期望值由生成器独立计算路径产出（不调引擎），基准用引擎重算对账
+- [x] 合成台账含三类机制算例（煤炭四变体/建设工程三类别/危险品全分段+电力两套标准）+ 3 个分段点 × ±0.01 邻域（恰等/邻域共 9 档案，id 按分段点唯一化）+ 元/万元错配 + 误报对照集（3 零命中 + 2 应降级）+ 双版本对照 6 例
+- [x] `tools/gen_synthetic.py --check` → FROZEN_TRUTH_OK（35 份逐字节一致，含 README；**含陈旧文件检测**）；**双重记账**：期望值由生成器独立计算路径产出（不调引擎），基准用引擎重算对账
 - [x] `safefee calc data/samples/archive-coal.json` 退出码 **1 → 0**，输出 3,600,000.00 元 + 第七条（危险品 1,350,000.00 第二十一条、建设工程 1,200,000.00 第十七条同验）
-- [x] `safefee bench`：`dual_version` **8/8**、`synthetic_ledger` **29/29** 从"未评估"转为达标（`tiered_boundary` 150/150）
+- [x] `safefee bench`：`dual_version` **8/8**、`synthetic_ledger` **34/34** 从"未评估"转为达标（`tiered_boundary` 150/150）
 - [x] 待核对项逐条处置：部令第 8 号（2022-01-06 公布/2022-04-01 施行）、煤安监技装〔2018〕9 号（成文 2018-04-27）、技装 8 号（2018-05-02/08-01 施行）、调查 14 号（2018-06-04/09-01 施行）已 curl 公报/政策库原文核对；**安全生产法 2014/2021 修正日期与 GB 12268 版本号显式留 `pending`**（flk.npc.gov.cn 为 JS 应用无静态页、npc.gov.cn TLS 握手失败——clauses.json + data/README §二留痕）
 - [x] 里程碑状态回写（plan/00 状态表 + 05 里程碑 + 06 决策含 C1 定夺与新进口径）
 
