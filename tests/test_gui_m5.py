@@ -204,7 +204,13 @@ def test_diff_out_stays_byte_reproducible(data_dir, tmp_path):
 
 @pytest.fixture(scope="module")
 def qapp():
-    """offscreen QApplication（CI 无显示器的等价校验）。"""
+    """offscreen QApplication（无显示器环境等价校验）。
+
+    PySide6 属 gui extra（默认不装）：缺依赖时跳过界面冒烟——
+    缺依赖契约（退出码 3）另有 import 桩测试覆盖，不依赖真 Qt；
+    CI 四矩阵只装 dev extra，界面冒烟由装齐 gui extra 的本地环境实测。
+    """
+    pytest.importorskip("PySide6", reason="界面冒烟需要 PySide6（pip install -e \".[gui]\"）")
     os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
     from PySide6 import QtWidgets
 
