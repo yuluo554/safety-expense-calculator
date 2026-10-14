@@ -1,0 +1,9 @@
+{
+  "factors": {
+    "CNY": "1",
+    "CNY100m": "100000000",
+    "CNY10k": "10000",
+    "ton": "1"
+  },
+  "schema_version": 1
+}

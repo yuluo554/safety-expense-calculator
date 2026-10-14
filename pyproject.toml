@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "safefee"
+version = "0.1.0"
+description = "企业安全生产费用提取与使用合规计算工作台（财资〔2022〕136号规则集 + 计提引擎 + 超额累退分段 + 双版本对照 + 支出核查 + 台账对账）"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name = "yuluo554" }]
+keywords = ["安全生产费用", "合规", "计提", "财资2022-136", "财务合规"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Financial and Insurance Industry",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Office/Business :: Financial :: Accounting",
+]
+dependencies = []
+
+[project.optional-dependencies]
+# 台账 XLSX 读入（惰性导入；缺依赖降级 CSV）
+xlsx = ["openpyxl>=3.0,<4"]
+# 桌面 GUI（惰性导入；缺依赖退出码 3）
+gui = ["PySide6>=6.6,<7"]
+# 开发与测试（CI 必须装齐：含测试期依赖 PyYAML）
+dev = ["pytest>=7,<9", "PyYAML>=5.4,<7"]
+# 打包（构建工具不该拖累运行时安装面）
+build = ["pyinstaller>=6,<7", "setuptools<81", "wheel"]
+
+[project.scripts]
+safefee = "safefee.cli.main:main"
+
+[project.urls]
+Homepage = "https://github.com/yuluo554/safety-expense-calculator"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

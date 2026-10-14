@@ -1,0 +1,62 @@
+name: CI
+
+# push 数 = run 数对账（无 filters 时 tag push 也会触发一轮）
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: ${{ matrix.os }} / py${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.8", "3.12"]
+
+    env:
+      # 编码守卫第三道：CI 的 python 不是"我们敲的命令"，没有 -X utf8；
+      # 子进程/测试内部打印中文在 cp1252 管道下会 UnicodeEncodeError
+      PYTHONUTF8: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # 脱敏审计的历史扫描守门依赖 git 历史；浅克隆会让它静默空验
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install (dev extra 含测试期依赖 PyYAML)
+        run: |
+          python -m pip install -U pip
+          python -m pip install -e ".[dev]"
+
+      - name: Regenerate frozen products and assert byte-identity
+        run: |
+          python tools/gen_rulesets.py --check
+          python tools/gen_samples.py --check
+          python tools/gen_synthetic.py --check
+
+      - name: Zero-policy-literal gate (with selftest positive control)
+        run: |
+          python tools/scan_policy_literals.py --selftest
+          python tools/scan_policy_literals.py
+
+      - name: Desensitization audit (with selftest)
+        run: |
+          python tools/dessensitize_audit.py --selftest
+          python tools/dessensitize_audit.py
+
+      - name: Pytest
+        run: python -m pytest -rs
+
+      - name: CLI smoke (exit-code contract)
+        run: |
+          python -m safefee version
+          python -m safefee selfcheck
+          python -m safefee bench

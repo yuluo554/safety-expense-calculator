@@ -1,0 +1,176 @@
+{
+  "doc_no": "财资〔2022〕136号",
+  "entries": [
+    {
+      "category": "允许",
+      "clause": "第八条",
+      "criterion": "煤矿安全生产改造与重大隐患治理支出",
+      "entry_id": "SP-COAL-01",
+      "industry_id": "coal",
+      "match_keywords": [
+        "安全改造",
+        "隐患治理"
+      ],
+      "provenance": {
+        "clause": "第八条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": null,
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": false
+      },
+      "status": "pending"
+    },
+    {
+      "category": "允许",
+      "clause": "第八条",
+      "criterion": "煤矿安全生产标准化建设与安全设备购置",
+      "entry_id": "SP-COAL-02",
+      "industry_id": "coal",
+      "match_keywords": [
+        "安全生产标准化",
+        "安全设备"
+      ],
+      "provenance": {
+        "clause": "第八条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": null,
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": false
+      },
+      "status": "pending"
+    },
+    {
+      "category": "禁止",
+      "clause": "第五条",
+      "criterion": "不得侵占、挪用安全生产费用（红线）",
+      "entry_id": "SP-COAL-99",
+      "industry_id": "coal",
+      "match_keywords": [
+        "挪用",
+        "侵占"
+      ],
+      "provenance": {
+        "clause": "第五条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": null,
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": false
+      },
+      "status": "pending"
+    },
+    {
+      "category": "允许",
+      "clause": "第十八条",
+      "criterion": "建设工程安全生产防护与文明施工支出",
+      "entry_id": "SP-CONST-01",
+      "industry_id": "construction",
+      "match_keywords": [
+        "安全防护",
+        "文明施工"
+      ],
+      "provenance": {
+        "clause": "第十八条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": null,
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": false
+      },
+      "status": "pending"
+    },
+    {
+      "category": "禁止",
+      "clause": "第五条",
+      "criterion": "不得以安全生产费用替代其他资金渠道应当列支的支出（红线）",
+      "entry_id": "SP-CONST-99",
+      "industry_id": "construction",
+      "match_keywords": [
+        "替代其他资金"
+      ],
+      "provenance": {
+        "clause": "第五条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": null,
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": false
+      },
+      "status": "pending"
+    },
+    {
+      "category": "允许",
+      "clause": "第二十二条",
+      "criterion": "危险品安全生产条件改善与应急救援器材支出",
+      "entry_id": "SP-HAZ-01",
+      "industry_id": "hazardous_chemicals",
+      "match_keywords": [
+        "安全生产条件",
+        "应急救援器材"
+      ],
+      "provenance": {
+        "clause": "第二十二条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": null,
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": false
+      },
+      "status": "pending"
+    },
+    {
+      "category": "禁止",
+      "clause": "第五条",
+      "criterion": "不得侵占、挪用安全生产费用（红线）",
+      "entry_id": "SP-HAZ-99",
+      "industry_id": "hazardous_chemicals",
+      "match_keywords": [
+        "挪用",
+        "侵占"
+      ],
+      "provenance": {
+        "clause": "第五条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": null,
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": false
+      },
+      "status": "pending"
+    },
+    {
+      "category": "允许",
+      "clause": "第四十四条",
+      "criterion": "电力生产安全防护与并网安全支出",
+      "entry_id": "SP-POWER-01",
+      "industry_id": "power",
+      "match_keywords": [
+        "安全防护",
+        "并网安全"
+      ],
+      "provenance": {
+        "clause": "第四十四条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": null,
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": false
+      },
+      "status": "pending"
+    },
+    {
+      "category": "禁止",
+      "clause": "第五条",
+      "criterion": "不得侵占、挪用安全生产费用（红线）",
+      "entry_id": "SP-POWER-99",
+      "industry_id": "power",
+      "match_keywords": [
+        "挪用",
+        "侵占"
+      ],
+      "provenance": {
+        "clause": "第五条",
+        "doc_no": "财资〔2022〕136号",
+        "fetched_at": null,
+        "url": "https://www.gov.cn/zhengce/zhengceku/2022-12/14/content_5731902.htm",
+        "verified": false
+      },
+      "status": "pending"
+    }
+  ],
+  "status": "pending"
+}

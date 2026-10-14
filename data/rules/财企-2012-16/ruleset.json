@@ -1,0 +1,717 @@
+{
+  "doc_no": "财企〔2012〕16号",
+  "doc_title": "企业安全生产费用提取和使用管理办法",
+  "effective_from_year": 2012,
+  "effective_to_year": 2022,
+  "industries": [
+    {
+      "clause": "第七条",
+      "implementation": "in_scope",
+      "industry_id": "coal",
+      "industry_name": "煤炭生产",
+      "mechanism": "by_output",
+      "provenance": {
+        "clause": "第七条",
+        "doc_no": "财企〔2012〕16号",
+        "fetched_at": null,
+        "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+        "verified": false
+      },
+      "status": "pending",
+      "variants": [
+        {
+          "clause": "第七条",
+          "conditions": {
+            "hazards": [
+              "gas_outburst",
+              "rockburst"
+            ]
+          },
+          "provenance": {
+            "clause": "第七条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "severity": 4,
+          "status": "pending",
+          "unit": "CNY/ton",
+          "value": null,
+          "variant_id": "coal_outburst_rockburst",
+          "variant_name": "煤（岩）与瓦斯（二氧化碳）突出矿井、冲击地压矿井"
+        },
+        {
+          "clause": "第七条",
+          "conditions": {
+            "mine_type": "high_gas"
+          },
+          "provenance": {
+            "clause": "第七条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "severity": 3,
+          "status": "pending",
+          "unit": "CNY/ton",
+          "value": null,
+          "variant_id": "coal_high_gas",
+          "variant_name": "高瓦斯矿井"
+        },
+        {
+          "clause": "第七条",
+          "conditions": {
+            "mine_type": "other_underground"
+          },
+          "provenance": {
+            "clause": "第七条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "severity": 2,
+          "status": "pending",
+          "unit": "CNY/ton",
+          "value": null,
+          "variant_id": "coal_other_underground",
+          "variant_name": "其他井工矿井"
+        },
+        {
+          "clause": "第七条",
+          "conditions": {
+            "mine_type": "opencast"
+          },
+          "provenance": {
+            "clause": "第七条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "severity": 1,
+          "status": "pending",
+          "unit": "CNY/ton",
+          "value": null,
+          "variant_id": "coal_opencast",
+          "variant_name": "露天矿井"
+        }
+      ]
+    },
+    {
+      "clause": "第九条",
+      "implementation": "deferred",
+      "industry_id": "noncoal_mine",
+      "industry_name": "非煤矿山开采",
+      "mechanism": "by_revenue_tiered",
+      "provenance": {
+        "clause": "第九条",
+        "doc_no": "财企〔2012〕16号",
+        "fetched_at": null,
+        "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+        "verified": false
+      },
+      "segments": [
+        {
+          "clause": "第九条",
+          "lower": "0",
+          "provenance": {
+            "clause": "第九条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "10000000"
+        },
+        {
+          "clause": "第九条",
+          "lower": "10000000",
+          "provenance": {
+            "clause": "第九条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "100000000"
+        },
+        {
+          "clause": "第九条",
+          "lower": "100000000",
+          "provenance": {
+            "clause": "第九条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "1000000000"
+        },
+        {
+          "clause": "第九条",
+          "lower": "1000000000",
+          "provenance": {
+            "clause": "第九条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": null
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "clause": "第十条",
+      "implementation": "deferred",
+      "industry_id": "oil_gas",
+      "industry_name": "石油天然气开采",
+      "mechanism": "by_revenue_tiered",
+      "provenance": {
+        "clause": "第十条",
+        "doc_no": "财企〔2012〕16号",
+        "fetched_at": null,
+        "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+        "verified": false
+      },
+      "segments": [
+        {
+          "clause": "第十条",
+          "lower": "0",
+          "provenance": {
+            "clause": "第十条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "10000000"
+        },
+        {
+          "clause": "第十条",
+          "lower": "10000000",
+          "provenance": {
+            "clause": "第十条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "100000000"
+        },
+        {
+          "clause": "第十条",
+          "lower": "100000000",
+          "provenance": {
+            "clause": "第十条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "1000000000"
+        },
+        {
+          "clause": "第十条",
+          "lower": "1000000000",
+          "provenance": {
+            "clause": "第十条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": null
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "clause": "第十三条",
+      "implementation": "in_scope",
+      "industry_id": "construction",
+      "industry_name": "建设工程施工",
+      "mechanism": "by_project_cost",
+      "provenance": {
+        "clause": "第十三条",
+        "doc_no": "财企〔2012〕16号",
+        "fetched_at": null,
+        "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+        "verified": false
+      },
+      "status": "pending",
+      "variants": [
+        {
+          "clause": "第十七条",
+          "provenance": {
+            "clause": "第十七条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "variant_id": "mine_engineering",
+          "variant_name": "矿山工程"
+        },
+        {
+          "clause": "第十七条",
+          "provenance": {
+            "clause": "第十七条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "variant_id": "railway_building_rail_transit",
+          "variant_name": "铁路、房屋建筑工程、城市轨道交通"
+        },
+        {
+          "clause": "第十七条",
+          "provenance": {
+            "clause": "第十七条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "variant_id": "water_power_electric",
+          "variant_name": "水利水电工程、电力工程"
+        },
+        {
+          "clause": "第十七条",
+          "provenance": {
+            "clause": "第十七条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "variant_id": "smelting_mechanical_chemical_telecom",
+          "variant_name": "冶炼工程、机电安装工程、化工石油工程、通信工程"
+        },
+        {
+          "clause": "第十七条",
+          "provenance": {
+            "clause": "第十七条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "variant_id": "municipal_port_highway",
+          "variant_name": "市政公用工程、港口与航道工程、公路工程"
+        }
+      ]
+    },
+    {
+      "clause": "第十六条",
+      "implementation": "in_scope",
+      "industry_id": "hazardous_chemicals",
+      "industry_name": "危险品生产与储存",
+      "mechanism": "by_revenue_tiered",
+      "provenance": {
+        "clause": "第十六条",
+        "doc_no": "财企〔2012〕16号",
+        "fetched_at": null,
+        "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+        "verified": false
+      },
+      "segments": [
+        {
+          "clause": "第十六条",
+          "lower": "0",
+          "provenance": {
+            "clause": "第十六条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "10000000"
+        },
+        {
+          "clause": "第十六条",
+          "lower": "10000000",
+          "provenance": {
+            "clause": "第十六条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "100000000"
+        },
+        {
+          "clause": "第十六条",
+          "lower": "100000000",
+          "provenance": {
+            "clause": "第十六条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "1000000000"
+        },
+        {
+          "clause": "第十六条",
+          "lower": "1000000000",
+          "provenance": {
+            "clause": "第十六条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": null
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "clause": "第十八条",
+      "implementation": "deferred",
+      "industry_id": "transport",
+      "industry_name": "交通运输",
+      "mechanism": "by_revenue_tiered",
+      "provenance": {
+        "clause": "第十八条",
+        "doc_no": "财企〔2012〕16号",
+        "fetched_at": null,
+        "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+        "verified": false
+      },
+      "segments": [
+        {
+          "clause": "第十八条",
+          "lower": "0",
+          "provenance": {
+            "clause": "第十八条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "10000000"
+        },
+        {
+          "clause": "第十八条",
+          "lower": "10000000",
+          "provenance": {
+            "clause": "第十八条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "100000000"
+        },
+        {
+          "clause": "第十八条",
+          "lower": "100000000",
+          "provenance": {
+            "clause": "第十八条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "1000000000"
+        },
+        {
+          "clause": "第十八条",
+          "lower": "1000000000",
+          "provenance": {
+            "clause": "第十八条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": null
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "clause": "第二十条",
+      "implementation": "deferred",
+      "industry_id": "metallurgy",
+      "industry_name": "冶金",
+      "mechanism": "by_revenue_tiered",
+      "provenance": {
+        "clause": "第二十条",
+        "doc_no": "财企〔2012〕16号",
+        "fetched_at": null,
+        "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+        "verified": false
+      },
+      "segments": [
+        {
+          "clause": "第二十条",
+          "lower": "0",
+          "provenance": {
+            "clause": "第二十条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "10000000"
+        },
+        {
+          "clause": "第二十条",
+          "lower": "10000000",
+          "provenance": {
+            "clause": "第二十条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "100000000"
+        },
+        {
+          "clause": "第二十条",
+          "lower": "100000000",
+          "provenance": {
+            "clause": "第二十条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "1000000000"
+        },
+        {
+          "clause": "第二十条",
+          "lower": "1000000000",
+          "provenance": {
+            "clause": "第二十条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": null
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "clause": "第二十一条",
+      "implementation": "deferred",
+      "industry_id": "machinery",
+      "industry_name": "机械制造",
+      "mechanism": "by_revenue_tiered",
+      "provenance": {
+        "clause": "第二十一条",
+        "doc_no": "财企〔2012〕16号",
+        "fetched_at": null,
+        "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+        "verified": false
+      },
+      "segments": [
+        {
+          "clause": "第二十一条",
+          "lower": "0",
+          "provenance": {
+            "clause": "第二十一条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "10000000"
+        },
+        {
+          "clause": "第二十一条",
+          "lower": "10000000",
+          "provenance": {
+            "clause": "第二十一条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "100000000"
+        },
+        {
+          "clause": "第二十一条",
+          "lower": "100000000",
+          "provenance": {
+            "clause": "第二十一条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "1000000000"
+        },
+        {
+          "clause": "第二十一条",
+          "lower": "1000000000",
+          "provenance": {
+            "clause": "第二十一条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": null
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "clause": "第二十三条",
+      "implementation": "deferred",
+      "industry_id": "fireworks",
+      "industry_name": "烟花爆竹生产",
+      "mechanism": "by_revenue_tiered",
+      "provenance": {
+        "clause": "第二十三条",
+        "doc_no": "财企〔2012〕16号",
+        "fetched_at": null,
+        "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+        "verified": false
+      },
+      "segments": [
+        {
+          "clause": "第二十三条",
+          "lower": "0",
+          "provenance": {
+            "clause": "第二十三条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "10000000"
+        },
+        {
+          "clause": "第二十三条",
+          "lower": "10000000",
+          "provenance": {
+            "clause": "第二十三条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "100000000"
+        },
+        {
+          "clause": "第二十三条",
+          "lower": "100000000",
+          "provenance": {
+            "clause": "第二十三条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": "1000000000"
+        },
+        {
+          "clause": "第二十三条",
+          "lower": "1000000000",
+          "provenance": {
+            "clause": "第二十三条",
+            "doc_no": "财企〔2012〕16号",
+            "fetched_at": null,
+            "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+            "verified": false
+          },
+          "rate": null,
+          "status": "pending",
+          "upper": null
+        }
+      ],
+      "status": "pending"
+    }
+  ],
+  "issued_date": "2012-02-14",
+  "issuer": [
+    "财政部",
+    "国家安全生产监督管理总局"
+  ],
+  "provenance": {
+    "clause": "全文",
+    "doc_no": "财企〔2012〕16号",
+    "fetched_at": null,
+    "url": "https://www.gov.cn/gongbao/content/2012/content_2177022.htm",
+    "verified": false
+  },
+  "ruleset_id": "财企-2012-16",
+  "status": "pending",
+  "supersedes": null
+}
