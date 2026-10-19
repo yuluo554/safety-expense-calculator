@@ -1,5 +1,6 @@
 [build-system]
-requires = ["setuptools>=61", "wheel"]
+# PEP 639（license 用 SPDX 字符串）自 setuptools 77 起支持；<77 会让 license = "MIT" 直接构建失败
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,16 +8,16 @@ name = "safefee"
 version = "0.1.0"
 description = "企业安全生产费用提取与使用合规计算工作台（财资〔2022〕136号规则集 + 计提引擎 + 超额累退分段 + 双版本对照 + 支出核查 + 台账对账）"
 readme = "README.md"
-requires-python = ">=3.8"
-license = { text = "MIT" }
+requires-python = ">=3.12"
+# SPDX 字符串（PEP 639）。TOML 表写法与 license classifier 均已被 setuptools 弃用
+# （弃用硬期限 2027-02-18）；守门见 tests/test_docs_guards.py
+license = "MIT"
 authors = [{ name = "yuluo554" }]
 keywords = ["安全生产费用", "合规", "计提", "财资2022-136", "财务合规"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Financial and Insurance Industry",
-  "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.12",
   "Topic :: Office/Business :: Financial :: Accounting",
 ]

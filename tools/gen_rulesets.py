@@ -51,6 +51,13 @@ SHA_2012_HTM = "0ab4597c079ce440d3482c774f39ec008f1edfe118d207dd86e8a05332899812
 
 FETCHED_AT = "2026-10-14"
 
+#: 复核锚（二次迭代新增判据）：费率/条款会换版，但原 manifest **没有任何"何时该复核"的机读锚点**
+#: （只有 `generated_by` 与各文件 sha256）。此处登记复核周期与下次复核日。
+#: 下次复核 = 基准日 + 1 年，用**纯字符串运算**推出（生成器禁 import datetime/time，见
+#: tests/test_frozen_products.py::test_generators_do_not_use_wall_clock）——单一真相仍是 FETCHED_AT。
+REVIEW_INTERVAL = "annual"
+NEXT_REVIEW = "%d%s" % (int(FETCHED_AT[:4]) + 1, FETCHED_AT[4:])
+
 #: 2022 版十二节（节次与条款号逐条对原文核对于 data/knowledge/raw/136-body.paragraphs.txt）
 #: 元组：(industry_id, 名称, 提取条款, 机制, implementation)
 INDUSTRIES_2022 = [
@@ -828,6 +835,8 @@ def generate() -> Dict[str, bytes]:
             "tiered_boundary": {"max_false_positive": 0, "min_pass_ratio": 1.0},
         },
         "generated_by": "tools/gen_rulesets.py",
+        "review_interval": REVIEW_INTERVAL,
+        "next_review": NEXT_REVIEW,
         "rulesets": [
             {
                 "dir": "财资-2022-136",

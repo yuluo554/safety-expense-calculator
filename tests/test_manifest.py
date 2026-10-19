@@ -15,6 +15,26 @@ from safefee.errors import (
 from safefee.rules import load_manifest
 
 
+def test_manifest_carries_review_anchor(data_dir):
+    """**复核锚**（二次迭代新增判据）：manifest 必须登记"何时该复核"的机读锚点。
+
+    背景：费率/条款会换版，而原 manifest 只有 ``generated_by`` 与各文件 sha256 ——
+    **没有任何"下次复核"锚点**，复核到期无人可查（只有 README 里一段非机读文字）。
+    锚点由生成器写入（``tools/gen_rulesets.py``），``selfcheck`` 会据此提示逾期。
+    """
+    import json
+    import re
+
+    raw = json.loads((Path(data_dir) / "rules" / "manifest.json").read_text(encoding="utf-8"))
+
+    assert raw.get("review_interval"), "manifest 应登记复核周期（review_interval）"
+    next_review = raw.get("next_review")
+    assert isinstance(next_review, str) and re.fullmatch(r"\d{4}-\d{2}-\d{2}", next_review), (
+        "manifest 的 next_review 应为 YYYY-MM-DD 字符串，实测 %r" % (next_review,)
+    )
+    date.fromisoformat(next_review)  # 必须是真实存在的日期（不是形状像而已）
+
+
 def test_manifest_loads_and_lists_two_rulesets(data_dir):
     manifest = load_manifest(data_dir)
     ids = {ref.ruleset_id for ref in manifest.refs}

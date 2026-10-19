@@ -15,11 +15,11 @@
 
 > 生成器为**唯一写入者**：产物禁手改；改体例走 `tools/gen_*.py` 整目录重生成，配"再生成逐字节一致"守门测试。
 
-### data/rules/ 冻结产物指纹（M3 spending 扩节后登记，2026-10-14）
+### data/rules/ 冻结产物指纹（M3 spending 扩节后登记，2026-10-14；2026-10-19 因 manifest 增复核锚重登记）
 
 | 文件 | sha256 |
 |---|---|
-| manifest.json | `444b3fa2238e99d4834c0cc8a7677208229fb4c7608e8be69e0d08602e13f22a` |
+| manifest.json | `6a49801c8d6f10018d47e5ce975450ebb289c1727fd081df302f9f6a396fe890` |
 | units.json | `b9b56739789eea1c27694bca5b56eea64557ef344e07999a2b6325309121efd0` |
 | 财资-2022-136/ruleset.json | `74db7df644477a27d0c9c1e76649530313957a78a8ef229e93f2a36ca21bbf44` |
 | 财资-2022-136/spending.json | `492fc84e65d8889177d286fe8fc5812c0a07c81ec7f31b874943ab6a84f8fd07` |
@@ -29,6 +29,12 @@
 | 财企-2012-16/progress.json | `d948598fabae68bc52374c1c607ba0c0418cf741c594c8adfa6fbab7ce4107d5` |
 
 （manifest.json 内另登记 ruleset/spending/progress 三份的 sha256，加载时逐份校验——手工改动可检出。）
+
+> **本表是手抄的第二份真相，生成器不会自动改它**——规则包一旦重生成，规则文件本身与
+> 本表**两处都要同步**（`tools/gen_rulesets.py --check` 只比对规则文件，管不到本表）。
+> 2026-10-19 二次迭代即按此口径重登记：manifest 新增机读复核锚
+> `review_interval: "annual"` / `next_review: "2027-10-14"`（`selfcheck` 会提示逾期），
+> 其余七份文件字节未动。
 
 ## 二、依据查证记录（逐条 ✅/⬜ + 渠道）
 

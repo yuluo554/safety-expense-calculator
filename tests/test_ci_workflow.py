@@ -73,8 +73,14 @@ def test_ci_sets_pythonutf8_env():
         assert "PYTHONUTF8" in text, "%s 未设置 PYTHONUTF8（CI 中文输出会崩）" % path.name
 
 
-def test_ci_matrix_covers_four_combinations():
-    """四矩阵：ubuntu/windows × 3.8/3.12。"""
+def test_ci_matrix_covers_both_os_on_supported_interpreter():
+    """双矩阵：ubuntu/windows × 3.12。
+
+    **口径变更声明（2026-10-19，DEC1）**：原断言是"四矩阵 ubuntu/windows × 3.8/3.12"
+    并把 ``3.8`` 写死。解释器底线抬到 3.12 后 3.8 不再是受支持口径，故本断言改为
+    "两 OS × 受支持的 3.12"，并**反向断言不含已 EOL 的 3.8**——不是放宽：口径本身变了，
+    且新断言比旧断言更严（旧断言只要求 3.8 在列，新断言要求 3.8 不得在列）。
+    """
     for path in _workflow_files():
         payload = yaml.safe_load(path.read_text(encoding="utf-8"))
         for job in (payload.get("jobs") or {}).values():
@@ -82,9 +88,16 @@ def test_ci_matrix_covers_four_combinations():
             if not matrix:
                 continue
             oses = matrix.get("os") or []
-            versions = matrix.get("python-version") or matrix.get("python_version") or []
-            assert len(oses) >= 2 and len(versions) >= 2, "%s 的矩阵不足四组合" % path.name
-            assert "3.8" in [str(v) for v in versions]
+            versions = [
+                str(v)
+                for v in (matrix.get("python-version") or matrix.get("python_version") or [])
+            ]
+            assert len(oses) >= 2, "%s 的矩阵应覆盖两个 OS" % path.name
+            assert versions, "%s 的矩阵缺 python-version" % path.name
+            assert "3.12" in versions, "%s 的矩阵应覆盖受支持的 3.12" % path.name
+            assert "3.8" not in versions, (
+                "%s 的矩阵不应再含已 EOL 的 3.8（DEC1：底线 3.12）" % path.name
+            )
 
 
 def test_ci_installs_dev_extra_covering_test_time_dependency():

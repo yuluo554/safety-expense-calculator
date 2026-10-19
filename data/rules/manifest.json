@@ -12,6 +12,8 @@
     }
   },
   "generated_by": "tools/gen_rulesets.py",
+  "next_review": "2027-10-14",
+  "review_interval": "annual",
   "rulesets": [
     {
       "dir": "财资-2022-136",

@@ -5,6 +5,15 @@ on:
   push:
   pull_request:
 
+# 最小权限：本 workflow 只读仓库（不写 release/issue/状态）
+permissions:
+  contents: read
+
+# 同一 ref 的旧跑自动取消（推一串提交时不必排队跑完每一轮）
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     name: ${{ matrix.os }} / py${{ matrix.python-version }}
@@ -12,8 +21,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        # DEC1（2026-10-19，plan/06 E29）：解释器底线抬至 3.12——已 EOL 的旧解释器
+        # 一律退出矩阵；且 ubuntu-latest 自 2026-10-19 起迁移到 Ubuntu 26
+        # （新镜像对旧解释器的支持存疑）。理由全文见 plan/06 E29。
         os: [ubuntu-latest, windows-latest]
-        python-version: ["3.8", "3.12"]
+        python-version: ["3.12"]
 
     env:
       # 编码守卫第三道：CI 的 python 不是"我们敲的命令"，没有 -X utf8；
@@ -22,12 +34,13 @@ jobs:
       PYTHONDONTWRITEBYTECODE: "1"
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
-          # 脱敏审计的历史扫描守门依赖 git 历史；浅克隆会让它静默空验
+          # 下面"Desensitization audit"一步真跑 `--history`（以及 tests/test_dessensitize.py
+          # 的 history 守门）——它们依赖 git 历史，浅克隆会让历史扫描静默空验
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -47,10 +60,11 @@ jobs:
           python tools/scan_policy_literals.py --selftest
           python tools/scan_policy_literals.py
 
-      - name: Desensitization audit (with selftest)
+      - name: Desensitization audit (tracked + full history, with selftest)
         run: |
           python tools/dessensitize_audit.py --selftest
           python tools/dessensitize_audit.py
+          python tools/dessensitize_audit.py --history
 
       - name: Pytest
         run: python -m pytest -rs

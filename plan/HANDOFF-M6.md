@@ -18,7 +18,7 @@
 | 中立目录验收 | ✅ | 双 exe 拷至无 `SAFEFEE_DATA_DIR` 的临时目录、exe 目录为 CWD：selfcheck/bench/calc/check/diff/报告导出全链过；GUI exe 实机启动验证（进程存活后正常终止） |
 | 演示素材可复现（E21 口径） | ✅ | `--fixed-time` 下 calc 报告两次导出 sha256 逐字节一致（三件全一致，实测留痕）；差异对照报告**默认**即字节冻结；`calc/check/progress --fixed-time` 全局参数接线（06 E26） |
 | `docs/技术报告.md` 入仓 | ✅ | 缓议 C2 定夺为 **Markdown 优先交付**（架构/决策/门禁/打包/边界七章）；README 补「桌面交付（M5）」节 |
-| 测试 / 门禁 | ✅ | **202 项 py3.8+3.12 双绿**（186 + 16）；零字面量门禁 + 脱敏审计 OK；三生成器 `--check` 逐字节一致（8+4+130 份）；基准三套件不回退 |
+| 测试 / 门禁 | ✅ | **202 项 py3.8+3.12 双绿**（186 + 16）**（后修订为 214 项）**；零字面量门禁 + 脱敏审计 OK；三生成器 `--check` 逐字节一致（8+4+130 份）；基准三套件不回退 |
 | CI 实跑 | ⬜ | **本机无远端未跑 CI**——一律写"本地等价校验"，首推后据实补记（同 M0~M4 纪律） |
 
 **M5 实测环境坑（新增两条，06 E25）**：
@@ -84,8 +84,8 @@ py -3.12 -X utf8 tools/scan_policy_literals.py --selftest && py -3.12 -X utf8 to
 py -3.12 -X utf8 tools/dessensitize_audit.py --selftest && py -3.12 -X utf8 tools/dessensitize_audit.py
 
 # 测试（双解释器；裸 python 不可用）
-PYTHONPATH=src py -3.12 -X utf8 -m pytest -q     # 202 项
-PYTHONPATH=src py -3.8  -X utf8 -m pytest -q
+PYTHONPATH=src py -3.12 -X utf8 -m pytest -q     # 202 项（当时的数；后修订为 214 项）
+PYTHONPATH=src py -3.8  -X utf8 -m pytest -q     # 3.8 通道已于 2026-10-19 撤销（DEC1）
 
 # GUI 冒烟（offscreen）
 QT_QPA_PLATFORM=offscreen PYTHONPATH=src py -3.12 -X utf8 -m pytest tests/test_gui_m5.py tests/test_gui_layering.py -q
@@ -109,7 +109,7 @@ PYTHONPATH=src py -3.12 -X utf8 -m safefee diff --from-year 2020 --to-year 2024 
 - [x] Release（exe）zip 附双 onedir；tag/release 说明经用户确认——**2026-10-14 用户确认后已发布**：tag `v0.1.0`（指向 3949987）+ Release（标题"v0.1.0 — 首个发布"，附件 `safefee-0.1.0-windows-x64-exe.zip` 88.2 MB / sha256 d136b5b3…ffc2b4）；发布后资产核验 draft=false、zip 在列；https://github.com/yuluo554/safety-expense-calculator/releases/tag/v0.1.0
 - [x] 缓议项清零（06 §五逐条定夺或显式顺延）——C1（建仓时机→M6 已建仓+CI 绿）/ C2（技术报告维持 Markdown）/ C3（不参赛已定）/ C4（M2/M3 已闭环）全部闭环；新增 E27/E28 决策
 - [x] 里程碑状态回写（plan/00 + 05 + 06 + README 终稿）——四处全部回写 ✅（2026-10-14）
-- [x] 全链本地等价校验绿（202 项测试双解释器；基准三套件达标不回退）——py3.12 带 Qt 209 全过（GUI 30 项实跑）；py3.8 209 全过；无 Qt 干净 venv 205 过 + 4 跳（CI 等价）；**CI 四矩阵全绿**（202 项在 CI 上的等价计数为 205+4 跳）
+- [x] 全链本地等价校验绿（202 项测试双解释器；基准三套件达标不回退）**（计数后修订为 214 项，见 §一）**——py3.12 带 Qt 209 全过（GUI 30 项实跑）；py3.8 209 全过；无 Qt 干净 venv 205 过 + 4 跳（CI 等价）；**CI 四矩阵全绿**（202 项在 CI 上的等价计数为 205+4 跳）
 
 > **M6 终态**：M0~M6 全部完成，项目进入维护模式。tag v0.1.0 + Release 已于 2026-10-14 经用户确认发布（R4 闭环）。
 
