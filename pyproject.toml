@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "safefee"
-version = "0.1.0"
+version = "0.2.0"
 description = "企业安全生产费用提取与使用合规计算工作台（财资〔2022〕136号规则集 + 计提引擎 + 超额累退分段 + 双版本对照 + 支出核查 + 台账对账）"
 readme = "README.md"
 requires-python = ">=3.12"
